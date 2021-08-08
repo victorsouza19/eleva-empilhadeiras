@@ -36,14 +36,24 @@
         }
     });
 
+    // Creating the routes | Criando as rotas
+    app.get("/", (req, res) => {
+        // only for test: res.send("<h1> Home Page</h1>")
+
+        res.render("index"); 
+    });
 
     app.get("/", (req, res) => {
         // only for test: res.send("<h1> Home Page</h1>")
 
-        // Setting the homepage | Definindo a homepage
         res.render("index"); 
     });
 
+    app.get("/home", (req, res) => {
+        // only for test: res.send("<h1> Home Page</h1>")
+
+        res.render("home"); 
+    });
 
 // verifying the connection to the server | verificando a conexão com o servidor
     app.listen(3000, () => {
