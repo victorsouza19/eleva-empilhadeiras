@@ -118,10 +118,18 @@ h2 {
 
     color: whitesmoke;
     background: #d6b41b;
+    cursor: pointer;
+
   }
 
   .acessar:hover {
     background: #f1c607;
+  }
+
+  .acessar a {
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
   }
 
   .copyright {

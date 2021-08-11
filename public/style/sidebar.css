@@ -1,0 +1,45 @@
+aside.sidebar {
+  position: absolute;
+  width: 100%;
+  height: 8vh;
+  padding:  2.4rem 3.2rem;
+  background: #4e4e4e;
+
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: space-around;
+  align-items: center;
+}
+
+aside.sidebar footer button {
+  width: 4.8rem;
+  height: 4.8rem;
+  border: 3px solid white;
+  background: none ;
+  border-radius: 1.6rem;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  transition: background-color 200ms;
+}
+
+aside.sidebar footer button:hover {
+  background: rgba(255, 217, 0, 0.924);
+}
+
+.with-sidebar {
+  padding-top: 5rem;
+}
+
+aside.sidebar footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image-aside {
+  height: 11rem;
+}
