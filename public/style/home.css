@@ -133,3 +133,8 @@ nav > img {
 .exit button:hover {
     background:rgb(200, 50, 50);
 }
+
+button > a {
+    text-decoration: none;
+    color: #ffff;
+}
