@@ -56,8 +56,40 @@ exports.login = async (req,res) => {
         if(!email || !password ) {
             return res.status(400).render('login', {
                 alertmessage: 'Por favor, insira o e-mail e senha'
-            })
+            });
         }
+
+        db.query('SELECT * FROM users WHERE email = ?', [email], async (error, results) => {
+            console.log(results);
+            if (!results || !(await bcrypt.compare(password, results[0].password) )) {
+                res.status(401).render('login', {
+                    alertmessage: 'E-mail ou senha incorretos'
+                });
+            } else {
+                const id = results[0].id;
+
+                // creating the jwt token | Criando o token jwt e configurando a expiração
+                const token = jwt.sign({ id }, process.env.JWT_SECRET, {
+                    expiresIn: process.env.JWT_EXPIRES_IN
+                });
+
+                console.log("The token is: " + token);
+
+                // configurando a expiração dos cookies
+                const cookieOptions = {
+                    expires: new Date(
+                        // convertendo a data de expiração para milissegundos
+                        Date.now() + process.env.JWT_COOKIES_EXPIRES * 24 * 60 * 60 * 1000
+                    ),
+                    httpOnly: true
+                }
+
+                // enviando o cookie para o browser
+                res.cookie('jwt', token, cookieOptions);
+                res.status(200).redirect("/");
+            }
+        });
+
 
 
     } catch (error) {

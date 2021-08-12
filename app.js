@@ -3,6 +3,7 @@
     const path = require('path');
     const mysql = require("mysql");
     const dotenv = require('dotenv');
+    const cookieParser = require('cookie-parser');
 
 // changing where the environment variables will be stored by dotenv | definindo onde ficarão armazenadas as variáveis de ambiente pelo dotenv 
     dotenv.config({ path: './.env'});
@@ -29,6 +30,8 @@ module.exports = db;
     app.use(express.urlencoded({ extended: false }));
 // Parse JSON bodies (as sent by API Clients)
     app.use(express.json());
+// Parse Cookie Parser
+    app.use(cookieParser());
 
 
 
