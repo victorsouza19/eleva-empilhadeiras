@@ -12,12 +12,12 @@
   }
 }
 
-@keyframes right {
+@keyframes down {
   from {
-    transform: translateX(-100%);
+    transform: translateY(-100%);
   }
   to {
-    transform: translateX(0);
+    transform: translateY(0);
   }
 }
 
@@ -36,8 +36,8 @@
   animation-fill-mode: backwards;
 }
 
-.animate-right {
-  animation-name: right;
+.animate-down {
+  animation-name: down;
   animation-duration: 300ms;
 }
 

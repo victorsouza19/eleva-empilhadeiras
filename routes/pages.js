@@ -1,16 +1,30 @@
 const express = require('express');
+const authController = require('../controllers/auth');
 
 const router = express.Router();
 
 
 
-router.get('/', (req, res) => {
-    res.render('index');
+router.get('/', authController.isLoggedIn, (req, res) => {
+    if(req.user) {
+        res.render('index', {
+            user: req.user,
+            date: new Date(Date.now())
+        });
+    } else {
+        res.redirect('/login');
+    }
+    
 });
 
 
-router.get('/create-user', (req, res) => {
-    res.render('create-user');
+router.get('/create-user', authController.isLoggedIn, (req, res) => {
+    if(req.user) {
+        res.render('create-user');
+    } else {
+        res.redirect('/login');
+    };
+    
 });
 
 

@@ -1,53 +1,9 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
+const { promisify } = require('util');
+
 db = require('../app');
 
-exports.register = (req, res) => {
-    console.log(req.body);
-
-    // EXTENDED FORM | FORMA ESTENDIDA: 
-    // const name = req.body.name;
-    // const email = req.body.email;
-    // const role = req.body.role;
-    // const password = req.body.password;
-    // const passwordConfirm = req.body.passwordConfirm;
-
-    // Short form | forma curta:
-    const { name, email, role, password, passwordConfirm } = req.body;
-
-    db.query('SELECT email FROM users WHERE email = ?', [email], async (error, results) => {
-        if(error) {
-            console.log(error);
-        }
-
-        if(results.length > 0) {
-            return res.render('create-user', {
-                alertmessage: 'Este e-mail já está em uso'
-            })
-        } else if( password !== passwordConfirm ) {
-            return res.render('create-user', {
-                alertmessage: 'As senhas não coincidem'
-            });
-        }
-
-        // Encriptando a senha
-        let hashedPassword = await bcrypt.hash(password, 8);
-        console.log(hashedPassword);
-
-        db.query('INSERT INTO users SET ?', { name: name, email: email, role: role, password: hashedPassword }, (error, results) => {
-            if(error) {
-                console.log(error);
-            } else {
-                console.log(results);
-                return res.render('create-user', {
-                    successmessage: 'Usuário criado'
-                });
-            }
-        })
-        
-    });
-
-};
 
 exports.login = async (req,res) => {
     try {
@@ -96,3 +52,92 @@ exports.login = async (req,res) => {
         console.log(error);
     }
 };
+
+exports.register = (req, res) => {
+    console.log(req.body);
+
+    // EXTENDED FORM | FORMA ESTENDIDA: 
+    // const name = req.body.name;
+    // const email = req.body.email;
+    // const role = req.body.role;
+    // const password = req.body.password;
+    // const passwordConfirm = req.body.passwordConfirm;
+
+    // Short form | forma curta:
+    const { name, email, role, password, passwordConfirm } = req.body;
+
+    db.query('SELECT email FROM users WHERE email = ?', [email], async (error, results) => {
+        if(error) {
+            console.log(error);
+        }
+
+        if(results.length > 0) {
+            return res.render('create-user', {
+                alertmessage: 'Este e-mail já está em uso'
+            })
+        } else if( password !== passwordConfirm ) {
+            return res.render('create-user', {
+                alertmessage: 'As senhas não coincidem'
+            });
+        }
+
+        // Encriptando a senha
+        let hashedPassword = await bcrypt.hash(password, 8);
+        console.log(hashedPassword);
+
+        db.query('INSERT INTO users SET ?', { name: name, email: email, role: role, password: hashedPassword }, (error, results) => {
+            if(error) {
+                console.log(error);
+            } else {
+                console.log(results);
+                return res.render('create-user', {
+                    successmessage: 'Usuário criado'
+                });
+            }
+        })
+        
+    });
+
+};
+
+exports.isLoggedIn = async (req, res, next) => {
+    //console.log(req.cookies);
+    if(req.cookies.jwt) {
+        try {
+            // 1) verify the token | verificar o token
+            const decoded = await promisify(jwt.verify)(
+                req.cookies.jwt,
+                process.env.JWT_SECRET
+                );
+
+            console.log(decoded);
+
+            // 2) check if the user still exists | verificar se o usuário existe 
+            db.query('SELECT * FROM users WHERE id = ?', [decoded.id], (error, result) => {
+                console.log(result);
+
+                if(!result) {
+                    return next();
+                }
+
+                req.user = result[0];
+                return next();
+
+            });
+
+        } catch (error) {
+            console.log(error);
+            return next();
+        }
+    } else {
+        next();
+    }
+}
+
+exports.logout = async (req, res) => {
+    res.cookie('jwt', 'user-logout', {
+        expires: new Date(Date.now()+ 2*1000),
+        httpOnly: true
+    });
+    res.status(200).redirect('/login');
+}
