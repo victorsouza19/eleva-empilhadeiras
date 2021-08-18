@@ -5,11 +5,13 @@ const router = express.Router();
 
 
 
-router.get('/', authController.isLoggedIn, (req, res) => {
+router.get('/', authController.isLoggedInIndex, (req, res) => {
+    
     if(req.user) {
         res.render('index', {
+            
             user: req.user,
-            date: data.toLocaleDateString("pt-BR")
+            date: dia+", "+data.getDate()+" de "+mes
         });
     } else {
         res.redirect('/login');

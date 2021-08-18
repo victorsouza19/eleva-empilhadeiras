@@ -101,6 +101,47 @@ exports.register = (req, res) => {
 };
 
 exports.customerRegister = (req, res) => {
+    console.log(req.body);
+
+    // Short form | forma curta:
+    const { customerName, identify, telephone, adress, adressNumber, cep, adressComplement} = req.body;
+
+    db.query('SELECT identify FROM customers WHERE identify = ?', [identify], (error, results) => {
+        if(error) {
+            console.log(error);
+        }
+
+        if(results.length > 0) {
+            return res.render('customerRegister', {
+                alertmessage: 'Cliente já cadastrado'
+            });
+        } 
+
+        db.query('INSERT INTO adresses SET ?', { street: adress, number: adressNumber, cep: cep, complement: adressComplement}, async (error, results) => {
+            if(error) {
+                console.log(error);
+            } else {
+                console.log(results);
+                
+            }
+
+            let adresses_id = await results.insertId;
+
+
+            db.query('INSERT INTO customers SET ?', { name: customerName, telephone: telephone, identify: identify, adress_id: adresses_id }, (error, results) => {
+                if(error) {
+                    console.log(error);
+                } else {
+                    console.log(results);
+                    return res.render('customerRegister', {
+                        successmessage: 'Cliente criado'
+                    });
+                }
+            });
+        });
+        
+    });
+
 };
 
 exports.isLoggedIn = async (req, res, next) => {
@@ -125,7 +166,72 @@ exports.isLoggedIn = async (req, res, next) => {
                 }
 
                 req.user = result[0];
+                return next();
+
+            });
+
+        } catch (error) {
+            console.log(error);
+            return next();
+        }
+    } else {
+        next();
+    }
+}
+
+exports.isLoggedInIndex = async (req, res, next) => {
+
+    //console.log(req.cookies);
+    if(req.cookies.jwt) {
+        try {
+            // 1) verify the token | verificar o token
+            const decoded = await promisify(jwt.verify)(
+                req.cookies.jwt,
+                process.env.JWT_SECRET
+                );
+
+            console.log(decoded);
+
+            // 2) check if the user still exists | verificar se o usuário existe 
+            db.query('SELECT * FROM users WHERE id = ?', [decoded.id], (error, result) => {
+                console.log(result);
+
+                if(!result) {
+                    return next();
+                }
+
+                req.user = result[0];
                 data = new Date();
+
+                Date.prototype.getMesEmPortugues = function() {
+                    if (this.getMonth() == 0){this.mesPt = "Janeiro"};
+                    if (this.getMonth() == 1){this.mesPt = "Fevereiro"};
+                    if (this.getMonth() == 2){this.mesPt = "Março"};
+                    if (this.getMonth() == 3){this.mesPt = "Abril"};
+                    if (this.getMonth() == 4){this.mesPt = "Maio"};
+                    if (this.getMonth() == 5){this.mesPt = "Junho"};
+                    if (this.getMonth() == 6){this.mesPt = "Julho"};
+                    if (this.getMonth() == 7){this.mesPt = "Agosto"};
+                    if (this.getMonth() == 8){this.mesPt = "Setembro"};
+                    if (this.getMonth() == 9){this.mesPt = "Outubro"};
+                    if (this.getMonth() == 10){this.mesPt = "Novembro"};
+                    if (this.getMonth() == 11){this.mesPt = "Dezembro"};
+                };
+                data.getMesEmPortugues();
+                mes = data.mesPt
+
+                Date.prototype.getDiaEmPortugues = function() {
+                    if (this.getDay() == 0){this.diaPt = "Dom"};
+                    if (this.getDay() == 1){this.diaPt = "Seg"};
+                    if (this.getDay() == 2){this.diaPt = "Ter"};
+                    if (this.getDay() == 3){this.diaPt = "Qua"};
+                    if (this.getDay() == 4){this.diaPt = "Qui"};
+                    if (this.getDay() == 5){this.diaPt = "Sex"};
+                    if (this.getDay() == 6){this.diaPt = "Sab"};
+                };
+                data.getDiaEmPortugues();
+                dia = data.diaPt
+
                 return next();
 
             });

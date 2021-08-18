@@ -155,4 +155,8 @@ fieldset legend {
   grid-template-columns: 1fr 2fr;
 }
 
+.form-information {
+  margin-bottom: 5rem;
+  text-align: justify;
+}
 
