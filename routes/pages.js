@@ -9,7 +9,7 @@ router.get('/', authController.isLoggedIn, (req, res) => {
     if(req.user) {
         res.render('index', {
             user: req.user,
-            date: new Date(Date.now())
+            date: data.toLocaleDateString("pt-BR")
         });
     } else {
         res.redirect('/login');
@@ -18,9 +18,27 @@ router.get('/', authController.isLoggedIn, (req, res) => {
 });
 
 
-router.get('/create-user', authController.isLoggedIn, (req, res) => {
+router.get('/userRegister', authController.isLoggedIn, (req, res) => {
     if(req.user) {
-        res.render('create-user');
+        res.render('userRegister');
+    } else {
+        res.redirect('/login');
+    };
+    
+});
+
+router.get('/customerVerify', authController.isLoggedIn, (req, res) => {
+    if(req.user) {
+        res.render('customerVerify');
+    } else {
+        res.redirect('/login');
+    };
+    
+});
+
+router.get('/customerRegister', authController.isLoggedIn, (req, res) => {
+    if(req.user) {
+        res.render('customerRegister');
     } else {
         res.redirect('/login');
     };

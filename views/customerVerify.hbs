@@ -5,7 +5,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cadastro de usuário | ElevaEmpilhadeiras</title>
+  <title>Ordem de Serviço | ElevaEmpilhadeiras</title>
 
 
   <link rel="icon" href="/images/logo-eleva.png" />
@@ -36,13 +36,20 @@
     </aside>
 
     <main class="animate-appear with-sidebar">
-      <form action="/auth/create-os" method="POST">  <!-- Criando a rota de envio para o banco de dados -->
+      <form action="/auth/customerVerify" method="POST">  <!-- Criando a rota de envio para o banco de dados -->
         <fieldset>
-          <legend>Cadastro de Usuário</legend>
+          <legend>Verificação de Requisitante</legend>
+          <p class="form-information">Aqui você pode identificar se o cliente já está cadastrado no sistema, e utilizar os dados já cadastrados. Para a verificação, você deve inserir os dados solicitados abaixo:</p>
 
           <div class="input-block">
-            <label for="username">Nome</label>
-            <input id="username" name="name" maxlength="100" required />
+            <label for="identify">CPF/CNPJ do Requisitante<span>Somente números</span></label>
+            <input id="identify" name="identify" maxlength="15" required />
+          </div>
+
+{{!--           
+          <div class="input-block">
+            <label for="costumer-name">Requisitante</label>
+            <input id="costumer-name" name="costumer-name" maxlength="100" required />
           </div>
 
           <div class="input-block">
@@ -63,7 +70,7 @@
           <div class="input-block">
             <label for="passwordConfirm">Confirmação de Senha</label>
             <input type="password" id="passwordConfirm" name="passwordConfirm" maxlength="" required />
-          </div>
+          </div> --}}
 
           {{#if alertmessage}}
             <h4 class="alert-message">{{alertmessage}}</h4>
@@ -71,7 +78,7 @@
             <h4 class="success-message">{{successmessage}}</h4>
           {{/if}}
 
-          <button type="submit" class="primary-button">Criar</button>
+          <button type="submit" class="primary-button">Consultar</button>
 
         </fieldset>
   </form>

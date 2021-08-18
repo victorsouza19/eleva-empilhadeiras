@@ -65,6 +65,20 @@ fieldset legend {
 
 }
 
+.row:first-child {
+  display: flex;
+  flex-direction: column;
+
+  margin: 0 2rem 0 0;
+}
+
+.row:last-child {
+  display: flex;
+  flex-direction: column;
+
+  margin: 0 0 0 2rem;
+}
+
 .input-block input:valid,
 .input-block textarea:valid  {
   border: 1px solid #A1E9C5;
@@ -75,7 +89,6 @@ fieldset legend {
     resize: vertical;
     padding: 1.6rem;
     line-height: 2.8rem;
-
 }
 
 
@@ -136,4 +149,10 @@ fieldset legend {
 .new-upload + .new-upload {
   margin-top: 2.4rem;
 }
+
+.input-row {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+}
+
 

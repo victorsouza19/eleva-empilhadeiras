@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+
+<html lang="pt_BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Requisitante | ElevaEmpilhadeiras</title>
+
+
+  <link rel="icon" href="/images/logo-eleva.png" />
+
+  <link rel="stylesheet" href="/style/main.css" />
+  <link rel="stylesheet" href="/style/animations.css" />
+  <link rel="stylesheet" href="/style/sidebar.css" />
+  <link rel="stylesheet" href="/style/forms.css" />
+  <link rel="stylesheet" href="/style/primary-button.css" />
+  <link rel="stylesheet" href="/style/page-forms.css" />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style/home.css">
+</head>
+
+<body>
+  <div id="page-creates">
+    <aside class="animate-down sidebar">
+      <img class="image-aside" src="/images/logo-eleva.png" alt="logo eleva" />
+
+      <footer>
+        <button>
+          <a href="/"><img src="../images/arrow-back.svg" alt="Voltar" /></a>
+        </button>
+      </footer>
+    </aside>
+
+    <main class="animate-appear with-sidebar">
+      <form action="/auth/customerRegister" method="POST">  <!-- Criando a rota de envio para o banco de dados -->
+        <fieldset>
+          <legend>Cadastro de Cliente</legend>
+
+          <div class="input-block">
+            <label for="costumer-name">Nome/Razão Social</label>
+            <input id="costumer-name" name="costumer-name" maxlength="100" required />
+          </div>
+
+          <div class="input-block">
+            <label for="identify">CPF/CNPJ do Requisitante<span>Somente números</span></label>
+            <input id="identify" name="identify" maxlength="15" required />
+          </div>
+
+          <div class="input-block">
+            <label for="telephone">Telefone para Contato / Whatsapp</label>
+            <input id="telephone" name="telephone" required />
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Endereço</legend>
+
+          <div class="input-block">
+            <label for="adress">Rua</label>
+            <input id="adress" name="adress" required />
+          </div>
+
+          <div class="input-block input-row">
+            <div class="input-block row">
+                <label for="adress-number">Número</label>
+                <input id="adress-number" name="adress-number" required />
+            </div>
+            <div class="input-block row">
+                <label for="cep">CEP<span>Somente números</span></label>
+                <input id="cep" name="cep" required />
+            </div>
+          </div>
+
+          <div class="input-block">
+            <label for="adress-complement">Complemento</label>
+            <input id="adress-complement" name="adress-complement" required />
+          </div>
+        
+          {{#if alertmessage}}
+            <h4 class="alert-message">{{alertmessage}}</h4>
+          {{else if successmessage}}
+            <h4 class="success-message">{{successmessage}}</h4>
+          {{/if}}
+
+          <button type="submit" class="primary-button">Criar</button>
+
+        </fieldset>
+      </form>
+    </main>
+  </div>
+
+  <script src="../scripts/page-creates.js"></script>
+
+</body>
+
+</html>

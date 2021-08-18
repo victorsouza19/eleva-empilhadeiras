@@ -72,11 +72,11 @@ exports.register = (req, res) => {
         }
 
         if(results.length > 0) {
-            return res.render('create-user', {
+            return res.render('userRegister', {
                 alertmessage: 'Este e-mail já está em uso'
             })
         } else if( password !== passwordConfirm ) {
-            return res.render('create-user', {
+            return res.render('userRegister', {
                 alertmessage: 'As senhas não coincidem'
             });
         }
@@ -90,7 +90,7 @@ exports.register = (req, res) => {
                 console.log(error);
             } else {
                 console.log(results);
-                return res.render('create-user', {
+                return res.render('userRegister', {
                     successmessage: 'Usuário criado'
                 });
             }
@@ -100,7 +100,11 @@ exports.register = (req, res) => {
 
 };
 
+exports.customerRegister = (req, res) => {
+};
+
 exports.isLoggedIn = async (req, res, next) => {
+
     //console.log(req.cookies);
     if(req.cookies.jwt) {
         try {
@@ -121,6 +125,7 @@ exports.isLoggedIn = async (req, res, next) => {
                 }
 
                 req.user = result[0];
+                data = new Date();
                 return next();
 
             });
@@ -136,7 +141,7 @@ exports.isLoggedIn = async (req, res, next) => {
 
 exports.logout = async (req, res) => {
     res.cookie('jwt', 'user-logout', {
-        expires: new Date(Date.now()+ 2*1000),
+        expires: new Date(Date.now()+ 1*1000),
         httpOnly: true
     });
     res.status(200).redirect('/login');
