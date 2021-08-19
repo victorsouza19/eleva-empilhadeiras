@@ -7,6 +7,8 @@ router.post('/userRegister', authController.register );
 
 router.post('/customerRegister', authController.customerRegister );
 
+router.post('/customerVerify', authController.customerVerify );
+
 router.post('/login', authController.login );
 
 router.get('/logout', authController.logout );

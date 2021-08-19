@@ -5,7 +5,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Requisitante | ElevaEmpilhadeiras</title>
+  <title>Ordem de Serviço | ElevaEmpilhadeiras</title>
 
 
   <link rel="icon" href="/images/logo-eleva.png" />
@@ -78,6 +78,8 @@
             <label for="adressComplement">Complemento</label>
             <input id="adressComplement" name="adressComplement" required />
           </div>
+
+
         
           {{#if alertmessage}}
             <h4 class="alert-message">{{alertmessage}}</h4>
@@ -85,12 +87,56 @@
             <h4 class="success-message">{{successmessage}}</h4>
           {{/if}}
 
-          <button type="submit" class="primary-button">Criar</button>
-
         </fieldset>
+        <fieldset>
+          <legend>Dados (OS)</legend>
+
+          <div class="input-block">
+            <label for="name">Responsavel</label>
+            <input id="name" name="name" required />
+          </div>
+
+        <div class="input-block">
+          <label for="open_on_weekends">Tipo de atendimento</label>
+          <input type="hidden" id="open_on_weekends" name="open_on_weekends" value="1" required />
+
+          <div class="button-select">
+            <button data-value="1" onclick="toggleSelect(event)" type="button" class="active">
+              Requisição
+            </button>
+            <button data-value="0" onclick="toggleSelect(event)" type="button">
+              Incidente
+            </button>
+          </div>
+
+          <div class="input-block">
+            <label for="about">Descrição<span>Máximo de 300 caracteres</span></label>
+            <textarea maxlength="300" id="about" name="about" required></textarea>
+          </div>
+
+          <div class="input-block">
+            <label for="status">Status</label>
+            <div class="button-select-status">
+              <button data-value="2" onclick="toggleSelect(event)" type="button" class="active">
+                Aberto
+              </button>
+              <button data-value="1" onclick="toggleSelectstatus(event)" type="button" class="active">
+                Em Andamento
+              </button>
+              <button data-value="0" onclick="toggleSelectstatus(event)" type="button">
+                Fechado
+              </button>
+            </div>
+
+            <button type="submit" class="primary-button">Criar</button>
+          </div>
+        </fieldset> 
       </form>
     </main>
   </div>
+
+  <script src="/scripts/animations.js"></script>
+
 </body>
 
 </html>

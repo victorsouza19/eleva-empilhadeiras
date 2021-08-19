@@ -106,7 +106,7 @@ exports.customerRegister = (req, res) => {
     // Short form | forma curta:
     const { customerName, identify, telephone, adress, adressNumber, cep, adressComplement} = req.body;
 
-    db.query('SELECT identify FROM customers WHERE identify = ?', [identify], (error, results) => {
+    db.query('SELECT * FROM customers WHERE identify = ?', [identify], (error, results) => {
         if(error) {
             console.log(error);
         }
@@ -139,6 +139,35 @@ exports.customerRegister = (req, res) => {
                 }
             });
         });
+        
+    });
+
+};
+
+exports.customerVerify = (req, res) => {
+    console.log(req.body);
+
+    // Short form | forma curta:
+    const { identify } = req.body;
+
+    db.query('SELECT * FROM customers WHERE identify = ?', [identify], (error, results) => {
+        if(error) {
+            console.log(error);
+        }
+
+        if(results.length > 0) {
+            res.render('customerVerify', {
+                successmessage: 'Cliente já cadastrado, deseja utilizar o cadastro existente?',
+                customer: results[0] 
+            });
+        
+        } else if(!results.length) {
+            res.render('customerVerify', {
+                alertmessage: 'Cliente não cadastrado'
+            });
+        
+        }
+
         
     });
 

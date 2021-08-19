@@ -47,6 +47,15 @@ router.get('/customerRegister', authController.isLoggedIn, (req, res) => {
     
 });
 
+router.get('/osCustomerRegister', authController.isLoggedIn, (req, res) => {
+    if(req.user) {
+        res.render('osCustomerRegister');
+    } else {
+        res.redirect('/login');
+    };
+    
+});
+
 
 router.get('/login', (req, res) => {
     res.render('login');
