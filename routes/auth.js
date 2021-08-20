@@ -9,6 +9,8 @@ router.post('/customerRegister', authController.customerRegister );
 
 router.post('/customerVerify', authController.customerVerify );
 
+router.post('/osCustomerRegister', authController.osCustomerRegister );
+
 router.post('/login', authController.login );
 
 router.get('/logout', authController.logout );

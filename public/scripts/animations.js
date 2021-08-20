@@ -13,14 +13,14 @@ function toggleSelect(event) {
     button.classList.add('active')
 
     // atualizar o input hidden com o valor selecionado
-    const input = document.querySelector('[name="open-on-weekends"]')
+    const input = document.querySelector('[name="os_type"]')
 
-    input.value = button.dataset.value
+    input.value = button.dataset.status;
 
     
 }
 
-function toggleSelectstatus(event) {
+function toggleSelectStatus(event) {
 
     // retirar a class .active(dos botoes)
 

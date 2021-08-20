@@ -100,11 +100,11 @@ exports.register = (req, res) => {
 
 };
 
-exports.customerRegister = (req, res) => {
+exports.osCustomerRegister = (req, res) => {
     console.log(req.body);
 
     // Short form | forma curta:
-    const { customerName, identify, telephone, adress, adressNumber, cep, adressComplement} = req.body;
+    const { customerName, identify, telephone, adress, adressNumber, cep, adressComplement, responsible, description, os_type, status } = req.body;
 
     db.query('SELECT * FROM customers WHERE identify = ?', [identify], (error, results) => {
         if(error) {
@@ -168,6 +168,50 @@ exports.customerVerify = (req, res) => {
         
         }
 
+        
+    });
+
+};
+
+exports.customerRegister = (req, res) => {
+    console.log(req.body);
+
+    // Short form | forma curta:
+    const { customerName, identify, telephone, adress, adressNumber, cep, adressComplement} = req.body;
+
+    db.query('SELECT * FROM customers WHERE identify = ?', [identify], (error, results) => {
+        if(error) {
+            console.log(error);
+        }
+
+        if(results.length > 0) {
+            return res.render('customerRegister', {
+                alertmessage: 'Cliente já cadastrado'
+            });
+        } 
+
+        db.query('INSERT INTO adresses SET ?', { street: adress, number: adressNumber, cep: cep, complement: adressComplement}, async (error, results) => {
+            if(error) {
+                console.log(error);
+            } else {
+                console.log(results);
+                
+            }
+
+            let adresses_id = await results.insertId;
+
+
+            db.query('INSERT INTO customers SET ?', { name: customerName, telephone: telephone, identify: identify, adress_id: adresses_id }, (error, results) => {
+                if(error) {
+                    console.log(error);
+                } else {
+                    console.log(results);
+                    return res.render('customerRegister', {
+                        successmessage: 'Cliente criado'
+                    });
+                }
+            });
+        });
         
     });
 
@@ -281,3 +325,4 @@ exports.logout = async (req, res) => {
     });
     res.status(200).redirect('/login');
 }
+

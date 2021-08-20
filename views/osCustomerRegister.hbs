@@ -36,9 +36,15 @@
     </aside>
 
     <main class="animate-appear with-sidebar">
-      <form action="/auth/customerRegister" method="POST">  <!-- Criando a rota de envio para o banco de dados -->
+      <form action="/auth/osCustomerRegister" method="POST">  <!-- Criando a rota de envio para o banco de dados -->
         <fieldset>
           <legend>Cadastro de Cliente</legend>
+
+          {{#if alertmessage}}
+            <h4 class="alert-message">{{alertmessage}}</h4>
+          {{else if successmessage}}
+            <h4 class="success-message">{{successmessage}}</h4>
+          {{/if}}
 
           <div class="input-block">
             <label for="customerName">Nome/Razão Social</label>
@@ -78,58 +84,50 @@
             <label for="adressComplement">Complemento</label>
             <input id="adressComplement" name="adressComplement" required />
           </div>
-
-
-        
-          {{#if alertmessage}}
-            <h4 class="alert-message">{{alertmessage}}</h4>
-          {{else if successmessage}}
-            <h4 class="success-message">{{successmessage}}</h4>
-          {{/if}}
-
         </fieldset>
         <fieldset>
           <legend>Dados (OS)</legend>
 
           <div class="input-block">
-            <label for="name">Responsavel</label>
-            <input id="name" name="name" required />
+            <label for="responsible">Responsável</label>
+            <input id="responsible" name="responsible" required />
           </div>
 
         <div class="input-block">
-          <label for="open_on_weekends">Tipo de atendimento</label>
-          <input type="hidden" id="open_on_weekends" name="open_on_weekends" value="1" required />
+          <label for="os_type">Tipo de atendimento</label>
+          <input type="hidden" id="os_type" name="os_type" value="Requisição" required />
 
           <div class="button-select">
-            <button data-value="1" onclick="toggleSelect(event)" type="button" class="active">
+            <button data-status="Requisição" onclick="toggleSelect(event)" type="button" class="active">
               Requisição
             </button>
-            <button data-value="0" onclick="toggleSelect(event)" type="button">
+            <button data-status="Incidente" onclick="toggleSelect(event)" type="button">
               Incidente
             </button>
           </div>
 
           <div class="input-block">
-            <label for="about">Descrição<span>Máximo de 300 caracteres</span></label>
-            <textarea maxlength="300" id="about" name="about" required></textarea>
+            <label for="description">Descrição<span>Máximo de 300 caracteres</span></label>
+            <textarea maxlength="300" id="description" name="description" required></textarea>
           </div>
 
           <div class="input-block">
             <label for="status">Status</label>
+            <input type="hidden" id="status" name="status" value="open" required />
+
             <div class="button-select-status">
-              <button data-value="2" onclick="toggleSelect(event)" type="button" class="active">
+              <button data-value="Aberto" onclick="toggleSelectStatus(event)" type="button" class="active">
                 Aberto
               </button>
-              <button data-value="1" onclick="toggleSelectstatus(event)" type="button" class="active">
+              <button data-value="Em andamento" onclick="toggleSelectStatus(event)" type="button">
                 Em Andamento
               </button>
-              <button data-value="0" onclick="toggleSelectstatus(event)" type="button">
+              <button data-value="Fechado" onclick="toggleSelectStatus(event)" type="button">
                 Fechado
               </button>
             </div>
-
-            <button type="submit" class="primary-button">Criar</button>
           </div>
+          <button type="submit" class="primary-button">Criar</button>
         </fieldset> 
       </form>
     </main>
