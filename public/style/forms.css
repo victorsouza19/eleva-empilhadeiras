@@ -126,6 +126,27 @@ fieldset legend {
   border-radius: 1rem;
 }
 
+.alert-message-top {
+  color: red;
+  text-align: center;
+  padding: 1.3rem;
+  margin: 0 0 2.5rem 0;
+  border: 1px solid red;
+  background-color: rgba(255, 0, 0, 0.137);
+  border-radius: 1rem;
+
+}
+
+.success-message-top {
+  color: #46d88f;
+  text-align: center;
+  padding: 1.3rem;
+  margin: 0 0 2.5rem 0;
+  border: 1px solid #46d88f;
+  background-color: #a1e9c549;
+  border-radius: 1rem;
+}
+
 .new-upload {
   position: relative;
 }

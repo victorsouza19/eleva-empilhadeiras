@@ -112,7 +112,7 @@ exports.osCustomerRegister = (req, res) => {
         }
 
         if(results.length > 0) {
-            return res.render('customerRegister', {
+            return res.render('osCustomerRegister', {
                 alertmessage: 'Cliente já cadastrado'
             });
         } 
@@ -128,20 +128,29 @@ exports.osCustomerRegister = (req, res) => {
             let adresses_id = await results.insertId;
 
 
-            db.query('INSERT INTO customers SET ?', { name: customerName, telephone: telephone, identify: identify, adress_id: adresses_id }, (error, results) => {
+            db.query('INSERT INTO customers SET ?', { name: customerName, telephone: telephone, identify: identify, adress_id: adresses_id }, async (error, result) => {
                 if(error) {
                     console.log(error);
                 } else {
-                    console.log(results);
-                    return res.render('customerRegister', {
-                        successmessage: 'Cliente criado'
-                    });
+                    console.log(result);
+
                 }
+            
+                let customer_id = await result.insertId;
+
+                db.query('INSERT INTO orders SET ?', { customer_id: customer_id, responsible: responsible, description: description, type: os_type, status: status}, async (error, results) => {
+                    if(error) {
+                        console.log(error);
+                    } else {
+                        console.log(results);
+                        return res.render('osCustomerRegister', {
+                            successmessage: 'Ordem de serviço cadastrada'
+                        });
+                    }
+                });
             });
         });
-        
     });
-
 };
 
 exports.customerVerify = (req, res) => {
@@ -316,6 +325,10 @@ exports.isLoggedInIndex = async (req, res, next) => {
     } else {
         next();
     }
+}
+
+exports.customerInfo = async (req, res, next) => {
+    next();
 }
 
 exports.logout = async (req, res) => {

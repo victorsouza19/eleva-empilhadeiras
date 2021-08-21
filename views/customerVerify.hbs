@@ -42,40 +42,14 @@
           <legend>Verificação de Requisitante</legend>
           <p class="form-information">Aqui você pode identificar se o cliente já está cadastrado no sistema, e utilizar os dados já cadastrados. Para a verificação, você deve inserir os dados solicitados abaixo:</p>
 
-          <div class="input-block">
-            <label for="identify">CPF/CNPJ do Requisitante<span>Somente números</span></label>
-            <input id="identify" name="identify" maxlength="15" required />
-          </div>
-
-{{!--           
-          <div class="input-block">
-            <label for="costumer-name">Requisitante</label>
-            <input id="costumer-name" name="costumer-name" maxlength="100" required />
-          </div>
-
-          <div class="input-block">
-            <label for="email">E-mail para login</label>
-            <input type="email" id="email" name="email" maxlength="50" required />
-          </div>
-
-          <div class="input-block">
-            <label for="role">Função</label>
-            <input id="role" name="role" maxlength="30" required />
-          </div>
-
-          <div class="input-block">
-            <label for="password">Senha</label>
-            <input type="password" id="password" name="password" maxlength="" required />
-          </div>
-
-          <div class="input-block">
-            <label for="passwordConfirm">Confirmação de Senha</label>
-            <input type="password" id="passwordConfirm" name="passwordConfirm" maxlength="" required />
-          </div> --}}
-
           {{#if alertmessage}}
-              <h4 class="alert-message">{{alertmessage}}</h4>
-              <a class="primary-button" href="/osCustomerRegister">Cadastrar</a>
+            <h4 class="alert-message">{{alertmessage}}</h4>
+
+            <div class="user-options">
+                <a href="/osCustomerRegister" class="secondary-button">Cadastrar</a>
+                <a href="/customerVerify" class="secondary-button">Nova Consulta</a>
+            </div>
+              
           {{else if successmessage}}
                 <div class="customer-info success-message">
                   <h4>{{successmessage}}</h4>
@@ -89,9 +63,14 @@
 
                 <div class="user-options">
                   <a href="/osRegister" class="secondary-button">Sim, utilizar cadastro</a>
-                  <a href="/customer/edit" class="secondary-button">Não, editar cadastro</a>
+                  <a href="/customerVerify" class="secondary-button">Nova consulta</a>
                 </div>
           {{else}}
+              <div class="input-block">
+                <label for="identify">CPF/CNPJ do Requisitante<span>Somente números</span></label>
+                <input id="identify" name="identify" maxlength="15" required />
+              </div>
+
               <button type="submit" class="primary-button">Consultar</button>          
           {{/if}}
           

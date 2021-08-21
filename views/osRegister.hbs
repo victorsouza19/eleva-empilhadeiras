@@ -36,9 +36,10 @@
     </aside>
 
     <main class="animate-appear with-sidebar">
-      <form action="/auth/osCustomerRegister" method="POST">  <!-- Criando a rota de envio para o banco de dados -->
+      <form action="/auth/osRegister" method="POST">  <!-- Criando a rota de envio para o banco de dados -->
+  
         <fieldset>
-          <legend>Cadastro de Cliente</legend>
+          <legend>Cadastro de Ordem de Serviço</legend>
 
           {{#if alertmessage}}
             <h4 class="alert-message-top">{{alertmessage}}</h4>
@@ -46,47 +47,10 @@
             <h4 class="success-message-top">{{successmessage}}</h4>
           {{/if}}
 
-          <div class="input-block">
-            <label for="customerName">Nome/Razão Social</label>
-            <input id="customerName" name="customerName" maxlength="100" required />
-          </div>
-
-          <div class="input-block">
-            <label for="identify">CPF/CNPJ do Requisitante<span>Somente números</span></label>
-            <input id="identify" name="identify" maxlength="15" required />
-          </div>
-
-          <div class="input-block">
-            <label for="telephone">Telefone para Contato / Whatsapp</label>
-            <input id="telephone" name="telephone" required />
-          </div>
-        </fieldset>
-        <fieldset>
-          <legend>Endereço</legend>
-
-          <div class="input-block">
-            <label for="adress">Rua</label>
-            <input id="adress" name="adress" required />
-          </div>
-
-          <div class="input-block input-row">
-            <div class="input-block row">
-                <label for="adressNumber">Número</label>
-                <input type="number" id="adressNumber" name="adressNumber" required />
-            </div>
-            <div class="input-block row">
-                <label for="cep">CEP<span>Somente números</span></label>
-                <input id="cep" name="cep" required />
-            </div>
-          </div>
-
-          <div class="input-block">
-            <label for="adressComplement">Complemento</label>
-            <input id="adressComplement" name="adressComplement" required />
-          </div>
-        </fieldset>
-        <fieldset>
-          <legend>Dados (OS)</legend>
+          <h4>Dados do cliente:</h4>
+                  <p>Nome/Razão Social: <span>{{customer.name}}</span></p>
+                  <p>CPF/CNPJ: <span>{{customer.identify}}</span></p>
+                  <p>Telefone: <span>{{customer.telephone}}</span></p>
 
           <div class="input-block">
             <label for="responsible">Responsável</label>
