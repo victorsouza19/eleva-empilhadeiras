@@ -38,6 +38,15 @@ router.get('/customerVerify', authController.isLoggedIn, (req, res) => {
     
 });
 
+router.get('/equipmentRegister', authController.isLoggedIn, (req, res) => {
+    if(req.user) {
+        res.render('equipmentRegister');
+    } else {
+        res.redirect('/login');
+    };
+    
+});
+
 router.get('/customerRegister', authController.isLoggedIn, (req, res) => {
     if(req.user) {
         res.render('customerRegister');
@@ -56,12 +65,12 @@ router.get('/osCustomerRegister', authController.isLoggedIn, (req, res) => {
     
 });
 
-router.get('/osRegister', authController.isLoggedIn, authController.customerInfo, (req, res) => {
-    if(req.user) {
-        res.render('osRegister');
-    } else {
-        res.redirect('/login');
-    };
+router.get('/osRegister', authController.isLoggedIn, (req, res) => {
+        if(req.user) {
+            res.render('osRegister');
+        } else {
+            res.redirect('/login');
+        };
     
 });
 

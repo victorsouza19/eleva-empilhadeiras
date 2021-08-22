@@ -46,11 +46,18 @@
           {{else if successmessage}}
             <h4 class="success-message-top">{{successmessage}}</h4>
           {{/if}}
+          
+          <div class="customer-info success-message-top">
+            <h4>Dados do cliente:</h4>
+                <p>Nome/Razão Social: <span>{{customer.name}}</span></p>
+                <p>CPF/CNPJ: <span>{{customer.identify}}</span></p>
+                <p>Telefone: <span>{{customer.telephone}}</span></p>
+          </div>
 
-          <h4>Dados do cliente:</h4>
-                  <p>Nome/Razão Social: <span>{{customer.name}}</span></p>
-                  <p>CPF/CNPJ: <span>{{customer.identify}}</span></p>
-                  <p>Telefone: <span>{{customer.telephone}}</span></p>
+          <div class="input-block" style="display: none;">
+            <label for="customer_id">Cliente</label>
+            <input id="customer_id" name="customer_id" value="{{customer.id}}" />
+          </div>
 
           <div class="input-block">
             <label for="responsible">Responsável</label>
@@ -71,8 +78,8 @@
           </div>
 
           <div class="input-block">
-            <label for="description">Descrição<span>Máximo de 300 caracteres</span></label>
-            <textarea maxlength="300" id="description" name="description" required></textarea>
+            <label for="description">Descrição<span>Máximo de 200 caracteres</span></label>
+            <textarea maxlength="200" id="description" name="description" required></textarea>
           </div>
 
           <div class="input-block">

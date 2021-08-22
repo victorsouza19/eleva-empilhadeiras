@@ -1,8 +1,7 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const { promisify } = require('util');
-
-db = require('../app');
+const db = require('../app');
 
 
 exports.login = async (req,res) => {
@@ -10,42 +9,45 @@ exports.login = async (req,res) => {
         const { email, password } = req.body;
 
         if(!email || !password ) {
+            console.log("rodando aqui");
+
             return res.status(400).render('login', {
                 alertmessage: 'Por favor, insira o e-mail e senha'
             });
-        }
+        } else {
+        
+            console.log("rodando 2");
+            db.query('SELECT * FROM users WHERE email = ?', [email], async (error, results) => {
+                console.log(results);
+                if (!results || !(await bcrypt.compare(password, results[0].password) )) {
+                    res.status(401).render('login', {
+                        alertmessage: 'E-mail ou senha incorretos'
+                    });
+                } else {
+                    const id = results[0].id;
 
-        db.query('SELECT * FROM users WHERE email = ?', [email], async (error, results) => {
-            console.log(results);
-            if (!results || !(await bcrypt.compare(password, results[0].password) )) {
-                res.status(401).render('login', {
-                    alertmessage: 'E-mail ou senha incorretos'
-                });
-            } else {
-                const id = results[0].id;
+                    // creating the jwt token | Criando o token jwt e configurando a expiração
+                    const token = jwt.sign({ id }, process.env.JWT_SECRET, {
+                        expiresIn: process.env.JWT_EXPIRES_IN
+                    });
 
-                // creating the jwt token | Criando o token jwt e configurando a expiração
-                const token = jwt.sign({ id }, process.env.JWT_SECRET, {
-                    expiresIn: process.env.JWT_EXPIRES_IN
-                });
+                    console.log("The token is: " + token);
 
-                console.log("The token is: " + token);
+                    // configurando a expiração dos cookies
+                    const cookieOptions = {
+                        expires: new Date(
+                            // convertendo a data de expiração para milissegundos
+                            Date.now() + process.env.JWT_COOKIES_EXPIRES * 24 * 60 * 60 * 1000
+                        ),
+                        httpOnly: true
+                    }
 
-                // configurando a expiração dos cookies
-                const cookieOptions = {
-                    expires: new Date(
-                        // convertendo a data de expiração para milissegundos
-                        Date.now() + process.env.JWT_COOKIES_EXPIRES * 24 * 60 * 60 * 1000
-                    ),
-                    httpOnly: true
+                    // enviando o cookie para o browser
+                    res.cookie('jwt', token, cookieOptions);
+                    res.status(200).redirect("/");
                 }
-
-                // enviando o cookie para o browser
-                res.cookie('jwt', token, cookieOptions);
-                res.status(200).redirect("/");
-            }
-        });
-
+            });
+        }
 
 
     } catch (error) {
@@ -98,6 +100,43 @@ exports.register = (req, res) => {
         
     });
 
+};
+
+exports.osRegisterOnly = (req, res) => {
+    console.log(req.body);
+
+    const { identify } = req.body;
+
+    db.query('SELECT * from customers WHERE identify = ?', [identify], (error, results) => {
+        if (error) {
+            console.log(error);
+        }
+ 
+        if (results.length > 0) {
+            return res.render('osRegister', {
+                customer: results[0]
+            });
+        }
+
+    });
+}
+
+exports.osRegister = (req, res) => {
+    console.log(req.body);
+
+    const { customer_id, responsible, os_type, description, status } = req.body;
+
+
+    db.query('INSERT INTO orders SET ?', { customer_id: customer_id, responsible: responsible, description: description, type: os_type, status: status}, (error, results) => {
+        if(error) {
+            console.log(error);
+        } else {
+            console.log(results);
+            return res.render('osRegister', {
+                successmessage: 'Ordem de serviço cadastrada'
+            });
+        }
+    });
 };
 
 exports.osCustomerRegister = (req, res) => {
@@ -325,10 +364,6 @@ exports.isLoggedInIndex = async (req, res, next) => {
     } else {
         next();
     }
-}
-
-exports.customerInfo = async (req, res, next) => {
-    next();
 }
 
 exports.logout = async (req, res) => {

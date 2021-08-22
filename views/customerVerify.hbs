@@ -37,7 +37,7 @@
     </aside>
 
     <main class="animate-appear with-sidebar">
-      <form action="/auth/customerVerify" method="POST">  <!-- Criando a rota de envio para o banco de dados -->
+      <form id="form" action="/auth/customerVerify" method="POST">  <!-- Criando a rota de envio para o banco de dados -->
         <fieldset>
           <legend>Verificação de Requisitante</legend>
           <p class="form-information">Aqui você pode identificar se o cliente já está cadastrado no sistema, e utilizar os dados já cadastrados. Para a verificação, você deve inserir os dados solicitados abaixo:</p>
@@ -61,8 +61,13 @@
                   
                 </div>
 
+               <div class="input-block" style="display: none;">
+                <label for="identify"></label>
+                <input id="identify" name="identify" value="{{customer.identify}}" />
+              </div>
+
                 <div class="user-options">
-                  <a href="/osRegister" class="secondary-button">Sim, utilizar cadastro</a>
+                  <button type="submit" id="setFormAction" class="secondary-button">Sim, utilizar cadastro</button>
                   <a href="/customerVerify" class="secondary-button">Nova consulta</a>
                 </div>
           {{else}}
@@ -73,12 +78,12 @@
 
               <button type="submit" class="primary-button">Consultar</button>          
           {{/if}}
-          
-
         </fieldset>
   </form>
   </main>
   </div>
+
+  <script src="/scripts/traceFormRoute.js"></script>
 </body>
 
 </html>
