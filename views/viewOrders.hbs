@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+
+<html lang="pt_BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ordem de Serviço | ElevaEmpilhadeiras</title>
+
+
+  <link rel="icon" href="/images/logo-eleva.png" />
+
+  <link rel="stylesheet" href="/style/main.css" />
+  <link rel="stylesheet" href="/style/animations.css" />
+  <link rel="stylesheet" href="/style/sidebar.css" />
+  <link rel="stylesheet" href="/style/views.css" />
+  <link rel="stylesheet" href="/style/primary-button.css" />
+  <link rel="stylesheet" href="/style/page-forms.css" />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style/home.css">
+</head>
+
+<body>
+  <div id="page-creates">
+    <aside class="animate-down sidebar">
+      <img class="image-aside" src="/images/logo-eleva.png" alt="logo eleva" />
+
+      <footer>
+        <button>
+          <a href="/"><img src="../images/arrow-back.svg" alt="Voltar" /></a>
+        </button>
+      </footer>
+    </aside>
+
+    <main class="animate-appear with-sidebar">
+      <div class="container">
+        <fieldset>
+          <legend>Editar Ordem de Serviço</legend>
+
+          {{#if alertmessage}}
+            <h4 class="alert-message-top">{{alertmessage}}</h4>
+          {{/if}}
+  
+
+        <button onclick="mostrar()" class="primary-button">Criar</button>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          {{!-- 
+          <div class="customer-info success-message-top">
+            <h4>Dados do cliente:</h4>
+                <p>Nome/Razão Social: <span>{{customer.name}}</span></p>
+                <p>CPF/CNPJ: <span>{{customer.identify}}</span></p>
+                <p>Telefone: <span>{{customer.telephone}}</span></p>
+          </div>
+
+          <div class="input-block">
+            <label for="responsible">Responsável</label>
+            <input id="responsible" name="responsible" required />
+          </div>
+
+        <div class="input-block">
+          <label for="os_type">Tipo de atendimento</label>
+          <input type="hidden" id="os_type" name="os_type" value="Requisição" required />
+
+          <div class="button-select">
+            <button data-status="Requisição" onclick="toggleSelect(event)" type="button" class="active">
+              Requisição
+            </button>
+            <button data-status="Incidente" onclick="toggleSelect(event)" type="button">
+              Incidente
+            </button>
+          </div>
+
+          <div class="input-block">
+            <label for="description">Descrição<span>Máximo de 200 caracteres</span></label>
+            <textarea maxlength="200" id="description" name="description" required></textarea>
+          </div>
+
+          <div class="input-block">
+            <label for="status">Status</label>
+            <input type="hidden" id="status" name="status" value="open" required />
+
+            <div class="button-select-status">
+              <button data-value="Aberto" onclick="toggleSelectStatus(event)" type="button" class="active">
+                Aberto
+              </button>
+              <button data-value="Em andamento" onclick="toggleSelectStatus(event)" type="button">
+                Em Andamento
+              </button>
+              <button data-value="Fechado" onclick="toggleSelectStatus(event)" type="button">
+                Fechado
+              </button>
+            </div>
+          </div>
+          <button type="submit" class="primary-button">Criar</button> --}}
+        </fieldset> 
+         </div>
+      </main>
+    </div>
+ 
+
+  <script src="/scripts/animations.js"></script>
+  <script src="/scripts/viewOrders.js"></script>
+
+</body>
+
+</html>

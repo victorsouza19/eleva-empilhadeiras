@@ -4,6 +4,7 @@ const authController = require('../controllers/auth');
 const router = express.Router();
 
 
+// Setting the pages routes || Definindo as rotas das páginas
 
 router.get('/', authController.isLoggedInIndex, (req, res) => {
     
@@ -19,6 +20,14 @@ router.get('/', authController.isLoggedInIndex, (req, res) => {
     
 });
 
+router.get('/view/orders', authController.isLoggedIn, (req, res) => {
+    if(req.user) {
+        res.render('viewOrders');
+    } else {
+        res.redirect('/login');
+    };
+    
+});
 
 router.get('/userRegister', authController.isLoggedIn, (req, res) => {
     if(req.user) {
