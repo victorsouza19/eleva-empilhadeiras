@@ -1,0 +1,60 @@
+thead { 
+    font-size: clamp(1rem, 1.5rem, 2rem);
+    font-weight: 600;
+    color: #2c2c2c;
+}
+
+table {
+    border-collapse: separate;
+    border-spacing: 0 1rem;
+    width: 100%;
+}
+    
+
+td {
+   padding:  1rem;
+}
+
+td:first-child {
+
+    border-radius: 0.5rem 0 0 0.5rem;
+}
+
+td:last-child {
+    border-radius: 0 0.5rem 0.5rem 0;
+}
+
+.item{ 
+    background-color: #ebebeb;
+    height: 5rem;
+    
+
+    font-size: clamp(1rem, 1.5rem, 2rem) ;
+}
+
+
+.edit-button {
+    background: #3cdc8c; 
+    
+    width: 100%;
+    border: none;
+    padding: 1rem;
+    
+    cursor: pointer;
+    
+    text-decoration: none;
+        
+    
+    border-radius: 0.5rem;
+    color: white;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+    transition: background-color 200ms;
+}
+
+.edit-button:hover {
+    background: #36cf82;
+}

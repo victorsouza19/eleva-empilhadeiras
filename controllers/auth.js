@@ -402,10 +402,8 @@ const db = require('../app');
 
             } else if(rows.length > 0) {
                 res.render('viewOrders', {
-                    
-                    items: rows
+                    items: rows 
                 });
-                return res.send(rows);
 
 
             } else {
