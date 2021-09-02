@@ -23,6 +23,8 @@ router.get('/logout', authController.logout );
 
 router.get('/viewOrders', authController.viewOrders );
 
+router.get('/orderEdit/:id', authController.orderEdit );
+
 
 
 module.exports = router;

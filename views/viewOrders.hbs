@@ -49,8 +49,9 @@
             <thead>
               <tr>
                 <div class="menu-items">
-                  <th>Id</th>
-                  <th>Responsavel</th>
+                  <th>Cliente</th>
+                  <th>CPF/CNPJ</th>
+                  <th>Responsável</th>
                   <th>Tipo</th>
                   <th>Status</th>
                   <th>Ação</th>
@@ -60,11 +61,12 @@
             <tbody>
               {{#each items}}
               <tr class="item">
-                  <td>{{id}}</td>
+                  <td>{{name}}</td>
+                  <td>{{identify}}</td>
                   <td>{{responsible}}</td>
                   <td>{{type}}</td>
                   <td>{{status}}</td>
-                  <td><button class="edit-button" type="submit">Editar</button></td>
+                  <td><a href="/auth/orderEdit/{{id}}"><button class="edit-button" type="submit">Editar</button></a></td>
               </tr>
               {{/each}}
             </tbody>

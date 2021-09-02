@@ -396,11 +396,12 @@ const db = require('../app');
     exports.viewOrders = async (req,res) => {
         try {
 
-        db.query('SELECT * FROM orders', async (error, rows, fields) => {
+        db.query('SELECT o.id, c.name, c.identify, o.responsible, o.status, o.type FROM orders AS o INNER JOIN customers as c ON c.id = o.customer_id ORDER BY o.initial_date DESC;', async (error, rows) => {
             if(error){
                 console.log(error)
 
             } else if(rows.length > 0) {
+                console.log(rows);
                 res.render('viewOrders', {
                     items: rows 
                 });
@@ -419,6 +420,27 @@ const db = require('../app');
         }
     };
 
+    exports.orderEdit = async (req,res) => {
+        try {
+            console.log(req.params.id);
+            id = req.params.id
+
+        db.query('SELECT * FROM orders WHERE id = ?', [id], async (error, result) => {
+            if(error){
+                console.log(error);
+            }  
+            
+            if(result.length > 0) {
+                console.log(result);
+                res.send({
+                    order: result[0]});
+            }
+        });         
+
+        } catch (error) {
+            console.log(error);
+        }
+    };
 
 
 

@@ -2,17 +2,24 @@ thead {
     font-size: clamp(1rem, 1.5rem, 2rem);
     font-weight: 600;
     color: #2c2c2c;
+
+    text-align: left;
+
 }
 
 table {
     border-collapse: separate;
     border-spacing: 0 1rem;
-    width: 100%;
+
 }
     
 
 td {
    padding:  1rem;
+}
+
+td > a {
+    text-decoration: none;
 }
 
 td:first-child {

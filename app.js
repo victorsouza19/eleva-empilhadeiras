@@ -14,7 +14,8 @@
 
 
 // making the connection to database | Fazendo a conexão com o banco de dados
-const db = mysql.createConnection({
+const db = mysql.createPool({
+    connectionLimit: 10,
     host: process.env.DATABASE_HOST,
     user: process.env.DATABASE_USER,
     password: process.env.DATABASE_PASSWORD,
@@ -44,7 +45,7 @@ module.exports = db;
     app.set('view engine', 'hbs');
 
 // verifying the connection to the db | verificando a conexão com o bd
-    db.connect( (error) => {
+    db.getConnection( (error) => {
         if(error) {
             console.log(error)
         } else {
