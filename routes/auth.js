@@ -5,26 +5,28 @@ const router = express.Router();
 
 // Setting the form routes || Definindo as rotas dos formulários
 
-router.post('/userRegister', authController.register );
+    // register routes || rotas de registro
+    router.post('/userRegister', authController.register );
 
-router.post('/customerRegister', authController.customerRegister );
+    router.post('/customerRegister', authController.customerRegister );
 
-router.post('/customerVerify', authController.customerVerify );
+    router.post('/osRegisterOnly', authController.osRegisterOnly );
 
-router.post('/osRegisterOnly', authController.osRegisterOnly );
+    router.post('/osRegister', authController.osRegister);
 
-router.post('/osRegister', authController.osRegister);
+    router.post('/osCustomerRegister', authController.osCustomerRegister );
 
-router.post('/osCustomerRegister', authController.osCustomerRegister );
+    // Access routes || Rotas de acesso
+    router.post('/login', authController.login );
 
-router.post('/login', authController.login );
+    router.get('/logout', authController.logout );
 
-router.get('/logout', authController.logout );
+    // Verify routes || Rotas de verificação
+    router.post('/customerVerify', authController.customerVerify );
 
-router.get('/viewOrders', authController.viewOrders );
 
-router.get('/orderEdit/:id', authController.orderEdit );
-
+    // Edit Routes || Rotas de edição
+    router.post('/osEdit', authController.osEdit);
 
 
 module.exports = router;

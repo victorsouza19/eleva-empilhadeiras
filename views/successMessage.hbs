@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<html lang="pt_BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sucesso | ElevaEmpilhadeiras</title>
+
+
+  <link rel="icon" href="/images/logo-eleva.png" />
+
+  <link rel="stylesheet" href="/style/main.css" />
+  <link rel="stylesheet" href="/style/animations.css" />
+  <link rel="stylesheet" href="/style/sidebar.css" />
+  <link rel="stylesheet" href="/style/views.css" />
+  <link rel="stylesheet" href="/style/primary-button.css" />
+  <link rel="stylesheet" href="/style/page-forms.css" />
+  <link rel="stylesheet" href="/style/items.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style/home.css">
+</head>
+
+<body>
+  <div id="page-creates">
+    <aside class="animate-down sidebar">
+      <img class="image-aside" src="/images/logo-eleva.png" alt="logo eleva" />
+
+      <footer>
+        <button>
+          <a href="/"><img src="../images/arrow-back.svg" alt="Voltar" /></a>
+        </button>
+      </footer>
+    </aside>
+
+    <main class="animate-appear with-sidebar">
+      <div class="container">
+        <fieldset>
+          {{#if errormessage}}
+            <legend>Erro</legend>
+
+              <h4 class="alert-message-top">{{errormessage}}</h4>
+          {{else if successmessage}}
+            <legend>Sucesso</legend>
+
+              <h4 class="success-message-top">{{successmessage}}</h4>
+          {{/if}}
+
+          <a href="/" class="primary-button">Voltar para Home</a>
+
+  
+  <script src="/scripts/animations.js"></script>
+</body>
+
+</html>

@@ -39,11 +39,14 @@ td:last-child {
     font-size: clamp(1rem, 1.5rem, 2rem) ;
 }
 
+.button-options{
+    padding: 1rem 0;
+}
 
-.edit-button {
-    background: #3cdc8c; 
+.edit-button, .delete-button {
+
     
-    width: 100%;
+    width: 90%;
     border: none;
     padding: 1rem;
     
@@ -62,6 +65,18 @@ td:last-child {
     transition: background-color 200ms;
 }
 
+.edit-button {
+    background: #3cdc8c; 
+}
+
+.delete-button {
+    background: #dc3c3c; 
+}
+
 .edit-button:hover {
     background: #36cf82;
+}
+
+.delete-button:hover {
+    background: #cf3636;
 }

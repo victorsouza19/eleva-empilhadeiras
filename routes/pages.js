@@ -20,9 +20,18 @@ router.get('/', authController.isLoggedInIndex, (req, res) => {
     
 });
 
-router.get('/view/orders', authController.isLoggedIn, (req, res) => {
+router.get('/orders', authController.isLoggedIn, (req, res) => {
     if(req.user) {
         res.render('viewOrders');
+    } else {
+        res.redirect('/login');
+    };
+    
+});
+
+router.get('/orders/edit', authController.isLoggedIn, (req, res) => {
+    if(req.user) {
+        res.render('osEdit');
     } else {
         res.redirect('/login');
     };
@@ -80,6 +89,15 @@ router.get('/osRegister', authController.isLoggedIn, (req, res) => {
         } else {
             res.redirect('/login');
         };
+    
+});
+
+router.get('/success', authController.isLoggedIn, (req, res) => {
+    if(req.user) {
+        res.render('successMessage');
+    } else {
+        res.redirect('/login');
+    };
     
 });
 

@@ -31,7 +31,7 @@
 
       <footer>
         <button>
-          <a href="/"><img src="../images/arrow-back.svg" alt="Voltar" /></a>
+          <a href="/"><img src="/images/arrow-back.svg" alt="Voltar" /></a>
         </button>
       </footer>
     </aside>
@@ -43,6 +43,8 @@
 
           {{#if alertmessage}}
             <h4 class="alert-message-top">{{alertmessage}}</h4>
+          {{else if successmessage}}
+            <h4 class="success-message-top">{{successmessage}}</h4>
           {{/if}}
 
           <table>
@@ -66,7 +68,8 @@
                   <td>{{responsible}}</td>
                   <td>{{type}}</td>
                   <td>{{status}}</td>
-                  <td><a href="/auth/orderEdit/{{id}}"><button class="edit-button" type="submit">Editar</button></a></td>
+                  <td class="button-options"><a href="/view/orderEdit/{{id}}"><button class="edit-button" type="submit">Editar</button></a></td>
+                  <td class="button-options"><a href="/view/orderDelete/{{id}}"><button class="delete-button" type="submit">Apagar</button></a></td>
               </tr>
               {{/each}}
             </tbody>

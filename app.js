@@ -56,6 +56,7 @@ module.exports = db;
 //Define Routes | Definindo as rotas
     app.use('/', require('./routes/pages'));
     app.use('/auth', require('./routes/auth'));
+    app.use('/view', require('./routes/view'));
 
 // verifying the connection to the server | verificando a conexão com o servidor
     app.listen(3000, () => {

@@ -47,17 +47,20 @@
             <h4 class="success-message-top">{{successmessage}}</h4>
           {{/if}}
           
+          {{#if customer}}
           <div class="customer-info success-message-top">
             <h4>Dados do cliente:</h4>
                 <p>Nome/Razão Social: <span>{{customer.name}}</span></p>
                 <p>CPF/CNPJ: <span>{{customer.identify}}</span></p>
                 <p>Telefone: <span>{{customer.telephone}}</span></p>
           </div>
+          
 
           <div class="input-block" style="display: none;">
             <label for="customer_id">Cliente</label>
             <input id="customer_id" name="customer_id" value="{{customer.id}}" />
           </div>
+          {{/if}}
 
           <div class="input-block">
             <label for="responsible">Responsável</label>
@@ -84,7 +87,7 @@
 
           <div class="input-block">
             <label for="status">Status</label>
-            <input type="hidden" id="status" name="status" value="open" required />
+            <input type="hidden" id="status" name="status" value="Aberto" required />
 
             <div class="button-select-status">
               <button data-value="Aberto" onclick="toggleSelectStatus(event)" type="button" class="active">

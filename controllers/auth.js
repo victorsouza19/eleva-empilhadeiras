@@ -212,7 +212,7 @@ const db = require('../app');
                     console.log(error);
                 } else {
                     console.log(results);
-                    return res.render('userRegister', {
+                    return res.render('successMessage', {
                         successmessage: 'Usuário criado'
                     });
                 }
@@ -254,7 +254,7 @@ const db = require('../app');
                 console.log(error);
             } else {
                 console.log(results);
-                return res.render('osRegister', {
+                return res.render('successMessage', {
                     successmessage: 'Ordem de serviço cadastrada'
                 });
             }
@@ -305,7 +305,7 @@ const db = require('../app');
                             console.log(error);
                         } else {
                             console.log(results);
-                            return res.render('osCustomerRegister', {
+                            return res.render('successMessage', {
                                 successmessage: 'Ordem de serviço cadastrada'
                             });
                         }
@@ -379,7 +379,7 @@ const db = require('../app');
                         console.log(error);
                     } else {
                         console.log(results);
-                        return res.render('customerRegister', {
+                        return res.render('successMessage', {
                             successmessage: 'Cliente criado'
                         });
                     }
@@ -390,57 +390,37 @@ const db = require('../app');
 
     };
 
+    exports.osEdit = (req, res) => {
+        console.log(req.body);
 
-// QUERYS TO SHOW IN PAGE || CONSULTAS PARA EXIBIR NA PÁGINA
+        const {order_id, responsible, os_type, description, status} = req.body;
 
-    exports.viewOrders = async (req,res) => {
-        try {
+        let param = [
+            {responsible: responsible, description: description, type: os_type, status: status},
+            order_id
+        ];
 
-        db.query('SELECT o.id, c.name, c.identify, o.responsible, o.status, o.type FROM orders AS o INNER JOIN customers as c ON c.id = o.customer_id ORDER BY o.initial_date DESC;', async (error, rows) => {
-            if(error){
-                console.log(error)
-
-            } else if(rows.length > 0) {
-                console.log(rows);
-                res.render('viewOrders', {
-                    items: rows 
+            try {
+                db.query('UPDATE orders SET ? WHERE id = ?', param, (error, results) => {
+                    if(error) {
+                        console.log(error);
+                    } else {
+                        console.log(results);
+                        return res.render('successMessage', {
+                            successmessage: 'Ordem de serviço editada'
+                        });
+                    }
                 });
 
-
-            } else {
-                return res.render('viewOrders', {
-                    alertmessage: "Nenhuma ordem de serviço cadastrada"
-                })
+            } catch (error) {
+                return console.error(error);
             }
-        });
+};
 
 
-        } catch (error) {
-            console.log(error);
-        }
-    };
 
-    exports.orderEdit = async (req,res) => {
-        try {
-            console.log(req.params.id);
-            id = req.params.id
+// FORM EDITS | FORMULÁRIOS DE EDIÇÃO
 
-        db.query('SELECT * FROM orders WHERE id = ?', [id], async (error, result) => {
-            if(error){
-                console.log(error);
-            }  
-            
-            if(result.length > 0) {
-                console.log(result);
-                res.send({
-                    order: result[0]});
-            }
-        });         
-
-        } catch (error) {
-            console.log(error);
-        }
-    };
 
 
 
