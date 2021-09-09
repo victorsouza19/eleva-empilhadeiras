@@ -90,6 +90,7 @@ const db = require('../app');
         }
     };
 
+// DELETES
     exports.orderDelete = async (req,res) => {
         try {
             console.log(req.params.id);
