@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+
+<html lang="pt_BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ordem de Serviço | ElevaEmpilhadeiras</title>
+
+
+  <link rel="icon" href="/images/logo-eleva.png" />
+
+  <link rel="stylesheet" href="/style/main.css" />
+  <link rel="stylesheet" href="/style/animations.css" />
+  <link rel="stylesheet" href="/style/sidebar.css" />
+  <link rel="stylesheet" href="/style/views.css" />
+  <link rel="stylesheet" href="/style/primary-button.css" />
+  <link rel="stylesheet" href="/style/page-forms.css" />
+  <link rel="stylesheet" href="/style/items.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style/home.css">
+</head>
+
+<body>
+  <div id="page-creates">
+    <aside class="animate-down sidebar">
+      <img class="image-aside" src="/images/logo-eleva.png" alt="logo eleva" />
+
+      <footer>
+        <button>
+          <a href="/"><img src="/images/arrow-back.svg" alt="Voltar" /></a>
+        </button>
+      </footer>
+    </aside>
+
+    <main class="animate-appear with-sidebar">
+      <div class="container">
+        <fieldset>
+          <legend>Editar Ordem de Serviço</legend>
+
+          {{#if alertmessage}}
+            <h4 class="alert-message-top">{{alertmessage}}</h4>
+          {{else if successmessage}}
+            <h4 class="success-message-top">{{successmessage}}</h4>
+          {{/if}}
+
+          <table>
+            <thead>
+              <tr>
+                <div class="menu-items">
+                  <th>Cliente</th>
+                  <th>CPF/CNPJ</th>
+                  <th>Responsável</th>
+                  <th>Tipo</th>
+                  <th>Status</th>
+                  <th>Ação</th>
+                </div>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each items}}
+              <tr class="item">
+                  <td>{{name}}</td>
+                  <td>{{identify}}</td>
+                  <td>{{responsible}}</td>
+                  <td>{{type}}</td>
+                  <td>{{status}}</td>
+                  <td class="button-options"><a href="/view/orderEdit/{{id}}"><button class="edit-button" type="submit">Editar</button></a></td>
+                  <td class="button-options"><a href="/view/orderDelete/{{id}}"><button class="delete-button" type="submit">Apagar</button></a></td>
+              </tr>
+              {{/each}}
+            </tbody>
+          </table>
+  
+  <script src="/scripts/animations.js"></script>
+</body>
+
+</html>

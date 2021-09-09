@@ -5,6 +5,8 @@
     height: 6.4rem;
     border: none;
 
+    text-decoration: none;
+
     cursor: pointer;
 
     background: #3cdc8c;
@@ -54,5 +56,39 @@
 }
 
 .button-select button:last-child {
+    border-radius: 0 1rem 1rem 0;
+}
+
+
+.button-select-status {
+    width: 100%;
+}
+
+.button-select-status {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    margin-bottom: 2.4rem;
+}
+
+.button-select-status button {
+    height: 6.4rem;
+    background: #f5f8fa;
+    border: 1px solid #d3e2e5;
+    color: #5c8599;
+    cursor: pointer;
+
+}
+
+.button-select-status button.active {
+    background: #edfff6;
+    border: 1px solid #a1e9c5;
+    color: #37c77f;
+}
+
+.button-select-status button:first-child {
+    border-radius: 1rem 0 0 1rem;   
+}
+
+.button-select-status button:last-child {
     border-radius: 0 1rem 1rem 0;
 }

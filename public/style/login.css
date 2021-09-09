@@ -37,7 +37,8 @@ body {
     flex: 1;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+
+    align-items: center;
 }
 
 .second-column {
@@ -51,6 +52,8 @@ body {
 form {
     display: flex;
     flex-direction: column;
+ 
+    align-items: center;
 }
 
 
@@ -89,8 +92,7 @@ h2 {
   }
   
   .input-block input {
-    width: 70%;
-    max-width: 55vw;
+    width: 19rem;
   
     background: #fdfdf1;
     border: 1px solid #d3e2e5;
@@ -108,7 +110,7 @@ h2 {
   
   .acessar {
     height: 2.5rem;
-    width: 40%;
+    width: 15rem;
     margin-top: 2.4rem;
     border: none;
     border-radius: 15px;
@@ -135,6 +137,17 @@ h2 {
   .copyright {
     margin-top: 1rem;
     font-weight: 600;
+  }
+
+  .alert-message {
+    color: red;
+    text-align: center;
+    padding: 1rem;
+    margin-top: 5rem;
+    border: 1px solid red;
+    background-color: rgba(255, 0, 0, 0.137);
+    border-radius: 1rem;
+    
   }
 
 

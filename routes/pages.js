@@ -1,16 +1,104 @@
 const express = require('express');
+const authController = require('../controllers/auth');
 
 const router = express.Router();
 
 
+// Setting the pages routes || Definindo as rotas das páginas
 
-router.get('/', (req, res) => {
-    res.render('index');
+router.get('/', authController.isLoggedInIndex, (req, res) => {
+    
+    if(req.user) {
+        res.render('index', {
+            
+            user: req.user,
+            date: dia+", "+data.getDate()+" de "+mes
+        });
+    } else {
+        res.redirect('/login');
+    }
+    
 });
 
+router.get('/orders', authController.isLoggedIn, (req, res) => {
+    if(req.user) {
+        res.render('viewOrders');
+    } else {
+        res.redirect('/login');
+    };
+    
+});
 
-router.get('/create-user', (req, res) => {
-    res.render('create-user');
+router.get('/orders/edit', authController.isLoggedIn, (req, res) => {
+    if(req.user) {
+        res.render('osEdit');
+    } else {
+        res.redirect('/login');
+    };
+    
+});
+
+router.get('/userRegister', authController.isLoggedIn, (req, res) => {
+    if(req.user) {
+        res.render('userRegister');
+    } else {
+        res.redirect('/login');
+    };
+    
+});
+
+router.get('/customerVerify', authController.isLoggedIn, (req, res) => {
+    if(req.user) {
+        res.render('customerVerify');
+    } else {
+        res.redirect('/login');
+    };
+    
+});
+
+router.get('/equipmentRegister', authController.isLoggedIn, (req, res) => {
+    if(req.user) {
+        res.render('equipmentRegister');
+    } else {
+        res.redirect('/login');
+    };
+    
+});
+
+router.get('/customerRegister', authController.isLoggedIn, (req, res) => {
+    if(req.user) {
+        res.render('customerRegister');
+    } else {
+        res.redirect('/login');
+    };
+    
+});
+
+router.get('/osCustomerRegister', authController.isLoggedIn, (req, res) => {
+    if(req.user) {
+        res.render('osCustomerRegister');
+    } else {
+        res.redirect('/login');
+    };
+    
+});
+
+router.get('/osRegister', authController.isLoggedIn, (req, res) => {
+        if(req.user) {
+            res.render('osRegister');
+        } else {
+            res.redirect('/login');
+        };
+    
+});
+
+router.get('/success', authController.isLoggedIn, (req, res) => {
+    if(req.user) {
+        res.render('successMessage');
+    } else {
+        res.redirect('/login');
+    };
+    
 });
 
 

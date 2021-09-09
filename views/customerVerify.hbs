@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+
+<html lang="pt_BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ordem de Serviço | ElevaEmpilhadeiras</title>
+
+
+  <link rel="icon" href="/images/logo-eleva.png" />
+
+  <link rel="stylesheet" href="/style/main.css" />
+  <link rel="stylesheet" href="/style/animations.css" />
+  <link rel="stylesheet" href="/style/sidebar.css" />
+  <link rel="stylesheet" href="/style/forms.css" />
+  <link rel="stylesheet" href="/style/primary-button.css" />
+  <link rel="stylesheet" href="/style/page-forms.css" />
+  <link rel="stylesheet" href="/style/secondary-button.css" />
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/style/home.css">
+</head>
+
+<body>
+  <div id="page-creates">
+    <aside class="animate-down sidebar">
+      <img class="image-aside" src="/images/logo-eleva.png" alt="logo eleva" />
+
+      <footer>
+        <button>
+          <a href="/"><img src="../images/arrow-back.svg" alt="Voltar" /></a>
+        </button>
+      </footer>
+    </aside>
+
+    <main class="animate-appear with-sidebar">
+      <form id="form" action="/auth/customerVerify" method="POST">  <!-- Criando a rota de envio para o banco de dados -->
+        <fieldset>
+          <legend>Verificação de Requisitante</legend>
+          <p class="form-information">Aqui você pode identificar se o cliente já está cadastrado no sistema, e utilizar os dados já cadastrados. Para a verificação, você deve inserir os dados solicitados abaixo:</p>
+
+          {{#if alertmessage}}
+            <h4 class="alert-message">{{alertmessage}}</h4>
+
+            <div class="user-options">
+                <a href="/osCustomerRegister" class="secondary-button">Cadastrar</a>
+                <a href="/customerVerify" class="secondary-button">Nova Consulta</a>
+            </div>
+              
+          {{else if successmessage}}
+                <div class="customer-info success-message">
+                  <h4>{{successmessage}}</h4>
+
+                  <h4>Dados do cliente:</h4>
+                  <p>Nome/Razão Social: <span>{{customer.name}}</span></p>
+                  <p>CPF/CNPJ: <span>{{customer.identify}}</span></p>
+                  <p>Telefone: <span>{{customer.telephone}}</span></p>
+                  
+                </div>
+
+               <div class="input-block" style="display: none;">
+                <label for="identify"></label>
+                <input id="identify" name="identify" value="{{customer.identify}}" />
+              </div>
+
+                <div class="user-options">
+                  <button type="submit" id="setFormAction" class="secondary-button">Sim, utilizar cadastro</button>
+                  <a href="/customerVerify" class="secondary-button">Nova consulta</a>
+                </div>
+          {{else}}
+              <div class="input-block">
+                <label for="identify">CPF/CNPJ do Requisitante<span>Somente números</span></label>
+                <input id="identify" name="identify" maxlength="15" required />
+              </div>
+
+              <button type="submit" class="primary-button">Consultar</button>          
+          {{/if}}
+        </fieldset>
+  </form>
+  </main>
+  </div>
+
+  <script src="/scripts/traceFormRoute.js"></script>
+</body>
+
+</html>

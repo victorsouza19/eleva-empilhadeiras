@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
      <title>Home | ElevaEmpilhadeiras</title>
      <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
 
@@ -13,41 +12,51 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/style/home.css">
+    <link rel="stylesheet" href="/style/animations.css" />
 
    
 </head>
 <body>
     <div class="container">
-        <div class= "top-content">
+        <div class= "animate-down top-content">
             <nav class= "top-nav">
-                <img src="/images/logo-eleva.png" alt="logo-eleva">
-                <p>Dom, 08 Agosto</p>
+                <div class="left-content">
+                    <img src="/images/logo-eleva.png" alt="logo-eleva">
+                    <span>| Since 2007</span>
+                </div>
+                <div class="right-content">
+                    <span>{{date}}</span>
+                </div>
             </nav>
         </div>
         <div class="bottom-content">
             <div class="first-column">
-                <h4>Nesta tela você poderá administrar as ordens de serviço</h4>
+                <h4>Nesta tela você poderá administrar as ordens de serviço, produtos e peças em estoque, cadastrar novos funcionários e tirar relatórios.</h4>
                 <div class="options">
-                    <button>Criar OS</button>
-                    <button>Atualizar OS</button>
-                    <button>Estoque/Peças</button>
-                    <button>Lorem Ipsum</button>
-                    <button>Funcionários</button>
-                    <button>Relatórios</button>
+                    <a href="/customerVerify">Criar OS</a>
+                    <a href="/view/viewOrders">Atualizar OS</a>
+                    <a href="/equipmentRegister">Estoque/Peças</a>
+                    <a href="/customerRegister">Cadastro de Cliente</a>
+                    <a href="/userRegister">Cadastro de Funcionários</a>
+                    <a href="#">Relatórios</a>
                 </div>
             </div>
             <div class="second-column">
                 <div class="profile">
-                    <img class="profile-image" src="/images/eleva-right.png" alt="user">
-                    <p>Olá, <b>Bruna!</b></p>
-                    <span>Operador de empilhadeiras</span>
+                    <div class="parent-profile">
+                        <img class="profile-background" src="/images/avatar.svg" alt="user-background">
+                        <img class="profile-avatar" src="/images/workers.svg" alt="user">
+                    </div>
+
+                    <p>Olá, <b>{{user.name}}!</b></p>
+                    <span>{{user.role}}</span>
                 </div>
                 <div class= "exit">
-                    <button>Sair</button>
+                    <a href="/auth/logout">Sair</a>
                 </div>
 
             </div>
         </div>
     </div>
-</body>
+</body>  
 </html>
