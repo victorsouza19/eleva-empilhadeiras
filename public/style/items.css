@@ -1,10 +1,18 @@
 thead { 
     font-size: clamp(1rem, 1.5rem, 2rem);
     font-weight: 600;
-    color: #2c2c2c;
+    color: #2c2c2cc5;
 
-    text-align: left;
+    text-align:left;
 
+}
+
+th:first-child {
+    padding-left: 1rem;
+}
+
+.th-center{
+    text-align: center;
 }
 
 table {
@@ -20,6 +28,10 @@ td {
 
 td > a {
     text-decoration: none;
+}
+
+td a > i {
+    padding: 1rem;
 }
 
 td:first-child {
@@ -46,9 +58,11 @@ td:last-child {
 .edit-button, .delete-button {
 
     
-    width: 90%;
+    width: 50px;
+    height: 50px;
     border: none;
     padding: 1rem;
+    margin-right: 1rem; 
     
     cursor: pointer;
     
@@ -62,21 +76,25 @@ td:last-child {
     align-items: center;
     justify-content: center;
     
-    transition: background-color 200ms;
+    transition: background-color 0.5s, border 0.5s, color 0.5s;
 }
 
 .edit-button {
-    background: #3cdc8c; 
+    background: #3cdc8c;
 }
 
 .delete-button {
-    background: #dc3c3c; 
+    background: #dc3c3c00;
+    border: 0.25rem solid #dc3c3c;
+    color: #2c2c2c;  
 }
 
 .edit-button:hover {
-    background: #36cf82;
+    background: #3abb7a;
 }
 
 .delete-button:hover {
     background: #cf3636;
+    border: none;
+    color: #ffff; 
 }

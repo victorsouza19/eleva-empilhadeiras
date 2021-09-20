@@ -8,9 +8,9 @@ const router = express.Router();
     // register routes || rotas de registro
     router.post('/userRegister', authController.register );
 
-    router.post('/customerRegister', authController.customerRegister );
+    router.post('/equipmentRegister', authController.equipmentRegister );
 
-    router.post('/osRegisterOnly', authController.osRegisterOnly );
+    router.post('/customerRegister', authController.customerRegister );
 
     router.post('/osRegister', authController.osRegister);
 
@@ -23,6 +23,12 @@ const router = express.Router();
 
     // Verify routes || Rotas de verificação
     router.post('/customerVerify', authController.customerVerify );
+
+
+    // rotas que passam parametros do back-end
+    router.post('/notOsRegisterOnly', authController.notOsRegisterOnly );
+
+    router.post('/osRegisterOnly', authController.osRegisterOnly );
 
 
     // Edit Routes || Rotas de edição

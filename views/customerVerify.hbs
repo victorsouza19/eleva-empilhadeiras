@@ -46,7 +46,7 @@
             <h4 class="alert-message">{{alertmessage}}</h4>
 
             <div class="user-options">
-                <a href="/osCustomerRegister" class="secondary-button">Cadastrar</a>
+                <button type="submit" onclick="setFormAction2()" class="secondary-button">Cadastrar</button>
                 <a href="/customerVerify" class="secondary-button">Nova Consulta</a>
             </div>
               
@@ -67,7 +67,7 @@
               </div>
 
                 <div class="user-options">
-                  <button type="submit" id="setFormAction" class="secondary-button">Sim, utilizar cadastro</button>
+                  <button type="submit" onclick="setFormAction()" class="secondary-button">Sim, utilizar cadastro</button>
                   <a href="/customerVerify" class="secondary-button">Nova consulta</a>
                 </div>
           {{else}}

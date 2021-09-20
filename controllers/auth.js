@@ -222,24 +222,90 @@ const db = require('../app');
 
     };
 
+    // Equipment register Function | Função de cadastro de equipamentos
+    exports.equipmentRegister = (req, res) => {
+        console.log(req.body);
+
+        const { equipment_type, made, model, price, description } = req.body;
+
+        db.query('INSERT INTO equipments SET ?', { provider: equipment_type, manufacturer: made, model: model, price: price, description: description}, (error, results) => {
+
+            if(error) {
+                console.log(error);
+                return res.render('successMessage', {
+                    errormessage: 'Erro ao cadastrar equipamento!'
+                });
+            } else {
+                console.log(results);
+                return res.render('successMessage', {
+                    successmessage: 'Equipamento cadastrado'
+                });
+            }
+        });
+    };
+
     // Os Function | Função de Os
     exports.osRegisterOnly = (req, res) => {
         console.log(req.body);
 
         const { identify } = req.body;
-
-        db.query('SELECT * from customers WHERE identify = ?', [identify], (error, results) => {
-            if (error) {
-                console.log(error);
+        db.query('SELECT id, provider, manufacturer, model FROM equipments', (error, rows) => {
+            if(error) {
+            console.log(error);
+            res.redirect.status(404);
             }
-    
-            if (results.length > 0) {
-                return res.render('osRegister', {
-                    customer: results[0]
+            if (rows.length > 0){
+                db.query('SELECT * from customers WHERE identify = ?', [identify], (error, results) => {
+                    if (error) {
+                        console.log(error);
+                    }
+                    if (results.length > 0) {
+                        console.log(rows);
+                        return res.render('osRegister', {
+                            customer: results[0],
+                            equipment: rows
+                        });
+                    }
+        
+                });
+
+            } else {
+                db.query('SELECT * from customers WHERE identify = ?', [identify], (error, results) => {
+                    if (error) {
+                        console.log(error);
+                    }
+                    if (results.length > 0) {
+                        console.log(rows);
+                        return res.render('osRegister', {
+                            customer: results[0],
+                            emptymessage: "Nenhum equipamento cadastrado!"
+                        });
+                    }
                 });
             }
+        });   
+    }
 
-        });
+    exports.notOsRegisterOnly = (req, res) => {
+        console.log(req.body);
+
+        db.query('SELECT id, provider, manufacturer, model FROM equipments', (error, rows) => {
+            if(error) {
+            console.log(error);
+            res.redirect.status(404);
+            }
+
+            if (rows.length > 0){
+                console.log(rows);
+                return res.render('osCustomerRegister', {
+                    equipment: rows
+                });
+            } else {
+                return res.render('osCustomerRegister', {
+                    emptymessage: "Nenhum equipamento cadastrado!"
+                });
+            }
+        }); 
     }
 
     // Os Function | Função de Os
@@ -252,6 +318,9 @@ const db = require('../app');
         db.query('INSERT INTO orders SET ?', { customer_id: customer_id, responsible: responsible, description: description, type: os_type, status: status}, (error, results) => {
             if(error) {
                 console.log(error);
+                return res.render('successMessage', {
+                    errormessage: 'Erro ao cadastrar a Ordem de serviço'
+                });
             } else {
                 console.log(results);
                 return res.render('successMessage', {
@@ -279,7 +348,7 @@ const db = require('../app');
                 });
             } 
 
-            db.query('INSERT INTO adresses SET ?', { street: adress, number: adressNumber, cep: cep, complement: adressComplement}, async (error, results) => {
+            db.query('INSERT INTO addresses SET ?', { street: adress, number: adressNumber, cep: cep, complement: adressComplement}, async (error, results) => {
                 if(error) {
                     console.log(error);
                 } else {
@@ -287,10 +356,10 @@ const db = require('../app');
                     
                 }
 
-                let adresses_id = await results.insertId;
+                let addresses_id = await results.insertId;
 
 
-                db.query('INSERT INTO customers SET ?', { name: customerName, telephone: telephone, identify: identify, adress_id: adresses_id }, async (error, result) => {
+                db.query('INSERT INTO customers SET ?', { name: customerName, telephone: telephone, identify: identify, adress_id: addresses_id }, async (error, result) => {
                     if(error) {
                         console.log(error);
                     } else {
@@ -363,7 +432,7 @@ const db = require('../app');
                 });
             } 
 
-            db.query('INSERT INTO adresses SET ?', { street: adress, number: adressNumber, cep: cep, complement: adressComplement}, async (error, results) => {
+            db.query('INSERT INTO addresses SET ?', { street: adress, number: adressNumber, cep: cep, complement: adressComplement}, async (error, results) => {
                 if(error) {
                     console.log(error);
                 } else {
@@ -371,10 +440,10 @@ const db = require('../app');
                     
                 }
 
-                let adresses_id = await results.insertId;
+                let addresses_id = await results.insertId;
 
 
-                db.query('INSERT INTO customers SET ?', { name: customerName, telephone: telephone, identify: identify, adress_id: adresses_id }, (error, results) => {
+                db.query('INSERT INTO customers SET ?', { name: customerName, telephone: telephone, identify: identify, adress_id: addresses_id }, (error, results) => {
                     if(error) {
                         console.log(error);
                     } else {
