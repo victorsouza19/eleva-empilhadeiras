@@ -34,7 +34,21 @@
     <main class="animate-appear with-sidebar">
       <form action="/auth/equipmentRegister" method="POST">
         <fieldset>
-          <legend>Dados (Equipamento)</legend>
+          <legend>Cadastro de Equipamento</legend>
+
+          <div class="input-block">
+          <label for="equipment_type">Tipo de equipamento</label>
+          <input type="hidden" id="equipment_type" name="equipment_type" value="Eleva" required />
+
+          <div class="button-select type-select">
+            <button data-type="Eleva" onclick="toggleSelectEquipment(event)" type="button" class="active">
+              Eleva
+            </button>
+            <button data-type="Terceiro" onclick="toggleSelectEquipment(event)" type="button">
+              Terceiro
+            </button>
+          </div>
+        </div>
 
           <div class="input-block">
             <label for="made">Fabricante</label>
@@ -48,12 +62,12 @@
 
           <div class="input-block">
             <label for="price">Preço<SPAN>(R$)</SPAN> </label>
-            <input id="price" name="price" required />
+            <input type="number" id="price" name="price" step="0.01" required />
           </div>
 
           <div class="input-block">
-            <label for="identify">Identificação</label>
-            <input id="identify" name="identify" required />
+            <label for="description">Descrição<span>Máximo de 200 caracteres</span></label>
+            <textarea maxlength="200" id="description" name="description"></textarea>
           </div>
 
           {{#if alertmessage}}
@@ -67,5 +81,7 @@
       </form>
     </main>
   </div>
+
+  <script src="/scripts/animations.js"></script>
 </body>
 </html>

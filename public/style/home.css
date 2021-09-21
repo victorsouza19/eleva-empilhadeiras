@@ -123,6 +123,10 @@ body {
     transition: background-color 0.4s, color 0.4s, box-shadow 0.4s;
 }
 
+.options a > i {
+    margin-right: 1rem;
+}
+
 .options a:hover{
     background-color: #4e4e4e;
     color: rgba(255, 217, 0, 0.924);

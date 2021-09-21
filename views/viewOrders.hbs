@@ -22,6 +22,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/style/home.css">
+    <script src="https://kit.fontawesome.com/a1c18692b7.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -54,9 +55,10 @@
                   <th>Cliente</th>
                   <th>CPF/CNPJ</th>
                   <th>Responsável</th>
-                  <th>Tipo</th>
+                  <th class="th-center">Tipo</th>
                   <th>Status</th>
-                  <th>Ação</th>
+                  <th>Editar</th>
+                  <th>Apagar</th>
                 </div>
               </tr>
             </thead>
@@ -68,8 +70,8 @@
                   <td>{{responsible}}</td>
                   <td>{{type}}</td>
                   <td>{{status}}</td>
-                  <td class="button-options"><a href="/view/orderEdit/{{id}}"><button class="edit-button" type="submit">Editar</button></a></td>
-                  <td class="button-options"><a href="/view/orderDelete/{{id}}"><button class="delete-button" type="submit">Apagar</button></a></td>
+                  <td class="button-options"><a href="/view/orderEdit/{{id}}"><button class="edit-button" type="submit"><i class="fas fa-edit"></button></a></td>
+                  <td class="button-options"><a href="/view/orderDelete/{{id}}"><button class="delete-button" type="submit"><i class="fas fa-trash-alt"></i></button></a></td>
               </tr>
               {{/each}}
             </tbody>

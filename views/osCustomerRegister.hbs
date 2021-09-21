@@ -127,6 +127,88 @@
               </button>
             </div>
           </div>
+        </fieldset>
+        <fieldset>
+          <legend>Equipamento</legend>
+          <div class="input-block">
+              <label for="equipment_situation">Situação</label>
+              <input type="hidden" id="equipment_situation" name="equipment_situation" value="new" required />
+
+              <div class="button-select equipment-select">
+                  <button data-type="new" onclick="toggleSelectOSequipment(event)" type="button" class="active">
+                    Cadastrar
+                  </button>
+                  <button data-type="old" onclick="toggleSelectOSequipment(event)" type="button">
+                    Utilizar Existente
+                  </button>
+              </div>
+          </div>
+
+          <div id="newEquipment">
+              <div class="input-block">
+                <label for="equipment_type">Fornecedor</label>
+                <input type="hidden" id="equipment_type" name="equipment_type" value="Eleva" required />
+
+                <div class="button-select type-select">
+                    <button data-type="Eleva" onclick="toggleSelectEquipment(event)" type="button" class="active">
+                      Eleva
+                    </button>
+                    <button data-type="Terceiro" onclick="toggleSelectEquipment(event)" type="button">
+                      Terceiro
+                    </button>
+                </div>
+              </div>
+
+
+              <div class="input-block">
+                <label for="made">Fabricante</label>
+                <input id="made" name="made" required />
+              </div>
+
+              <div class="input-block">
+                <label for="model">Modelo</label>
+                <input id="model" name="model" maxlength="25" required />
+              </div>
+
+              <div class="input-block">
+                <label for="price">Preço<SPAN>(R$)</SPAN> </label>
+                <input type="number" id="price" name="price" step="0.01" required />
+              </div>
+
+              <div class="input-block">
+                <label for="description">Descrição<span>Máximo de 200 caracteres</span></label>
+                <textarea maxlength="200" id="description" name="description"></textarea>
+              </div>
+          </div> 
+
+          <div class="input-block" id="oldEquipment" style="display: none;">
+             {{#if emptymessage}}
+                  <h4 class="alert-message-top">{{emptymessage}}</h4>
+              {{else}}
+                <div class="input-block">
+                    <label for="provider">Fornecedor</label>
+                    <select class="provider-list" id="provider" onchange="setProvider(this.id)">
+
+                      <option value="" selected hidden disabled>Selecione</option>
+                      <option value="Eleva">Eleva</option>
+                      <option value="Terceiro">Terceiro</option>
+
+                    </select>
+                    
+                
+                <div class="input-block">
+                  <label for="equipments">Escolha o equipamento:</label>
+                  <select class="equipment-list" name="equipment_id" id="equipments">
+                    <option id="default-equipment" value="" >Selecione</option>
+                        {{#each equipment}}
+                          <option class="provider-{{provider}}" value="{{id}}" style="display: none;">{{manufacturer}} {{model}}</option>
+                      {{/each}}
+                  </select>
+                  </div>
+                </div>
+              {{/if}}
+          </div>
+          
           <button type="submit" class="primary-button">Criar</button>
         </fieldset> 
       </form>
