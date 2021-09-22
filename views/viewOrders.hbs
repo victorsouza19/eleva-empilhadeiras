@@ -41,13 +41,16 @@
       <div class="container">
         <fieldset>
           <legend>Editar Ordem de Serviço</legend>
+          {{#if successmessage}}
+              <h4 class="success-message-top">{{successmessage}}</h4>
+          {{/if}}
 
           {{#if alertmessage}}
             <h4 class="alert-message-top">{{alertmessage}}</h4>
-          {{else if successmessage}}
-            <h4 class="success-message-top">{{successmessage}}</h4>
-          {{/if}}
+            <a href="/customerVerify" class="primary-button"><span>Cadastrar</span></a>
 
+
+          {{else}}
           <table>
             <thead>
               <tr>
@@ -62,6 +65,7 @@
                 </div>
               </tr>
             </thead>
+          {{/if}}
             <tbody>
               {{#each items}}
               <tr class="item">

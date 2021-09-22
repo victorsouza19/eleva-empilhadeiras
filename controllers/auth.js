@@ -107,7 +107,6 @@ const db = require('../app');
 
     // Login Check for Index | Verificação de Login para index.hbs
     exports.isLoggedInIndex = async (req, res, next) => {
-
         //console.log(req.cookies);
         if(req.cookies.jwt) {
             try {
@@ -312,22 +311,81 @@ const db = require('../app');
     exports.osRegister = (req, res) => {
         console.log(req.body);
 
-        const { customer_id, responsible, os_type, description, status } = req.body;
+        const {customer_id, responsible, os_type, description, status, equipment_situation} = req.body;
+        let initial_date = new Date();
 
+        // check the type of equipment input | checar o tipo de inserção de equipamento
+        // if new equipment
+        if (equipment_situation == "new"){
+            const { provider_type, made, model, price, equipment_description } = req.body;
 
-        db.query('INSERT INTO orders SET ?', { customer_id: customer_id, responsible: responsible, description: description, type: os_type, status: status}, (error, results) => {
-            if(error) {
-                console.log(error);
-                return res.render('successMessage', {
-                    errormessage: 'Erro ao cadastrar a Ordem de serviço'
-                });
-            } else {
-                console.log(results);
-                return res.render('successMessage', {
-                    successmessage: 'Ordem de serviço cadastrada'
-                });
-            }
-        });
+            db.query('INSERT INTO equipments SET ?', { provider: provider_type, manufacturer: made, model: model, price: price, description: equipment_description}, async (error, results) => {
+
+                if(error) {
+                    console.log(error);
+                    return res.render('successMessage', {
+                        errormessage: 'Erro ao cadastrar equipamento!'
+                    });
+                } else {
+                    let id_equip = await results.insertId;
+
+                    db.query('INSERT INTO orders SET ?', { customer_id, responsible, description, type: os_type, status, initial_date}, async (error, results) => {
+                        if(error) {
+                            console.log(error);
+                            return res.render('successMessage', {
+                                errormessage: 'Erro ao cadastrar a Ordem de serviço'
+                            });
+                        } else {
+                            console.log(results);
+                            let id_os = await results.insertId;
+
+                            db.query('INSERT INTO orders_equipments SET ?', {equipment_id: id_equip, order_id: id_os}, (error, results) => {
+                                if(error){
+                                    console.error(error);
+                                    return res.render('successMessage', {
+                                        errormessage: 'Erro ao vincular equipamento à ordem de serviço'
+                                    });
+                                } else {
+                                    console.log(results);
+                                    return res.render('successMessage', {
+                                        successmessage: 'Ordem de serviço cadastrada'
+                                    });
+                                };
+                            });    
+                        }
+                    });
+                }
+            });
+        // if old equipment
+        } else if (equipment_situation == "old") {
+            const { equipment_id } = req.body;
+
+            db.query('INSERT INTO orders SET ?', { customer_id, responsible, description, type: os_type, status, initial_date}, async (error, results) => {
+                if(error) {
+                    console.log(error);
+                    return res.render('successMessage', {
+                        errormessage: 'Erro ao cadastrar a Ordem de serviço'
+                    });
+                } else {
+                    console.log(results);
+                    let id_os2 = await results.insertId;
+
+                    db.query('INSERT INTO orders_equipments SET ?', {equipment_id, order_id: id_os2}, (error, results) => {
+                        if(error){
+                            console.error(error);
+                            return res.render('successMessage', {
+                                errormessage: 'Erro ao vincular equipamento à ordem de serviço'
+                            });
+                        } else {
+                            console.log(results);
+                            return res.render('successMessage', {
+                                successmessage: 'Ordem de serviço cadastrada'
+                            });
+                        };
+                    });    
+                }
+            });
+        }
     };
 
     // os and customer Function | Função de os e cliente
@@ -335,7 +393,8 @@ const db = require('../app');
         console.log(req.body);
 
         // Short form | forma curta:
-        const { customerName, identify, telephone, adress, adressNumber, cep, adressComplement, responsible, description, os_type, status } = req.body;
+        const { customerName, identify, telephone, adress, adressNumber, cep, adressComplement, responsible, description, os_type, status, equipment_situation} = req.body;
+
 
         db.query('SELECT * FROM customers WHERE identify = ?', [identify], (error, results) => {
             if(error) {
@@ -368,17 +427,80 @@ const db = require('../app');
                     }
                 
                     let customer_id = await result.insertId;
+                    let initial_date = new Date();
 
-                    db.query('INSERT INTO orders SET ?', { customer_id: customer_id, responsible: responsible, description: description, type: os_type, status: status}, async (error, results) => {
-                        if(error) {
-                            console.log(error);
-                        } else {
-                            console.log(results);
-                            return res.render('successMessage', {
-                                successmessage: 'Ordem de serviço cadastrada'
-                            });
-                        }
-                    });
+                    // check the type of equipment input | checar o tipo de inserção de equipamento
+                    // if new equipment
+                    if (equipment_situation == "new"){
+                        const { provider_type, made, model, price, equipment_description } = req.body;
+            
+                        db.query('INSERT INTO equipments SET ?', { provider: provider_type, manufacturer: made, model: model, price: price, description: equipment_description}, async (error, results) => {
+            
+                            if(error) {
+                                console.log(error);
+                                return res.render('successMessage', {
+                                    errormessage: 'Erro ao cadastrar equipamento!'
+                                });
+                            } else {
+                                let id_equip = await results.insertId;
+            
+                                db.query('INSERT INTO orders SET ?', { customer_id, responsible, description, type: os_type, status, initial_date}, async (error, results) => {
+                                    if(error) {
+                                        console.log(error);
+                                        return res.render('successMessage', {
+                                            errormessage: 'Erro ao cadastrar a Ordem de serviço'
+                                        });
+                                    } else {
+                                        console.log(results);
+                                        let id_os = await results.insertId;
+            
+                                        db.query('INSERT INTO orders_equipments SET ?', {equipment_id: id_equip, order_id: id_os}, (error, results) => {
+                                            if(error){
+                                                console.error(error);
+                                                return res.render('successMessage', {
+                                                    errormessage: 'Erro ao vincular equipamento à ordem de serviço'
+                                                });
+                                            } else {
+                                                console.log(results);
+                                                return res.render('successMessage', {
+                                                    successmessage: 'Ordem de serviço cadastrada'
+                                                });
+                                            };
+                                        });    
+                                    }
+                                });
+                            }
+                        });
+                    // if old equipment
+                    } else if (equipment_situation == "old") {
+                        const { equipment_id } = req.body;
+            
+                        db.query('INSERT INTO orders SET ?', { customer_id, responsible, description, type: os_type, status, initial_date}, async (error, results) => {
+                            if(error) {
+                                console.log(error);
+                                return res.render('successMessage', {
+                                    errormessage: 'Erro ao cadastrar a Ordem de serviço'
+                                });
+                            } else {
+                                console.log(results);
+                                let id_os2 = await results.insertId;
+            
+                                db.query('INSERT INTO orders_equipments SET ?', {equipment_id, order_id: id_os2}, (error, results) => {
+                                    if(error){
+                                        console.error(error);
+                                        return res.render('successMessage', {
+                                            errormessage: 'Erro ao vincular equipamento à ordem de serviço'
+                                        });
+                                    } else {
+                                        console.log(results);
+                                        return res.render('successMessage', {
+                                            successmessage: 'Ordem de serviço cadastrada'
+                                        });
+                                    };
+                                });    
+                            }
+                        });
+                    }
                 });
             });
         });
