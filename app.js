@@ -4,7 +4,7 @@
     const mysql = require("mysql");
     const dotenv = require('dotenv');
     const cookieParser = require('cookie-parser');
-
+    const cors = require("cors");
 // changing where the environment variables will be stored by dotenv | definindo onde ficarão armazenadas as variáveis de ambiente pelo dotenv 
     dotenv.config({ path: './.env'});
 
@@ -36,6 +36,7 @@ module.exports = db;
 // Parse Cookie Parser
     app.use(cookieParser());
 
+    app.use(cors());
 
 
 // setting where the express will search the public files || definindo onde o express buscará os arquivos públicos
