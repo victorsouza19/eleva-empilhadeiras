@@ -60,6 +60,6 @@ module.exports = db;
     app.use('/view', require('./routes/view'));
 
 // verifying the connection to the server | verificando a conexão com o servidor
-    app.listen(3000, () => {
+    app.listen(process.env.PORT || 3000, () => {
         console.log("Server started on Port 3000");
     })
