@@ -71,11 +71,11 @@
           <label for="os_type">Tipo de atendimento</label>
           <input type="hidden" id="os_type" name="os_type" value="Requisição" required />
 
-          <div class="button-select">
-            <button data-status="Requisição" onclick="toggleSelect(event)" type="button" class="active">
+          <div class="button-select ostype-select">
+            <button data-status="Requisição" onclick="toggleSelectOsType(event)" type="button" class="active">
               Requisição
             </button>
-            <button data-status="Incidente" onclick="toggleSelect(event)" type="button">
+            <button data-status="Incidente" onclick="toggleSelectOsType(event)" type="button">
               Incidente
             </button>
           </div>
@@ -122,7 +122,7 @@
           <div id="newEquipment">
               <div class="input-block">
                 <label for="equipment_type">Fornecedor</label>
-                <input type="hidden" id="equipment_type" name="equipment_type" value="Eleva" required />
+                <input type="hidden" id="equipment_type" name="provider_type" value="Eleva" required />
 
                 <div class="button-select type-select">
                     <button data-type="Eleva" onclick="toggleSelectEquipment(event)" type="button" class="active">
@@ -152,7 +152,7 @@
 
               <div class="input-block">
                 <label for="description">Descrição<span>Máximo de 200 caracteres</span></label>
-                <textarea maxlength="200" id="description" name="description"></textarea>
+                <textarea maxlength="200" id="description" name="equipment_description"></textarea>
               </div>
           </div> 
 
@@ -162,7 +162,7 @@
               {{else}}
                 <div class="input-block">
                     <label for="provider">Fornecedor</label>
-                    <select class="provider-list" id="provider" onchange="setProvider(this.id)">
+                    <select name="provider_name" class="provider-list" id="provider" onchange="setProvider(this.id)">
 
                       <option value="" selected hidden disabled>Selecione</option>
                       <option value="Eleva">Eleva</option>

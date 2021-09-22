@@ -19,6 +19,26 @@ function toggleSelect(event) {
     
 }
 
+function toggleSelectOsType(event) {
+
+    // retirar a class .active(dos botoes)
+
+    document.querySelectorAll('.ostype-select button')
+    .forEach( button => button.classList.remove('active') ) /* para uma função unica, pode-se eliminar o () e {} */
+
+
+    // inserir a class .active no botao
+    const button =  event.currentTarget
+    button.classList.add('active')
+
+    // atualizar o input hidden com o valor selecionado
+    const input = document.querySelector('[name="os_type"]')
+
+    input.value = button.dataset.status;
+
+    
+}
+
 function toggleSelectStatus(event) {
 
     document.querySelectorAll('.button-select-status button')
@@ -43,7 +63,7 @@ function toggleSelectEquipment(event) {
     const button =  event.currentTarget
     button.classList.add('active')
 
-    const input = document.querySelector('[name="equipment_type"]')
+    const input = document.querySelector('[name="provider_type"]')
 
     input.value = button.dataset.type
     
@@ -64,10 +84,26 @@ function toggleSelectOSequipment(event) {
     if (input.value == 'new') {
         document.getElementById('newEquipment').style.display = "block";
         document.getElementById('oldEquipment').style.display = "none";
+
+        document.getElementById('made').required = true;
+        document.getElementById('model').required = true;
+        document.getElementById('price').required = true;
+        document.getElementById('equipment_type').required = true;
+
+        document.getElementById('provider').removeAttribute("required");
+        document.getElementById('equipments').removeAttribute("required");
     
     } else if (input.value == 'old') {
         document.getElementById('oldEquipment').style.display = "block";
         document.getElementById('newEquipment').style.display = "none";
+
+        document.getElementById('made').removeAttribute("required");
+        document.getElementById('model').removeAttribute("required");
+        document.getElementById('price').removeAttribute("required");
+        document.getElementById('equipment_type').removeAttribute("required");
+
+        document.getElementById('provider').required = true;
+        document.getElementById('equipments').required = true;
     }
     
 
