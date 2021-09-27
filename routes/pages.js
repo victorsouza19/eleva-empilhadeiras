@@ -9,11 +9,18 @@ const router = express.Router();
 router.get('/', authController.isLoggedInIndex, (req, res) => {
     
     if(req.user) {
-        res.render('index', {
-            
-            user: req.user,
-            date: dia+", "+data.getDate()+" de "+mes
-        });
+            if(req.order){
+                res.render('index', {
+                    order: req.order,
+                    user: req.user,
+                    date: dia+", "+data.getDate()+" de "+mes
+                });
+            } else {
+                res.render('index', {
+                    user: req.user,
+                    date: dia+", "+data.getDate()+" de "+mes
+                });
+            };
     } else {
         res.redirect('/login');
     }
@@ -95,6 +102,15 @@ router.get('/osRegister', authController.isLoggedIn, (req, res) => {
 router.get('/success', authController.isLoggedIn, (req, res) => {
     if(req.user) {
         res.render('successMessage');
+    } else {
+        res.redirect('/login');
+    };
+    
+});
+
+router.get('/graphs', authController.isLoggedIn, (req, res) => {
+    if(req.user) {
+        res.render('graphs');
     } else {
         res.redirect('/login');
     };
