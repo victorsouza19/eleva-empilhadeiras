@@ -36,7 +36,7 @@ module.exports = db;
     app.use(express.json());
 // Parse Cookie Parser
     app.use(cookieParser());
-    
+
     app.use(cors());
 
 
@@ -62,5 +62,5 @@ module.exports = db;
 
 // verifying the connection to the server | verificando a conexão com o servidor
     app.listen(process.env.PORT || 3000, () => {
-        console.log("Server started on Port 3000");
+        console.log("Server started on Port " + process.env.PORT );
     })
