@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const { promisify } = require('util');
 const db = require('../app');
+const { viewOrders } = require('./view');
 
 
 // ACCESS CONTROL  || CONTROLE DE ACESSO
@@ -158,8 +159,21 @@ const db = require('../app');
                     data.getDiaEmPortugues();
                     dia = data.diaPt
 
-                    return next();
+                    db.query('SELECT count(status) as "contagem", status FROM orders GROUP BY status', async (error, fields) => {
+                        if(error){
+                            console.log(error);
 
+                        } 
+                       
+                        if(fields){
+                            console.log(fields); 
+                            order = await fields; 
+                            
+                            return next();
+                        }
+                    });
+
+                    return next();
                 });
 
             } catch (error) {
