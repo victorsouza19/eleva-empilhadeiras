@@ -1,0 +1,4 @@
+{
+    "appService.defaultWebAppToDeploy": "/subscriptions/a6ce43fa-cf81-4839-ac76-2a2d0dda3481/resourceGroups/appsvc_linux_centralus_basic/providers/Microsoft.Web/sites/elevaempilhadeiras",
+    "appService.deploySubpath": "."
+}

@@ -1,0 +1,135 @@
+/* pagina graphs.hbs */
+
+.top-text{
+    padding: 0 0 1rem 0;
+}
+
+.graph-container{
+    position: relative;
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+
+    margin-bottom: 1rem;
+}
+
+.graph-container .card{
+    position: relative;
+    padding: 1rem;
+    width: 28%;
+    background: linear-gradient(0deg, #ffff, rgb(241, 241, 241), #ffff);
+    box-shadow: 0 1px 10px rgba(0, 0, 0, .2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    border-radius: 0.4rem;
+    text-align: center;
+    overflow: hidden;
+    transition: 0.5s;
+}
+
+.graph-container .card:hover{
+    transform: translateY(-10px);
+    box-shadow: 0 10px 15px rgba(0, 0, 0, .3)
+}
+
+.graph-container .card:before{
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
+    pointer-events: none;
+    z-index: 1;
+}
+
+.percent{
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(0deg, #ffff, rgb(241, 241, 241), #ffff);
+    z-index: 1000;
+}
+
+.percent .number{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+
+}
+
+.percent .number h2{
+    color: #777;
+    font-weight: 700;
+    font-size: 2.2rem;
+    transition: 0.5s;
+}
+
+.card:hover .percent .number h2{
+    color: rgb(65, 65, 65);
+    font-weight: 700;
+    font-size: 2.5rem;
+}
+
+.cardtext{
+    color: #777;
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: 0.5s;
+    margin-top: 1rem;
+}
+
+.card:hover .cardtext{
+    color: rgb(65, 65, 65);
+    font-weight: 700;
+    font-size: 1.1rem;
+    transition: 0.5s;
+}
+
+
+
+
+svg{
+    position: relative;
+    width: 150px;
+    height: 150px;
+    z-index: 1000;
+}
+
+svg circle{
+    width: 100%;
+    height: 100%;
+    fill: none;
+    stroke: #ffff;
+    stroke-width: 10;
+    stroke-linecap: round;
+    transform: translate(5px,5px);
+}
+
+svg circle:nth-child(2){
+    stroke-dasharray: 440;
+    stroke-dashoffset: 440;
+}
+
+.card:nth-child(1) svg circle:nth-child(2){
+    stroke-dashoffset: calc(440 - (440 * 100) / 100);
+    stroke: #ff0000;
+}
+
+.card:nth-child(2) svg circle:nth-child(2){
+    stroke-dashoffset: calc(440 - (440 * 100) / 100);
+    stroke: #ecde15;
+}
+
+.card:nth-child(3) svg circle:nth-child(2){
+    stroke-dashoffset: calc(440 - (440 * 100) / 100);
+    stroke: #00ff43;
+}

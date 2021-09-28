@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Home | ElevaEmpilhadeiras</title>
+     <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,400;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/animations.css" />
+    <link rel="stylesheet" href="/css/graphs.css" />
+
+    <script src="https://kit.fontawesome.com/a1c18692b7.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <div class= "animate-down top-content">
+            <nav class= "top-nav">
+                <div class="left-content">
+                    <img src="/images/logo-eleva.png" alt="logo-eleva">
+                    <span>| Since 2007</span>
+                </div>
+                <div class="right-content">
+                    <span>{{date}}</span>
+                </div>
+            </nav>
+        </div>
+        <div class="bottom-content">
+            <div class="first-column">
+                <div class="graph-container">
+                    <div class="card">
+                        <div class="box">
+                            <div class="percent">
+                                <svg>
+                                    <circle cx="70" cy="70" r="70"></circle>
+                                    <circle cx="70" cy="70" r="70"></circle>
+                                </svg>
+                                <div class="number">
+                                    <h2>90</h2>
+                                </div>
+                            </div>
+                            <h2 class="cardtext">ABERTO</h2>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="box">
+                            <div class="percent">
+                                <svg>
+                                    <circle cx="70" cy="70" r="70"></circle>
+                                    <circle cx="70" cy="70" r="70"></circle>
+                                </svg>
+                                <div class="number">
+                                    <h2>45</h2>
+                                </div>
+                            </div>
+                            <h2 class="cardtext">ANDAMENTO</h2>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="box">
+                            <div class="percent">
+                                <svg>
+                                    <circle cx="70" cy="70" r="70"></circle>
+                                    <circle cx="70" cy="70" r="70"></circle>
+                                </svg>
+                                <div class="number">
+                                    <h2>85</h2>
+                                </div>
+                            </div>
+                            <h2 class="cardtext">FECHADO</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="second-column">
+                <div class="profile">
+                    <div class="parent-profile">
+                        <img class="profile-background" src="/images/avatar.svg" alt="user-background">
+                        <img class="profile-avatar" src="/images/workers.svg" alt="user">
+                    </div>
+
+                    <p>Olá, <b>{{user.name}}!</b></p>
+                    <span>{{user.role}}</span>
+                </div>
+                <div class= "exit">
+                    <a href="/auth/logout">Sair</a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</body>  
+</html>

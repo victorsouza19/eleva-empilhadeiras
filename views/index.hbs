@@ -10,9 +10,10 @@
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/style/home.css">
-    <link rel="stylesheet" href="/style/animations.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,400;1,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/home.css">
+    <link rel="stylesheet" href="/css/animations.css" />
+    <link rel="stylesheet" href="/css/graphs.css" />
 
     <script src="https://kit.fontawesome.com/a1c18692b7.js" crossorigin="anonymous"></script>
 </head>
@@ -31,14 +32,109 @@
         </div>
         <div class="bottom-content">
             <div class="first-column">
-                <h4>Nesta tela você poderá administrar as ordens de serviço, produtos e peças em estoque, cadastrar novos funcionários e tirar relatórios.</h4>
+                <div class="top-text">
+                    <h2>Ordens de Serviço</h2>
+                </div>
+                <div class="graph-container">
+                    {{#if order}}
+                        {{#each order}}
+                            <div class="card">
+                                <div class="box">
+                                    <div class="percent">
+                                        <svg>
+                                            <circle cx="70" cy="70" r="70"></circle>
+                                            <circle cx="70" cy="70" r="70"></circle>
+                                        </svg>
+                                        <div class="number">
+                                            <h2>{{contagem}}</h2>
+                                        </div>
+                                    </div>
+                                    <h2 class="cardtext">{{status}}</h2>
+                                </div>
+                            </div>
+                        {{/each}}
+                    {{else}}
+                        <div class="card">
+                            <div class="box">
+                                <div class="percent">
+                                    <svg>
+                                        <circle cx="70" cy="70" r="70"></circle>
+                                        <circle cx="70" cy="70" r="70"></circle>
+                                    </svg>
+                                    <div class="number">
+                                        <h2>0</h2>
+                                    </div>
+                                </div>
+                                <h2 class="cardtext">Em aberto</h2>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="box">
+                                <div class="percent">
+                                    <svg>
+                                        <circle cx="70" cy="70" r="70"></circle>
+                                        <circle cx="70" cy="70" r="70"></circle>
+                                    </svg>
+                                    <div class="number">
+                                        <h2>0</h2>
+                                    </div>
+                                </div>
+                                <h2 class="cardtext">Em andamento</h2>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="box">
+                                <div class="percent">
+                                    <svg>
+                                        <circle cx="70" cy="70" r="70"></circle>
+                                        <circle cx="70" cy="70" r="70"></circle>
+                                    </svg>
+                                    <div class="number">
+                                        <h2>0</h2>
+                                    </div>
+                                </div>
+                                <h2 class="cardtext">Fechado</h2>
+                            </div>
+                        </div>
+                        {{/if}}
+                </div>   
                 <div class="options">
-                    <a href="/customerVerify"><i class="fas fa-file-import"></i><span>Ordem de Serviço</span></a>
-                    <a href="/view/viewOrders"><i class="fas fa-edit"></i><span>Atualizar OS</span></a>
-                    <a href="/equipmentRegister"><i class="fas fa-tools"></i><span>Equipamentos</span></a>
-                    <a href="/customerRegister"><i class="fas fa-user-plus"></i><span> Cliente</span></a>
-                    <a href="/userRegister"><i class="fas fa-user-plus"></i><span>Funcionários</span></a>
-                    <a href="#"><i class="fas fa-list-alt"></i><span>Relatórios</span></a>
+                    <div class="os-container">
+                        <div class="buttons-container">
+                            <a href="/customerVerify"><button><i class="fas fa-file-import"></i><span>Criar</span></button></a>
+                            <a href="/view/viewOrders"><button><i class="fas fa-edit"></i><span>Editar</span></button></a>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="items-container">
+                        <div class="options-container">
+                            <h4>Equipamentos</h4>
+                            <div class="buttons-container">
+                                <a href="/equipmentRegister"><button><i class="fas fa-tools"></i><span>Criar</span></button></a>
+                                <a href="#"><button><i class="fas fa-edit"></i><span>Editar</span></button></a>
+                            </div>
+                        </div>      
+                        <div class="options-container">
+                            <h4>Cliente</h4>
+                            <div class="buttons-container">
+                                <a href="/customerRegister"><button><i class="fas fa-user-plus"></i><span> Criar</span></button></a>
+                                <a href="#"><button><i class="fas fa-edit"></i><span>Editar</span></button></a>
+                            </div>
+                        </div> 
+                        <div class="options-container">
+                            <h4>Funcionário</h4>
+                                <div class="buttons-container">
+                                <a href="/userRegister"><button><i class="fas fa-user-plus"></i><span>Criar</span></button></a>
+                                <a href="#"><button><i class="fas fa-edit"></i><span>Editar</span></button></a>
+                            </div>
+                        </div> 
+                        <div class="options-container">
+                            <h4>Relatórios</h4>
+                            <a href="#"><button><i class="fas fa-list-alt"></i><span>Relatórios</span></button></a>
+                        </div>  
+                    </div>         
                 </div>
             </div>
             <div class="second-column">
@@ -51,10 +147,15 @@
                     <p>Olá, <b>{{user.name}}!</b></p>
                     <span>{{user.role}}</span>
                 </div>
-                <div class= "exit">
-                    <a href="/auth/logout">Sair</a>
-                </div>
+                <div class="usr-buttons">
+                    <div class= "edit">
+                            <a href="#"><button><i class="fas fa-user-edit"></i>Editar</button></a>
+                    </div>
+                    <div class= "exit">
+                            <a href="/auth/logout"><button><i class="fas fa-sign-out-alt"></i>Sair</button></a>
 
+                    </div>
+                </div>
             </div>
         </div>
     </div>
