@@ -2,12 +2,12 @@
     const express = require("express");
     const path = require('path');
     const mysql = require("mysql");
-    // const dotenv = require('dotenv');
+    const dotenv = require('dotenv');
     const cookieParser = require('cookie-parser');
     const cors = require("cors");
 
 // changing where the environment variables will be stored by dotenv | definindo onde ficarão armazenadas as variáveis de ambiente pelo dotenv 
-    // dotenv.config({ path: './.env'});
+    dotenv.config({ path: './.env'});
 
 // starting express | iniciando o express
     const app = express();
@@ -56,9 +56,9 @@ module.exports = db;
     });
 
 //Define Routes | Definindo as rotas
-    // app.use('/', require('./routes/pages'));
-    // app.use('/auth', require('./routes/auth'));
-    // app.use('/view', require('./routes/view'));
+    app.use('/', require('./routes/pages'));
+    app.use('/auth', require('./routes/auth'));
+    app.use('/view', require('./routes/view'));
 
 // verifying the connection to the server | verificando a conexão com o servidor
     const PORT = process.env.PORT || 3000;
