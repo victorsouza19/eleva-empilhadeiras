@@ -17,7 +17,8 @@ body {
 
 .top-content {
     background-color: #ffff;
-    height: 8vh;
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.198);
+    z-index:1000;
 }
 
 .top-nav {
@@ -25,22 +26,22 @@ body {
     justify-content: space-between;
     align-items: center;
     padding: 0 2rem;
+
+    height: 8vh;
    
 }
 
 .left-content {
     display: flex;
     align-items: center;
-
+    justify-content: center;
 }
 
 
 .left-content img {
-    width: 80px;
+    height: 8vh;
     background-color: black;
-    margin-left: 1.5rem;
-  
-  
+    margin-left: 1.5rem; 
 }
 
 .left-content span {
@@ -60,19 +61,16 @@ body {
     display: grid;
     height: 92vh;
 
-    grid-template-columns: 2fr 1fr;
-
+    grid-template-columns: 3fr 1fr;
 }
 
 .first-column {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
 
-    background-color: #ebebeb;
-    padding: 3rem;
-
+    background-color: #f1f1f1;
+    padding: 2rem 3rem;
 }
 
 .second-column {
@@ -83,20 +81,54 @@ body {
 
     background-image: linear-gradient(to top, rgba(255, 145, 0, 0.8), rgba(255, 217, 0, 0.924));
     padding: 3rem;
-
-
 }
 
-.first-column > h4 {
-    text-align: center;
-    font-size: 1.2rem;
-    margin: 2rem 0;
+.os-container{
+    display: flex;
+    justify-content: center;
+    margin-top: 0.5rem;
 }
 
-.options {
+.items-container{
     display: grid;
     grid-template-columns: 1fr 1fr;
+}
 
+.options-container{
+    background: #ffff;
+    padding: 0.7rem 1.2rem;
+    margin: 0.5rem 0.7rem;
+    border-radius: 0.4rem;
+    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2);
+}
+.options-container h4{
+    font-size: 1.3rem;
+}
+
+.buttons-container{
+    display: flex;
+}
+
+.options button{
+    text-decoration: none;
+    color: #4e4e4e;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 800;
+    border: none;
+    background: none;
+
+    display: flex;
+
+    transition: 0.5s;
+}
+.options hr{
+    margin: 2rem 0;
+    height: 0.2rem;
+    width: 100%;
+    background: #5c5c5c38;
+    border-radius: 0.1rem;
+    border: none;
 }
 
 .options a {
@@ -104,34 +136,31 @@ body {
     justify-content: center;
     align-items: center;
     text-decoration: none;
-    color: #4e4e4e;
-
-    margin: 1rem;
+    
     border: none;
-    border-radius: 15px;
-    padding: 0 0.5rem;
-    font-size: 1.1rem;
-    font-weight: 800;
+    border-radius: 0.4rem;
+    padding: 1.5rem 4rem;
+    margin: 0.5rem;
 
-    width: 16em;
-    height: 5em;
-
-    color: #4e4e4e;
-    background: rgba(255, 217, 0, 0.924);
+    color: #5c5c5c;
+    background: linear-gradient(0deg, #ffff, rgb(241, 241, 241), #ffff);
     box-shadow: 2px 2px 6px rgba(70, 70, 70, 0.3);
 
-    transition: background-color 0.4s, color 0.4s, box-shadow 0.4s;
+    transition: 0.5s;
 }
 
-.options a > i {
+.options button > i {
     margin-right: 1rem;
 }
 
 .options a:hover{
-    background-color: #4e4e4e;
-    color: rgba(255, 217, 0, 0.924);
-    box-shadow: 2px 2px 6px rgba(255, 217, 0, 0.3);
+    box-shadow: 2px 6px 12px rgb(194, 166, 5);
+    transform: translateY(-5px);
 
+}
+
+.options button:hover{
+    color: rgb(194, 166, 5);
 }
 
 .parent-profile {
@@ -176,25 +205,48 @@ body {
     color: #ffff;
 }
 
-.exit a {
-    text-decoration: none;
+.edit button,
+.exit button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-    margin: 1rem;
-    height: 3rem;
+    text-decoration: none;
+    width: 10rem;
+    height: 2.6rem;
+    margin: 1rem 0;
+    padding: 1rem;
     border: 3px solid white;
     border-radius: 15px;
-    padding: 0.5rem 3.2rem;
     font-size: 1rem;
     font-weight: 600;
 
     color: whitesmoke;
     background-color: rgba(255, 255, 255, 0);
-
-    transition: border 0.5s, color 0.5s;
-
+    transition: 0.5s;
 }
 
-.exit a:hover {
+.exit a, .edit a{
+    text-decoration: none;
+    color: whitesmoke;
+}
+
+.exit button:hover {
     border: 3px solid rgba(255, 0, 0);
     color: rgb(255, 0, 0);
+    transform: translateY(-5px);
 }
+
+
+.edit button:hover {
+    border: 3px solid #4bfb7a;
+    color: #4bfb7a;
+    transform: translateY(-5px);
+}
+
+.exit button,
+.edit button{
+    display: flex;
+    justify-content: space-around;
+}
+
