@@ -59,6 +59,7 @@ module.exports = db;
     app.use('/', require('./routes/pages'));
     app.use('/auth', require('./routes/auth'));
     app.use('/view', require('./routes/view'));
+    app.use('/equipments', require('./routes/equipments'));
 
 // verifying the connection to the server | verificando a conexão com o servidor
     const PORT = process.env.PORT || 3000;

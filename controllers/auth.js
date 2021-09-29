@@ -235,28 +235,6 @@ const { viewOrders } = require('./view');
 
     };
 
-    // Equipment register Function | Função de cadastro de equipamentos
-    exports.equipmentRegister = (req, res) => {
-        console.log(req.body);
-
-        const { equipment_type, made, model, price, description } = req.body;
-
-        db.query('INSERT INTO equipments SET ?', { provider: equipment_type, manufacturer: made, model: model, price: price, description: description}, (error, results) => {
-
-            if(error) {
-                console.log(error);
-                return res.render('successMessage', {
-                    errormessage: 'Erro ao cadastrar equipamento!'
-                });
-            } else {
-                console.log(results);
-                return res.render('successMessage', {
-                    successmessage: 'Equipamento cadastrado'
-                });
-            }
-        });
-    };
-
     // Os Function | Função de Os
     exports.osRegisterOnly = (req, res) => {
         console.log(req.body);

@@ -2,9 +2,7 @@ thead {
     font-size: clamp(1rem, 1.5rem, 2rem);
     font-weight: 600;
     color: #2c2c2cc5;
-
     text-align:left;
-
 }
 
 th:first-child {
@@ -17,10 +15,20 @@ th:first-child {
 
 table {
     border-collapse: separate;
-    border-spacing: 0 1rem;
+    border-spacing: 0 0.3rem;
 
+    width: 100%;
 }
-    
+
+
+
+.item:nth-child(odd) {
+    background-color: #f5f5f5b7;
+}
+
+.item:nth-child(even) {
+    background-color: #f5f5f5;
+}
 
 td {
    padding:  1rem;
@@ -35,7 +43,6 @@ td a > i {
 }
 
 td:first-child {
-
     border-radius: 0.5rem 0 0 0.5rem;
 }
 
@@ -44,11 +51,8 @@ td:last-child {
 }
 
 .item{ 
-    background-color: #ebebeb;
     height: 5rem;
-    
-
-    font-size: clamp(1rem, 1.5rem, 2rem) ;
+    font-size: clamp(1rem, 1.5rem, 2rem);
 }
 
 .button-options{
@@ -79,13 +83,19 @@ td:last-child {
     transition: background-color 0.5s, border 0.5s, color 0.5s;
 }
 
+
+
 .edit-button {
     background: #3cdc8c;
 }
 
+.edit-button i{
+    padding: 0 0 0.2rem 0.3rem;
+}
+
 .delete-button {
     background: #dc3c3c00;
-    border: 0.25rem solid #dc3c3c;
+    border: 0.2rem solid #dc3c3c;
     color: #2c2c2c;  
 }
 

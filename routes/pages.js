@@ -63,15 +63,6 @@ router.get('/customerVerify', authController.isLoggedIn, (req, res) => {
     
 });
 
-router.get('/equipmentRegister', authController.isLoggedIn, (req, res) => {
-    if(req.user) {
-        res.render('equipmentRegister');
-    } else {
-        res.redirect('/login');
-    };
-    
-});
-
 router.get('/customerRegister', authController.isLoggedIn, (req, res) => {
     if(req.user) {
         res.render('customerRegister');

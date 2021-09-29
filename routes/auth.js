@@ -8,8 +8,6 @@ const router = express.Router();
     // register routes || rotas de registro
     router.post('/userRegister', authController.register );
 
-    router.post('/equipmentRegister', authController.equipmentRegister );
-
     router.post('/customerRegister', authController.customerRegister );
 
     router.post('/osRegister', authController.osRegister);
