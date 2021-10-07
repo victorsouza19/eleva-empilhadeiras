@@ -58,8 +58,10 @@ module.exports = db;
 //Define Routes | Definindo as rotas
     app.use('/', require('./routes/pages'));
     app.use('/auth', require('./routes/auth'));
-    app.use('/view', require('./routes/view'));
     app.use('/equipments', require('./routes/equipments'));
+    app.use('/customers', require('./routes/customers'));
+    app.use('/users', require('./routes/users'));
+    app.use('/orders', require('./routes/orders'));
 
 // verifying the connection to the server | verificando a conexão com o servidor
     const PORT = process.env.PORT || 3000;

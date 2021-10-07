@@ -47,7 +47,7 @@
 
           {{#if alertmessage}}
             <h4 class="alert-message-top">{{alertmessage}}</h4>
-            <a href="/customerVerify" class="primary-button"><span>Cadastrar</span></a>
+            <a href="customers/verify" class="primary-button"><span>Cadastrar</span></a>
 
 
           {{else}}
@@ -74,8 +74,8 @@
                   <td>{{responsible}}</td>
                   <td>{{type}}</td>
                   <td>{{status}}</td>
-                  <td class="button-options"><a href="/view/orderEdit/{{id}}"><button class="edit-button" type="submit"><i class="fas fa-edit"></button></a></td>
-                  <td class="button-options"><a href="/view/orderDelete/{{id}}"><button class="delete-button" type="submit"><i class="fas fa-trash-alt"></i></button></a></td>
+                  <td class="button-options"><a href="/orders/edit/{{id}}"><button class="edit-button" type="submit"><i class="fas fa-edit"></button></a></td>
+                  <td class="button-options"><a href="/orders/delete/{{id}}"><button class="delete-button" type="submit"><i class="fas fa-trash-alt"></i></button></a></td>
               </tr>
               {{/each}}
             </tbody>

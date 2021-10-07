@@ -5,7 +5,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Cadastro de usuário | ElevaEmpilhadeiras</title>
+  <title>Requisitante | ElevaEmpilhadeiras</title>
 
 
   <link rel="icon" href="/images/logo-eleva.png" />
@@ -36,35 +36,49 @@
     </aside>
 
     <main class="animate-appear with-sidebar">
-      <form action="/auth/userRegister" method="POST">  <!-- Criando a rota de envio para o banco de dados -->
+      <form action="/customers/new" method="POST">  <!-- Criando a rota de envio para o banco de dados -->
         <fieldset>
-          <legend>Cadastro de Usuário</legend>
+          <legend>Cadastro de Cliente</legend>
 
           <div class="input-block">
-            <label for="username">Nome</label>
-            <input id="username" name="name" maxlength="100" required />
+            <label for="customerName">Nome/Razão Social</label>
+            <input id="customerName" name="customerName" maxlength="100" required />
           </div>
 
           <div class="input-block">
-            <label for="email">E-mail para login</label>
-            <input type="email" id="email" name="email" maxlength="50" required />
+            <label for="identify">CPF/CNPJ do Requisitante<span>Somente números</span></label>
+            <input id="identify" name="identify" maxlength="15" required />
           </div>
 
           <div class="input-block">
-            <label for="role">Função</label>
-            <input id="role" name="role" maxlength="30" required />
+            <label for="telephone">Telefone para Contato / Whatsapp</label>
+            <input id="telephone" name="telephone" required />
+          </div>
+        </fieldset>
+        <fieldset>
+          <legend>Endereço</legend>
+
+          <div class="input-block">
+            <label for="adress">Rua</label>
+            <input id="adress" name="adress" required />
+          </div>
+
+          <div class="input-block input-row">
+            <div class="input-block row">
+                <label for="adressNumber">Número</label>
+                <input type="number" id="adressNumber" name="adressNumber" required />
+            </div>
+            <div class="input-block row">
+                <label for="cep">CEP<span>Somente números</span></label>
+                <input id="cep" maxlength="8" name="cep" required />
+            </div>
           </div>
 
           <div class="input-block">
-            <label for="password">Senha</label>
-            <input type="password" id="password" name="password" maxlength="" required />
+            <label for="adressComplement">Complemento</label>
+            <input id="adressComplement" name="adressComplement" required />
           </div>
-
-          <div class="input-block">
-            <label for="passwordConfirm">Confirmação de Senha</label>
-            <input type="password" id="passwordConfirm" name="passwordConfirm" maxlength="" required />
-          </div>
-
+        
           {{#if alertmessage}}
             <h4 class="alert-message">{{alertmessage}}</h4>
           {{else if successmessage}}
@@ -74,12 +88,9 @@
           <button type="submit" class="primary-button">Criar</button>
 
         </fieldset>
-  </form>
-  </main>
+      </form>
+    </main>
   </div>
-
-  <script src="../scripts/page-creates.js"></script>
-
 </body>
 
 </html>

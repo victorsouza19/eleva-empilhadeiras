@@ -13,7 +13,13 @@ router.get('/register', authController.isLoggedIn, (req, res) => {
     
 });
 
-router.get('/', authController.isLoggedIn, equipmentsController.equipments );
+router.get('/', authController.isLoggedIn, equipmentsController.equipments, (req, res) => {
+    if(req.user) {
+        res.render('equipments/equipments');
+    } else {
+        res.redirect('/login');
+    };
+});
 
 router.get('/edit/:id', authController.isLoggedIn, equipmentsController.edit );
 
