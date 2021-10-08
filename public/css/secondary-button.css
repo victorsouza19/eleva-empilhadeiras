@@ -35,3 +35,46 @@
 .secondary-button:hover {
     background: #c80505;
 }
+
+
+.choose-button, 
+.choose-button-overlay{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem 1rem;
+    width: 100%;
+    text-decoration: none;
+    font-weight: 600;
+    border-radius: 0.4rem;
+
+    transition: 0.5s;
+}
+
+.choose-button{
+    background: #3cdc8c;
+    color: #fff;
+    margin-top: 3rem;
+
+}
+
+.choose-button-overlay{
+    box-shadow: inset 0 0 0 2px #3cdc8c;
+    margin-top: 1.3rem;
+    color: #3cdc8c;
+}
+
+.equip-checkbox input {
+    width: 2rem;
+    height: 2rem;
+}
+
+.choose-button-overlay:hover{
+    transform: translateY(-5px);
+}
+
+.choose-button:hover{
+    background: #36cf82;
+    transform: translateY(-5px);
+};
+

@@ -17,12 +17,12 @@
   <link rel="stylesheet" href="/css/primary-button.css" />
   <link rel="stylesheet" href="/css/page-forms.css" />
   <link rel="stylesheet" href="/css/items.css" />
+  <link rel="stylesheet" href="/css/secondary-button.css" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="/css/home.css">
-    <script src="https://kit.fontawesome.com/a1c18692b7.js" crossorigin="anonymous"></script>
 </head>
 
 <body>
@@ -40,28 +40,27 @@
     <main class="animate-appear with-sidebar">
       <div class="container">
         <fieldset>
-          <legend>Editar Ordem de Serviço</legend>
-          {{#if successmessage}}
-              <h4 class="success-message-top">{{successmessage}}</h4>
-          {{/if}}
-
-          {{#if alertmessage}}
-            <h4 class="alert-message-top">{{alertmessage}}</h4>
-            <a href="customers/verify" class="primary-button"><span>Cadastrar</span></a>
-
-
-          {{else}}
-          <table>
+          {{#if verifymessage}}
+            <legend>Verificação | Ordem de Serviço</legend>
+            <div class="alert-message-top">
+              <h4 >{{verifymessage}}</h4>
+              <br>
+              <p>Abaixo você tem a lista de equipamentos que possuem o vínculo mencionado.</p>
+              <p>Você pode apagar somente a ordem de serviço, ou apagar os equipamentos que estão vinculados também.</p>
+              <br>
+              <p style="color: black">O que você deseja apagar?</p>
+            </div>
+            
+            
+            <table>
             <thead>
               <tr>
                 <div class="menu-items">
-                  <th>Cliente</th>
-                  <th>CPF/CNPJ</th>
-                  <th>Responsável</th>
-                  <th class="th-center">Tipo</th>
-                  <th>Status</th>
-                  <th>Editar</th>
-                  <th>Apagar</th>
+                  <th>Marca</th>
+                  <th>Modelo</th>
+                  <th>Fornecedor</th>
+                  <th>Preço</th>
+                  <th>Selecionar</th>
                 </div>
               </tr>
             </thead>
@@ -69,17 +68,21 @@
             <tbody>
               {{#each items}}
               <tr class="item">
-                  <td>{{name}}</td>
-                  <td>{{identify}}</td>
-                  <td>{{responsible}}</td>
-                  <td>{{type}}</td>
-                  <td>{{status}}</td>
-                  <td class="button-options"><a href="/orders/edit/{{id}}"><button class="edit-button" type="submit"><i class="fas fa-edit"></button></a></td>
-                  <td class="button-options"><a href="/orders/delete/verify/{{id}}"><button class="delete-button" type="submit"><i class="fas fa-trash-alt"></i></button></a></td>
+                  <td>{{manufacturer}}</td>
+                  <td>{{model}}</td>
+                  <td>{{provider}}</td>
+                  <td>R$ {{price}}</td>
+                  <td class="equip-checkbox"><input type="checkbox" name="equipment_id" value="{{id}}" checked></td>
               </tr>
               {{/each}}
             </tbody>
           </table>
+
+          <!--<a href="/" class="primary-button">Apagar todos</a>-->
+          <a href="/orders/delete/{{order_id}}" class="choose-button">Somente OS</a>
+          <a href="/orders/delete/all/{{order_id}}{{#each items}}&{{id}}{{/each}}" class="choose-button-overlay">OS e equipamento</a>
+          
+
   
   <script src="/scripts/animations.js"></script>
 </body>

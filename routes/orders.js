@@ -14,6 +14,15 @@ const router = express.Router();
   
   });
 
+  router.get('/verify', authController.isLoggedIn, (req, res) => {
+    if(req.user) {
+        res.render('orders/verify');
+    } else {
+        res.redirect('/login');
+    };
+    
+    });
+
   router.get('/edit', authController.isLoggedIn, (req, res) => {
   if(req.user) {
       res.render('orders/edit');
@@ -49,6 +58,10 @@ router.get('/', ordersController.orders );
 router.get('/edit/:id', ordersController.edit );
 
 router.get('/delete/:id', ordersController.delete );
+
+router.get('/delete/all/:id&:equipmentId', ordersController.deleteAll );
+
+router.get('/delete/verify/:id', ordersController.deleteVerify );
 
 
 // form manipulations

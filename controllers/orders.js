@@ -1,7 +1,6 @@
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
 const { promisify } = require('util');
 const db = require('../app');
+const { json } = require('express');
 
 
 // Order Interactions || interações com as ordens de serviço pela rota "/orders"
@@ -89,37 +88,201 @@ const db = require('../app');
         }
     };
 
+    exports.deleteVerify = async (req,res) => {
+        try {
+            console.log(req.params.id);
+            order_id = req.params.id
+
+            db.query('SELECT * FROM orders_equipments WHERE order_id = ?', [order_id], async (error, rows) => {
+                if(error){
+                    console.log(error)
+                    return res.render('successMessage', {
+                        errormessage: "Erro ao buscar equipamentos vinculados a ordem"
+                    })
+
+                } else if(rows.length > 0){
+                    console.log(rows);
+                    equipmentsArr = [];
+                    id = rows[0].equipment_id;
+
+                    db.query('SELECT id, manufacturer, model, provider, price FROM equipments WHERE id = ?', [id], async (error, results) => {
+                        if(error){
+                            console.log(error);
+    
+                        } else if(results.length > 0) {
+                            console.log(results);
+                            await equipmentsArr.push(results[0]);
+
+                            res.render('orders/verify', {
+                                items: equipmentsArr,
+                                order_id: order_id,
+                                verifymessage: "A ordem de serviço selecionada possui um ou mais equipamentos vinculados."})
+                        }
+                    })
+
+                    // equipmentsArr = [];
+                    // function setEquipments(id) {
+                    //     console.log(id);
+                    //     nome = 'Pedro';
+
+                    //     db.query('SELECT id, manufacturer, model, provider price from equipments WHERE id = ?', [id], async (error, results) => {
+                    //         if(error){
+                    //             console.log(error);
+
+                    //         } else if(results.length > 0) {
+                    //             await equipmentsArr.push(results[0]);
+                    //         }
+                    //     })
+                    // };
+                    // for await(let i in rows){
+                    //     let id = await rows[i].equipment_id;
+                    //     setEquipments(id);
+                    // }
+
+                } else {
+                    db.query('DELETE FROM orders WHERE id = ?', [id], async (error, result) => {
+                        if(error){
+                            return console.log(error);
+                        }  
+                        
+                        else if(result) {
+                            console.log(result);
+                            db.query('SELECT o.id, c.name, c.identify, o.responsible, o.status, o.type FROM orders AS o INNER JOIN customers as c ON c.id = o.customer_id ORDER BY o.initial_date DESC;', async (error, rows) => {
+                                if(error){
+                                    console.log(error)
+                    
+                                } else if(rows.length > 0) {
+                                    return res.render('orders/orders', {
+                                        items: rows, 
+                                        successmessage: "Ordem de serviço apagada!"
+                                    });
+                    
+                    
+                                } else {
+                                    return res.render('orders/orders', {
+                                        alertmessage: "Nenhuma ordem de serviço cadastrada"
+                                    })
+                                }
+                            });
+                        }
+                    });      
+                }
+            })
+
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     exports.delete = async (req,res) => {
         try {
             console.log(req.params.id);
-            id = req.params.id
+            id = req.params.id;
 
-            db.query('DELETE FROM orders WHERE id = ?', [id], async (error, result) => {
+            db.query('DELETE FROM orders_equipments WHERE order_id = ?', [id], async(error, results) => {
                 if(error){
-                    return console.log(error);
-                }  
-                
-                else if(result) {
-                    console.log(result);
-                    db.query('SELECT o.id, c.name, c.identify, o.responsible, o.status, o.type FROM orders AS o INNER JOIN customers as c ON c.id = o.customer_id ORDER BY o.initial_date DESC;', async (error, rows) => {
+                    console.error(error);
+                    res.status(404)
+                    res.render('successMessage', {
+                        errormessage: 'Falha ao desvincular ordem de serviço do equipamento'
+                    })
+                } else if(results){
+                    db.query('DELETE FROM orders WHERE id = ?', [id], async (error, result) => {
                         if(error){
-                            console.log(error)
-            
-                        } else if(rows.length > 0) {
-                            return res.render('orders/orders', {
-                                items: rows, 
-                                successmessage: "Ordem de serviço apagada!"
+                            return console.log(error);
+                        }  
+                                
+                        else if(result) {
+                            console.log(result);
+                            db.query('SELECT o.id, c.name, c.identify, o.responsible, o.status, o.type FROM orders AS o INNER JOIN customers as c ON c.id = o.customer_id ORDER BY o.initial_date DESC;', async (error, rows) => {
+                                if(error){
+                                    console.log(error)
+                            
+                                } else if(rows.length > 0) {
+                                    return res.render('orders/orders', {
+                                        items: rows, 
+                                        successmessage: "Ordem de serviço apagada!"
+                                    });
+                            
+                            
+                                } else {
+                                    return res.render('orders/orders', {
+                                        alertmessage: "Nenhuma ordem de serviço cadastrada"
+                                    })
+                                }
                             });
-            
-            
-                        } else {
-                            return res.render('orders/orders', {
-                                alertmessage: "Nenhuma ordem de serviço cadastrada"
-                            })
                         }
-                    });
+                    }); 
                 }
-            });      
+            });     
+
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    exports.deleteAll = async (req,res) => {
+        try {
+            console.log(req.params);
+            order_id = req.params.id;
+            equipment_id = req.params.equipmentId;
+
+            param = [ order_id, equipment_id ];
+
+            db.query('SELECT * FROM orders_equipments WHERE order_id <> ? AND equipment_id = ?', [order_id, equipment_id], (error, results) => {
+                if(error){
+                    console.error(error);
+                    res.status(404)
+                    res.render('successMessage', {
+                        errormessage: 'Falha ao buscar o vínculo entre ordem de serviço e equipamento'
+                    })
+                } else if(results.length > 0) {
+                    console.log(results);
+                    return res.render('successMessage', {
+                        errormessage: `Falha: Equipamento possui vinculo com outra ordem de serviço. Quantidade de vínculos: ${results.length}`,
+                    });
+
+                
+                } else {
+                    return res.send('Sem vínculo');
+                    db.query('SELECT * FROM orders_equipments WHERE order_id = ? AND equipment_id = ?' [param], (error, results) => {
+                        if(error){
+                            console.error(error);
+                            res.status(404)
+                            res.render('successMessage', {
+                                errormessage: 'Falha ao buscar o vínculo entre ordem de serviço e equipamento'
+                            })
+                        } else{
+                            db.query('DELETE FROM orders WHERE id = ?', [id], async (error, result) => {
+                                if(error){
+                                    return console.log(error);
+                                }  
+                                        
+                                else if(result) {
+                                    console.log(result);
+                                    db.query('SELECT o.id, c.name, c.identify, o.responsible, o.status, o.type FROM orders AS o INNER JOIN customers as c ON c.id = o.customer_id ORDER BY o.initial_date DESC;', async (error, rows) => {
+                                        if(error){
+                                            console.log(error)
+                                    
+                                        } else if(rows.length > 0) {
+                                            return res.render('orders/orders', {
+                                                items: rows, 
+                                                successmessage: "Ordem de serviço apagada!"
+                                            });
+                                    
+                                    
+                                        } else {
+                                            return res.render('orders/orders', {
+                                                alertmessage: "Nenhuma ordem de serviço cadastrada"
+                                            })
+                                        }
+                                    });
+                                }
+                            }); 
+                        }
+                    }); 
+                }    
+            });
 
         } catch (error) {
             console.log(error);

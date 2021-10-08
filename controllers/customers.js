@@ -46,14 +46,17 @@ const db = require('../app');
           }
 
           if(results.length > 0) {
-              return res.render('customerRegister', {
-                  alertmessage: 'Cliente já cadastrado'
+              return res.render('customers/register', {
+                  alertmessage: 'CPF/CNPJ já cadastrado'
               });
-          } 
+          }  
 
           db.query('INSERT INTO addresses SET ?', { street: adress, number: adressNumber, cep: cep, complement: adressComplement}, async (error, results) => {
               if(error) {
                   console.log(error);
+                  return res.render('successMessage', {
+                      errormessage: 'Erro ao cadastrar endereço!'
+                  })
               } else {
                   console.log(results);
                   
