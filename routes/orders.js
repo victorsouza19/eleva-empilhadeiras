@@ -59,7 +59,7 @@ router.get('/edit/:id', ordersController.edit );
 
 router.get('/delete/:id', ordersController.delete );
 
-router.get('/delete/all/:id&:equipmentId', ordersController.deleteAll );
+router.post('/delete/all', ordersController.deleteAll );
 
 router.get('/delete/verify/:id', ordersController.deleteVerify );
 

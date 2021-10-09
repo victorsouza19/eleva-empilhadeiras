@@ -18,9 +18,7 @@ const { json } = require('express');
 
 
             } else {
-                return res.render('orders/orders', {
-                    alertmessage: "Nenhuma ordem de serviço cadastrada"
-                })
+                return res.render('orders/orders');
             }
         });
 
@@ -103,41 +101,43 @@ const { json } = require('express');
                 } else if(rows.length > 0){
                     console.log(rows);
                     equipmentsArr = [];
-                    id = rows[0].equipment_id;
+                    size = rows.length;
+                    
+                    function setEquipments() {
 
-                    db.query('SELECT id, manufacturer, model, provider, price FROM equipments WHERE id = ?', [id], async (error, results) => {
-                        if(error){
-                            console.log(error);
-    
-                        } else if(results.length > 0) {
-                            console.log(results);
-                            await equipmentsArr.push(results[0]);
+                      function condiction(arr, callback){
+                        if(size === arr.length){
+                          return callback(equipmentsArr);
 
-                            res.render('orders/verify', {
-                                items: equipmentsArr,
-                                order_id: order_id,
-                                verifymessage: "A ordem de serviço selecionada possui um ou mais equipamentos vinculados."})
+                        } else {
+                          return
                         }
-                    })
+                      }
+        
+                      for(let i in rows){
+                        id = rows[i].equipment_id;
 
-                    // equipmentsArr = [];
-                    // function setEquipments(id) {
-                    //     console.log(id);
-                    //     nome = 'Pedro';
+                        db.query( 'SELECT id, manufacturer, model, provider, price from equipments WHERE id = ?', [id], async (error, results) => {
+                          if(error){
+                            console.log(error);
 
-                    //     db.query('SELECT id, manufacturer, model, provider price from equipments WHERE id = ?', [id], async (error, results) => {
-                    //         if(error){
-                    //             console.log(error);
+                          } else if(results.length > 0) {
+                            await equipmentsArr.push(results[0]);
+                            condiction(equipmentsArr, show);
+                          }
+                        })
+                      }
 
-                    //         } else if(results.length > 0) {
-                    //             await equipmentsArr.push(results[0]);
-                    //         }
-                    //     })
-                    // };
-                    // for await(let i in rows){
-                    //     let id = await rows[i].equipment_id;
-                    //     setEquipments(id);
-                    // }
+                    };
+
+                    function show(arr) {
+                      res.render('orders/verify', {
+                        items: arr,
+                        order_id: order_id,
+                        verifymessage: "A ordem de serviço selecionada possui um ou mais equipamentos vinculados."})
+                    }
+
+                    setEquipments();
 
                 } else {
                     db.query('DELETE FROM orders WHERE id = ?', [id], async (error, result) => {
@@ -184,7 +184,7 @@ const { json } = require('express');
                     console.error(error);
                     res.status(404)
                     res.render('successMessage', {
-                        errormessage: 'Falha ao desvincular ordem de serviço do equipamento'
+                        errormessage: 'Falha ao desvincular ordem de serviço dos equipamentos'
                     })
                 } else if(results){
                     db.query('DELETE FROM orders WHERE id = ?', [id], async (error, result) => {
@@ -206,9 +206,7 @@ const { json } = require('express');
                             
                             
                                 } else {
-                                    return res.render('orders/orders', {
-                                        alertmessage: "Nenhuma ordem de serviço cadastrada"
-                                    })
+                                    return res.render('orders/orders')
                                 }
                             });
                         }
@@ -223,11 +221,10 @@ const { json } = require('express');
 
     exports.deleteAll = async (req,res) => {
         try {
-            console.log(req.params);
-            order_id = req.params.id;
-            equipment_id = req.params.equipmentId;
-
+            console.log(req.body);
             param = [ order_id, equipment_id ];
+
+            return console.log("CONTINUAR DAQUI no deleteAll!!")
 
             db.query('SELECT * FROM orders_equipments WHERE order_id <> ? AND equipment_id = ?', [order_id, equipment_id], (error, results) => {
                 if(error){

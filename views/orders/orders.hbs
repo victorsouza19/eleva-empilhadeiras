@@ -41,16 +41,10 @@
       <div class="container">
         <fieldset>
           <legend>Editar Ordem de Serviço</legend>
+
           {{#if successmessage}}
               <h4 class="success-message-top">{{successmessage}}</h4>
           {{/if}}
-
-          {{#if alertmessage}}
-            <h4 class="alert-message-top">{{alertmessage}}</h4>
-            <a href="customers/verify" class="primary-button"><span>Cadastrar</span></a>
-
-
-          {{else}}
           <table>
             <thead>
               <tr>
@@ -65,7 +59,6 @@
                 </div>
               </tr>
             </thead>
-          {{/if}}
             <tbody>
               {{#each items}}
               <tr class="item">
@@ -77,10 +70,17 @@
                   <td class="button-options"><a href="/orders/edit/{{id}}"><button class="edit-button" type="submit"><i class="fas fa-edit"></button></a></td>
                   <td class="button-options"><a href="/orders/delete/verify/{{id}}"><button class="delete-button" type="submit"><i class="fas fa-trash-alt"></i></button></a></td>
               </tr>
+
+              {{else}}
+                <h4 class="alert-message-top">Nenhuma ordem de serviço cadastrada</h4>
+                <a href="customers/verify" class="primary-button"><span>Cadastrar</span></a>
               {{/each}}
             </tbody>
           </table>
-  
+        </fieldset>
+      </div>
+    </main>
+  </div>
   <script src="/scripts/animations.js"></script>
 </body>
 
