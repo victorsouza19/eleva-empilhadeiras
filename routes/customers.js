@@ -14,6 +14,15 @@ const router = express.Router();
   
   });
 
+  router.get('/customers/edit', authController.isLoggedIn, (req, res) => {
+    if(req.user) {
+        res.render('customers/edit');
+    } else {
+        res.redirect('/login');
+    };
+    
+  });
+
   router.get('/register', authController.isLoggedIn, (req, res) => {
   if(req.user) {
       res.render('customers/register');
@@ -23,9 +32,24 @@ const router = express.Router();
   
   });
 
+  router.get('/', authController.isLoggedIn, customersController.customers,(req, res) => {
+    if(req.user) {
+        res.render('customers/customers');
+    } else {
+        res.redirect('/login');
+    };
+    
+  });
+
 
 // CRUD routes || Rotas para CRUD
   router.post('/new', customersController.new );
+
+  router.get('/edit/:id', customersController.edit );
+
+  router.post('/update', customersController.put );
+
+  router.get('/delete/:id', customersController.delete );
 
 
 // Verify routes || Rotas de verificação

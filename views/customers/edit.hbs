@@ -30,19 +30,22 @@
 
       <footer>
         <button>
-          <a href="/"><img src="../images/arrow-back.svg" alt="Voltar" /></a>
+          <a href="/"><img src="/images/arrow-back.svg" alt="Voltar" /></a>
         </button>
       </footer>
     </aside>
 
     <main class="animate-appear with-sidebar">
-      <form action="/customers/new" method="POST">  <!-- Criando a rota de envio para o banco de dados -->
+      <form action="/customers/update" method="POST">  <!-- Criando a rota de envio para o banco de dados -->
         <fieldset>
-          <legend>Cadastro de Cliente</legend>
+          <legend>Editar Cliente</legend>
+
+          <input type="hidden" id="customerId" name="customer_id" value="{{customer.customer_id}}" required />
+          <input type="hidden" id="addressId" name="address_id"  value="{{customer.address_id}}" required />
 
           <div class="input-block">
             <label for="customerName">Nome/Razão Social</label>
-            <input id="customerName" name="customerName" maxlength="100" value="{{customer.customerName}}" required />
+            <input id="customerName" name="name" maxlength="100" value="{{customer.name}}" required />
           </div>
 
           <div class="input-block">
@@ -60,13 +63,13 @@
 
           <div class="input-block">
             <label for="adress">Rua</label>
-            <input id="adress" name="adress" value="{{customer.adress}}" required />
+            <input id="adress" name="street" value="{{customer.street}}" required />
           </div>
 
           <div class="input-block input-row">
             <div class="input-block row">
                 <label for="adressNumber">Número</label>
-                <input type="number" id="adressNumber" name="adressNumber" value="{{customer.adressNumber}}" required />
+                <input type="number" id="number" name="number" value="{{customer.number}}" required />
             </div>
             <div class="input-block row">
                 <label for="cep">CEP<span>Somente números</span></label>
@@ -76,7 +79,7 @@
 
           <div class="input-block">
             <label for="adressComplement">Complemento</label>
-            <input id="adressComplement" name="adressComplement" value="{{customer.adressComplement}}" required />
+            <input id="adressComplement" name="complement" value="{{customer.complement}}" required />
           </div>
         
           {{#if alertmessage}}
@@ -85,7 +88,7 @@
             <h4 class="success-message">{{successmessage}}</h4>
           {{/if}}
 
-          <button type="submit" class="primary-button">Criar</button>
+          <button type="submit" class="primary-button">Editar</button>
 
         </fieldset>
       </form>

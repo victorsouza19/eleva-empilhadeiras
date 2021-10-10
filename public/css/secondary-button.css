@@ -46,7 +46,7 @@
     width: 100%;
     text-decoration: none;
     font-weight: 600;
-    border-radius: 0.4rem;
+    border-radius: 0.6rem;
 
     transition: 0.5s;
 }
@@ -56,6 +56,10 @@
     color: #fff;
     margin-top: 3rem;
 
+}
+
+.choose-button2{
+    margin-top: 1rem;
 }
 
 .choose-button-overlay{
@@ -78,5 +82,4 @@
 .choose-button:hover{
     background: #36cf82;
     transform: translateY(-5px);
-};
-
+}
