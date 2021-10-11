@@ -59,7 +59,7 @@ td:last-child {
     padding: 1rem 0;
 }
 
-.edit-button, .delete-button {
+.edit-button, .delete-button, .separate-button {
 
     
     width: 50px;
@@ -94,9 +94,9 @@ td:last-child {
 }
 
 .delete-button {
-    background: #dc3c3c00;
-    border: 0.2rem solid #dc3c3c;
-    color: #2c2c2c;  
+    background: #fff;
+    border: 0.1rem solid #d3e2e5;
+    color: #ff6666;  
 }
 
 .edit-button:hover {
@@ -104,7 +104,53 @@ td:last-child {
 }
 
 .delete-button:hover {
-    background: #cf3636;
-    border: none;
-    color: #ffff; 
+    background: #fafafad8;
 }
+
+.item-new{
+    width: 100%;
+    background-color: #41eb960a;
+    border: 1px dashed #3cdc8c;
+
+    margin-top: 2rem;
+    border-radius: 1rem;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: 0.5s;
+}
+
+.item-new:hover{
+    background-color: #3cdc8c18;
+}
+
+.item-new button{
+    width: 100%;
+    height: 5rem;
+    text-decoration: none;
+    background: none;
+    border: none;
+    border-radius: 1rem;
+    
+}
+
+.separate-button{
+    background: #fff;
+    border: 0.1rem solid #d3e2e5;
+}
+
+.separate-button:hover{
+    background: #fafafad8;
+}
+
+.item-new span{
+    color: #3cdc8c;
+    font-size: 1.65rem;
+    margin-left: 1rem;
+    font-weight: 600;
+
+}
+
+
+

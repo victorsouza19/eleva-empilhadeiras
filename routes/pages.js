@@ -9,18 +9,12 @@ const router = express.Router();
 router.get('/', authController.isLoggedInIndex, (req, res) => {
     
     if(req.user) {
-            if(req.order){
-                res.render('index', {
-                    order: req.order,
-                    user: req.user,
-                    date: dia+", "+data.getDate()+" de "+mes
-                });
-            } else {
-                res.render('index', {
-                    user: req.user,
-                    date: dia+", "+data.getDate()+" de "+mes
-                });
-            };
+      res.render('index', {
+        open, progress, closed,
+        user: req.user,
+        date: dia+", "+data.getDate()+" de "+mes
+      });
+    
     } else {
         res.redirect('/login');
     }

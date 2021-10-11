@@ -2,6 +2,7 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const { promisify } = require('util');
 const db = require('../app');
+const { checkPrime } = require('crypto');
 
 
 // ACCESS CONTROL  || CONTROLE DE ACESSO
@@ -157,22 +158,51 @@ const db = require('../app');
                     };
                     data.getDiaEmPortugues();
                     dia = data.diaPt
+                    open = 0;
+                    progress = 0;
+                    closed = 0;
 
-                    db.query('SELECT count(status) as "contagem", status FROM orders GROUP BY status', async (error, fields) => {
+                    db.query('SELECT status, count(status) as "contagem" FROM orders GROUP BY status', async (error, rows) => {
                         if(error){
                             console.log(error);
-
                         } 
-                       
-                        if(fields){
-                            console.log(fields); 
-                            order = await fields; 
+                        if(rows){
+                            console.log(rows);
+                            let size = parseInt(rows.length);
+    
+
+                            async function check(rows, callback){
+                                for(i in rows){
+                                    let position = rows[i].status;
+                                    let count = rows[i].contagem;
+
+                                    if(position == "Aberto"){
+                                        open += parseInt(count);
+
+                                    } else if(position == "Em andamento"){
+                                        progress += parseInt(count);
+
+                                    } else if(position == "Fechado"){
+                                        closed += parseInt(count);
+
+                                    }
+
+                                    if((parseInt(i)) == size-1){
+                                        callback();
+                                    }
+                                } 
                             
+                            }
+                            check(rows, loading);
+
+                            function loading(){
+                                return next();
+                            } 
+                        } else {
                             return next();
                         }
                     });
-
-                    return next();
+                    //return next();
                 });
 
             } catch (error) {

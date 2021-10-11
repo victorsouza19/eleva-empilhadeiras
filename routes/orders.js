@@ -61,6 +61,8 @@ router.get('/delete/:id', ordersController.delete );
 
 router.post('/delete/all', ordersController.deleteAll );
 
+router.get('/deleteEquipment/:equipId&:orderId', ordersController.deleteEquipment );
+
 router.get('/delete/verify/:id', ordersController.deleteVerify );
 
 
@@ -74,11 +76,5 @@ router.post('/customRegister', ordersController.customRegister );
 router.post('/register', ordersController.register );
 
 router.post('/update', ordersController.put);
-
-
-/// 
-
-
-
 
 module.exports = router;

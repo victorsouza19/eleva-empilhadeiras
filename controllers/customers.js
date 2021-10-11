@@ -64,7 +64,7 @@ const db = require('../app');
       console.log(req.body);
 
       // Short form | forma curta:
-      const { customerName, identify, telephone, adress, adressNumber, cep, adressComplement} = req.body;
+      const { customerName, customer_email, identify, telephone, adress, adressNumber, cep, adressComplement} = req.body;
 
       db.query('SELECT * FROM customers WHERE identify = ?', [identify], (error, results) => {
           if(error) {
@@ -92,7 +92,7 @@ const db = require('../app');
               let addresses_id = await results.insertId;
 
 
-              db.query('INSERT INTO customers SET ?', { name: customerName, telephone: telephone, identify: identify, adress_id: addresses_id }, (error, results) => {
+              db.query('INSERT INTO customers SET ?', { name: customerName, email: customer_email, telephone: telephone, identify: identify, adress_id: addresses_id }, (error, results) => {
                   if(error) {
                       console.log(error);
                   } else {
@@ -111,9 +111,9 @@ const db = require('../app');
 	exports.put = (req, res) => {
     console.log(req.body);
 
-		const { name, identify, telephone, street, number, cep, complement, customer_id, address_id } = req.body;
+		const { name, identify, customer_email, telephone, street, number, cep, complement, customer_id, address_id } = req.body;
 
-    let customer_param = [{name, identify, telephone}, customer_id];
+    let customer_param = [{name, identify, email: customer_email, telephone}, customer_id];
 		let address_param = [{street, number, cep, complement}, address_id];
 
         try {
@@ -234,7 +234,7 @@ const db = require('../app');
     try {
         id = req.params.id
 
-    db.query('SELECT c.id as "customer_id", c.name, c.telephone, identify, a.id as "address_id", a.street, a.number, a.cep, a.complement  FROM customers as c INNER JOIN addresses as a ON a.id = c.adress_id WHERE c.id = ?;', [id], async (error, results) => {
+    db.query('SELECT c.id as "customer_id", c.name, c.telephone, c.email, identify, a.id as "address_id", a.street, a.number, a.cep, a.complement  FROM customers as c INNER JOIN addresses as a ON a.id = c.adress_id WHERE c.id = ?;', [id], async (error, results) => {
         if(error){
             console.log(error);
         }  

@@ -10,12 +10,3 @@ function setFormAction2(){
 }
 
 // 1 só OS / 2 com o customer
-
-
-// document.getElementById('setFormAction').onclick = function() {
-//     document.getElementById('form').action = '/auth/osRegisterOnly';
-// }
-
-// document.getElementById('setCreate').onclick = function() {
-//     document.getElementById('form').action = '/auth/notOsRegisterOnly';
-// }
