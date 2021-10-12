@@ -17,20 +17,22 @@
 </head>
 <body>
     <div class="container">
-        <div class="content">
-
             <div class="first-column">
-                <h2>Realize o login</h2>
-                <p class="text-mid">Este sistema é restrito para o uso dos colaboradores da Eleva Empilhadeiras.
-                </p>
-                <form action="/auth/login" method="POST">        
+                <form action="/auth/login" method="POST">  
+                    <h2>Realize o login</h2>
+                    <p class="text-mid">Este sistema é restrito para o uso dos colaboradores da Eleva Empilhadeiras.
+                    </p><span class="back-to-site">Chegou aqui por engano?<a href="https://www.elevaempilhadeiras.ind.br">Voltar para o site</a></span>      
                     <div class="input-block">
                         <label for="email"></label>
-                        <input type="text" name="email" placeholder="E-mail" id="email" ></input>
+                        <div class ="icon-input">
+                            <i class="fas fa-envelope-open"></i><input type="text" name="email" placeholder="E-mail" id="email" ></input>
+                        </div>
                     </div>
                     <div class="input-block">
                         <label for="password"></label>
-                        <input type="password" name= "password" placeholder="Senha" id="password"></input>
+                        <div class ="icon-input">
+                            <i class="fas fa-unlock"></i><input type="password" name= "password" placeholder="Senha" id="password"></input>
+                        </div>
                     </div>
                     <div class="input-block">
                     <button type="submit" class="acessar">
@@ -43,12 +45,10 @@
                     <p class="copyright">&copy; Eleva 2020</p>
                 </form>
             </div>
-            
             <div class="second-column">
-                <img src="/images/eleva-right.png" alt="fundo-eleva">
+                <img class="img1" src="/images/eleva-right.png" alt="fundo-eleva">
+                 <img class="img2" src="/images/fundo-eleva-mobile.png" alt="fundo-eleva">
             </div>
-
-        </div>
     </div>
 </body>
 </html>
