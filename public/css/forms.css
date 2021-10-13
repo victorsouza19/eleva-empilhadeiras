@@ -222,3 +222,17 @@ fieldset legend {
 .provider-list {
   margin-bottom: 2.4rem;
 }
+
+@media screen and (max-width: 720px){
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 95%;
+
+    margin: 6.4rem auto;
+    padding: 4rem 3rem;
+  }
+
+}

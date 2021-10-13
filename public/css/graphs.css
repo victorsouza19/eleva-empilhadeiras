@@ -143,8 +143,8 @@ svg circle:nth-child(2){
     .graph-container .card{
         position: relative;
         margin-bottom: 1.5rem;
-        width: 100%;
         height: 100%;
+        max-width: 50em;
     }
 }
 
@@ -152,14 +152,13 @@ svg circle:nth-child(2){
     .graph-container{
         display: flex;
         flex-direction: column;
-        width: 100%;
     }
 
     .graph-container .card{
         position: relative;
         margin-bottom: 1.5rem;
-        width: 70vw;
         height: 100%;
+        width: auto;
     }
 }
 
@@ -167,6 +166,8 @@ svg circle:nth-child(2){
     .graph-container{
         display: flex;
         flex-direction: column;
+        justify-content: center;
+        width: 100%;
     }
 
     .graph-container .card{

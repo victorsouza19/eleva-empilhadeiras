@@ -62,7 +62,7 @@ body {
     display: grid;
     height: 92vh;
 
-    grid-template-columns: 3fr 1fr;
+    grid-template-columns: 73vw 27vw;
 }
 
 .first-column {
@@ -218,7 +218,7 @@ body {
     height: 2.6rem;
     margin: 1rem 0;
     padding: 1rem;
-    border: 3px solid white;
+    border: 1px solid white;
     border-radius: 15px;
     font-size: 1rem;
     font-weight: 600;
@@ -234,26 +234,112 @@ body {
 }
 
 .exit button:hover {
-    border: 3px solid rgba(255, 0, 0);
+    border: 1px solid rgba(255, 0, 0);
     color: rgb(255, 0, 0);
-    transform: translateY(-5px);
 }
 
 
 .edit button:hover {
-    border: 3px solid #4bfb7a;
+    border: 1px solid #4bfb7a;
     color: #4bfb7a;
-    transform: translateY(-5px);
 }
 
 .exit button,
 .edit button{
     display: flex;
     justify-content: space-around;
+    
 }
 
+@media screen and (min-width: 1024px) and (max-width: 1420px){
+    .options-container a {
+        padding: 1.5rem 1.9rem;
+        margin: 0.5rem;
+    }
 
-@media screen and (max-width: 780px){
+    .first-column{
+        width: 73vw;
+    }
+
+    .second-column{
+        width: 27vw;
+    }
+}
+
+@media screen and (min-width: 960px) and (max-width: 1023px){
+    .options-container a {
+        padding: 1.5rem 3rem;
+        margin: 0.5rem;
+    }
+}
+
+@media screen and (max-width: 1023px){
+    .bottom-content {
+        display: flex;
+        flex-direction: column;
+        height: 92vh;
+    }
+
+    .options hr{
+        width: 90%;
+    }
+
+    .second-column {
+        padding: 2rem;
+        flex-direction: row;
+    }
+
+    .profile-background {
+        width: 5em;
+        height: 5em;
+      }
+      .profile-avatar {
+        width: 5em;
+        height: 5em;
+      }
+
+      .profile p {
+        font-size: 1.1rem;
+        margin: 0;
+    }
+    
+    .profile span {
+        font-size: 1rem;
+    }
+
+    .edit button,
+    .exit button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 7em;
+        height: 2.6rem;
+        margin: 0.5rem;
+        font-size: 1rem;
+    }
+
+    .exit i,
+    .edit i{
+        margin-right: 0.5rem
+    }
+
+    .usr-buttons{
+        display: flex;
+    }
+
+    .profile {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .usr-info{
+        text-align: center;
+        padding-left: 0.5rem;
+    }
+}
+
+@media screen and (max-width: 960px){
     .bottom-content {
         display: flex;
         flex-direction: column;
@@ -269,7 +355,64 @@ body {
         flex-direction: column;
     }
 
+    .second-column {
+        padding: 2rem;
+    }
 
+    .profile-background {
+        width: 5em;
+        height: 5em;
+      }
+      .profile-avatar {
+        width: 5em;
+        height: 5em;
+      }
+
+      .profile p {
+        font-size: 1.1rem;
+        margin: 0;
+    }
+    
+    .profile span {
+        font-size: 1rem;
+    }
+
+    .edit button,
+    .exit button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        width: 7em;
+        height: 2.6rem;
+        margin: 0.5rem;
+        font-size: 1rem;
+    }
+
+    .exit i,
+    .edit i{
+        margin-right: 0.5rem
+    }
+
+    .usr-buttons{
+        display: flex;
+    }
+
+    .profile {
+        display: flex;
+        flex-direction: row;
+    }
+
+    .usr-info{
+        text-align: center;
+        padding-left: 0.5rem;
+    }
+}
+
+@media screen and (max-width: 734px){
+    .second-column{
+        flex-direction: column;
+    }  
 }
 
 @media screen and (max-width: 510px){
@@ -286,9 +429,7 @@ body {
     .buttons-container{
         flex-direction: column;
         width: 100%;
-        padding: 1rem;
-        
-        
+        padding: 1rem; 
     }
 
     .options-container .buttons-container{
@@ -324,56 +465,13 @@ body {
         margin-left: 1rem;
     }
 
-    .second-column {
-        padding: 2rem;
-    }
-
-    .profile-background {
-        width: 5em;
-        height: 5em;
-      }
-      .profile-avatar {
-        width: 5em;
-        height: 5em;
-      }
-
-      .profile p {
+    .profile p {
         font-size: 1rem;
         margin: 0;
     }
     
     .profile span {
         font-size: 0.9rem;
-    }
-
-    .edit button,
-    .exit button {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        width: 7em;
-        height: 2.6rem;
-        margin: 0.5rem;
-        font-size: 1rem;
-    }
-
-    .exit i,
-    .edit i{
-        margin-right: 0.5rem
-    }
-    .usr-buttons{
-        display: flex;
-    }
-
-    .profile {
-        display: flex;
-        flex-direction: row;
-    }
-
-    .usr-info{
-        text-align: center;
-        padding-left: 0.5rem;
     }
 }
 
