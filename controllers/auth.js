@@ -2,7 +2,6 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const { promisify } = require('util');
 const db = require('../app');
-const { checkPrime } = require('crypto');
 
 
 // ACCESS CONTROL  || CONTROLE DE ACESSO
@@ -69,10 +68,10 @@ const { checkPrime } = require('crypto');
 
         res.status(200).redirect('/login');
     }
-
+    
     // Login Check | Verificação de Login
     exports.isLoggedIn = async (req, res, next) => {
-
+        console.log("entrei no middleware");
         //console.log(req.cookies);
         if(req.cookies.jwt) {
             try {

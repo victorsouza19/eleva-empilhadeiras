@@ -13,19 +13,13 @@ router.get('/register', authController.isLoggedIn, (req, res) => {
     
 });
 
-router.get('/', authController.isLoggedIn, equipmentsController.equipments, (req, res) => {
-    if(req.user) {
-        res.render('equipments/equipments');
-    } else {
-        res.redirect('/login');
-    };
-});
+router.get('/', authController.isLoggedIn, equipmentsController.equipments);
 
 router.get('/edit/:id', authController.isLoggedIn, equipmentsController.edit );
 
-router.post('/new', authController.isLoggedIn, equipmentsController.new );
+router.post('/new', equipmentsController.new );
 
-router.post('/update', authController.isLoggedIn, equipmentsController.put );
+router.post('/update', equipmentsController.put );
 
 router.get('/delete/:id', authController.isLoggedIn, equipmentsController.delete );
 

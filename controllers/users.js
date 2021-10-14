@@ -4,29 +4,34 @@ const db = require('../app');
 
 // View
   exports.users = async (req,res) => {
-    try {
+      if(req.user){
+        try {
 
-    db.query('SELECT id, name, email, role FROM users ORDER BY id DESC;', async (error, rows) => {
-        if(error){
-            console.log(error)
-
-        } else if(rows.length > 0) {
-            return res.render('users/users', {
-                items: rows 
+            db.query('SELECT id, name, email, role FROM users ORDER BY id DESC;', async (error, rows) => {
+                if(error){
+                    console.log(error)
+        
+                } else if(rows.length > 0) {
+                    return res.render('users/users', {
+                        items: rows 
+                    });
+        
+        
+                } else {
+                    return res.render('users/users', {
+                        alertmessage: "Nenhum usuário cadastrado"
+                    })
+                }
             });
+        
+        
+            } catch (error) {
+                console.log(error);
+            }
 
-
-        } else {
-            return res.render('users/users', {
-                alertmessage: "Nenhum usuário cadastrado"
-            })
-        }
-    });
-
-
-    } catch (error) {
-        console.log(error);
-    }
+      } else{
+          res.redirect('/login');
+      }
 	};
 
 // CRUD
@@ -157,68 +162,78 @@ exports.put  = async (req, res) => {
 }
 
 exports.delete = async (req,res) => {
-    try {
-        console.log(req.params.id);
-        user_id = req.params.id
-
-				if(user_id == 1){
-          return res.status(401).render( 'successMessage',{
-          	errormessage: 'Usuário administrador, impossível apagar!'
-          });
-
-				} else {
-          db.query('DELETE FROM users WHERE id = ?', [user_id], async (error, result) => {
-            if(error){
-              return console.log(error);
-            }  
+    if(req.user){
+        try {
+            console.log(req.params.id);
+            user_id = req.params.id
+    
+                    if(user_id == 1){
+              return res.status(401).render( 'successMessage',{
+                  errormessage: 'Usuário administrador, impossível apagar!'
+              });
+    
+                    } else {
+              db.query('DELETE FROM users WHERE id = ?', [user_id], async (error, result) => {
+                if(error){
+                  return console.log(error);
+                }  
+                        
+                else if(result) {
+                  console.log(result);
+                  db.query('SELECT id, name, email, role FROM users ORDER BY id DESC;', async (error, rows) => {
+                                    if(error){
+                                            console.log(error)
                     
-            else if(result) {
-              console.log(result);
-              db.query('SELECT id, name, email, role FROM users ORDER BY id DESC;', async (error, rows) => {
-								if(error){
-										console.log(error)
-				
-								} else if(rows.length > 0) {
-										return res.status(200).render('users/users', {
-												items: rows,
-												successmessage: 'Usuário apagado!' 
-										});
-				
-				
-								} else {
-										return res.render('users/users', {
-												alertmessage: "Nenhum usuário cadastrado"
-										})
-								}
-						});       
-            }
-        	}); 
-				};    
+                                    } else if(rows.length > 0) {
+                                            return res.status(200).render('users/users', {
+                                                    items: rows,
+                                                    successmessage: 'Usuário apagado!' 
+                                            });
+                    
+                    
+                                    } else {
+                                            return res.render('users/users', {
+                                                    alertmessage: "Nenhum usuário cadastrado"
+                                            })
+                                    }
+                            });       
+                }
+                }); 
+                    };    
+    
+        } catch (error) {
+            console.log(error);
+        }
 
-    } catch (error) {
-        console.log(error);
+    } else{
+        res.redirect('/login');
     }
 };
 
 exports.edit = async (req,res) => {
-    try {
-        user_id = req.params.id
-
-    db.query('SELECT * FROM users WHERE id = ?', [user_id], async (error, result) => {
-        if(error){
+    if(req.user){
+        try {
+            user_id = req.params.id
+    
+        db.query('SELECT * FROM users WHERE id = ?', [user_id], async (error, result) => {
+            if(error){
+                console.log(error);
+            }  
+            
+            if(result.length > 0) {
+                console.log(result);
+    
+                return res.render('users/edit',{
+                    users: result[0]
+                });
+            }
+        });         
+    
+        } catch (error) {
             console.log(error);
-        }  
-        
-        if(result.length > 0) {
-            console.log(result);
-
-            return res.render('users/edit',{
-                users: result[0]
-            });
         }
-    });         
 
-    } catch (error) {
-        console.log(error);
+    } else{
+        res.redirect('/login');
     }
 };

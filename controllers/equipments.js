@@ -2,29 +2,34 @@ const { promisify } = require('util');
 const db = require('../app');
 
 exports.equipments = async (req,res) => {
-    try {
+    if(req.user){
+        try {
 
-    db.query('SELECT id, provider, manufacturer, price, model FROM equipments ORDER BY id DESC;', async (error, rows) => {
-        if(error){
-            console.log(error)
-
-        } else if(rows.length > 0) {
-            return res.render('equipments/equipments', {
-                items: rows 
+            db.query('SELECT id, provider, manufacturer, price, model FROM equipments ORDER BY id DESC;', async (error, rows) => {
+                if(error){
+                    console.log(error)
+        
+                } else if(rows.length > 0) {
+                    return res.render('equipments/equipments', {
+                        items: rows 
+                    });
+        
+        
+                } else {
+                    return res.render('equipments/equipments', {
+                        alertmessage: "Nenhum equipamento cadastrado"
+                    })
+                }
             });
+        
+        
+            } catch (error) {
+                console.log(error);
+            }
 
-
-        } else {
-            return res.render('equipments/equipments', {
-                alertmessage: "Nenhum equipamento cadastrado"
-            })
-        }
-    });
-
-
-    } catch (error) {
-        console.log(error);
-    }
+    } else {
+        res.redirect('/login');
+    };
 };
 
 exports.put = (req, res) => {
@@ -58,58 +63,63 @@ exports.put = (req, res) => {
 };
 
 exports.delete = async (req,res) => {
-    try {
-        console.log(req.params.id);
-        id = req.params.id
-
-        db.query('SELECT * FROM orders_equipments WHERE equipment_id = ?', [id], (error, results) => {
-            if(error){
-                console.log(error);
-                return res.render(500, 'successMessage',{
-                    errormessage: 'Ocorreu um erro interno!'
-                });
-            }
-
-            else if(results.length > 0){
-                return res.render('successMessage',{
-                    errormessage: 'Equipamentos vinculados à uma ordem de serviço não podem ser excluídos.'
-                });
-            } else {
-
-                db.query('DELETE FROM equipments WHERE id = ?', [id], async (error, result) => {
-                    if(error){
-                        return console.log(error);
-                    }  
+    if(req.user){
+        try {
+            console.log(req.params.id);
+            id = req.params.id
+    
+            db.query('SELECT * FROM orders_equipments WHERE equipment_id = ?', [id], (error, results) => {
+                if(error){
+                    console.log(error);
+                    return res.render(500, 'successMessage',{
+                        errormessage: 'Ocorreu um erro interno!'
+                    });
+                }
+    
+                else if(results.length > 0){
+                    return res.render('successMessage',{
+                        errormessage: 'Equipamentos vinculados à uma ordem de serviço não podem ser excluídos.'
+                    });
+                } else {
+    
+                    db.query('DELETE FROM equipments WHERE id = ?', [id], async (error, result) => {
+                        if(error){
+                            return console.log(error);
+                        }  
+                        
+                        else if(result) {
+                            console.log(result);
+                            db.query('SELECT id, provider, manufacturer, price, model FROM equipments ORDER BY id DESC;', async (error, rows) => {
+                                if(error){
+                                    console.log(error)
                     
-                    else if(result) {
-                        console.log(result);
-                        db.query('SELECT id, provider, manufacturer, price, model FROM equipments ORDER BY id DESC;', async (error, rows) => {
-                            if(error){
-                                console.log(error)
-                
-                            } else if(rows.length > 0) {
-                                return res.render('equipments/equipments', {
-                                    items: rows, 
-                                    successmessage: "Equipamento apagado!"
-                                });
-                
-                
-                            } else {
-                                return res.render('equipments/equipments', {
-                                    alertmessage: "Nenhum equipamento cadastrado"
-                                })
-                            }
-                        });
-                    }
-                }); 
+                                } else if(rows.length > 0) {
+                                    return res.render('equipments/equipments', {
+                                        items: rows, 
+                                        successmessage: "Equipamento apagado!"
+                                    });
+                    
+                    
+                                } else {
+                                    return res.render('equipments/equipments', {
+                                        alertmessage: "Nenhum equipamento cadastrado"
+                                    })
+                                }
+                            });
+                        }
+                    }); 
+    
+                };
+            });
+    
+                 
+    
+        } catch (error) {
+            console.log(error);
+        }
 
-            };
-        });
-
-             
-
-    } catch (error) {
-        console.log(error);
+    } else {
+        res.redirect('/login');
     }
 };
 
@@ -136,33 +146,38 @@ exports.new = (req, res) => {
 };
 
 exports.edit = async (req,res) => {
-    try {
-        id = req.params.id
-
-    db.query('SELECT * FROM equipments WHERE id = ?', [id], async (error, result) => {
-        if(error){
+    if(req.user){
+        try {
+            id = req.params.id
+    
+        db.query('SELECT * FROM equipments WHERE id = ?', [id], async (error, result) => {
+            if(error){
+                console.log(error);
+            }  
+            
+            if(result.length > 0) {
+                console.log(result);
+                let providerType;
+    
+                if(result[0].provider == "Eleva"){
+                    providerType = true;
+                } else if (result[0].provider == "Terceiro"){
+                    providerType = false;
+                };
+    
+                return res.render('equipments/edit',{
+                    providerType,
+                    equipment: result[0]
+                });
+            }
+        });         
+    
+        } catch (error) {
             console.log(error);
-        }  
-        
-        if(result.length > 0) {
-            console.log(result);
-            let providerType;
-
-            if(result[0].provider == "Eleva"){
-                providerType = true;
-            } else if (result[0].provider == "Terceiro"){
-                providerType = false;
-            };
-
-            return res.render('equipments/edit',{
-                providerType,
-                equipment: result[0]
-            });
         }
-    });         
 
-    } catch (error) {
-        console.log(error);
+    } else{
+        res.redirect('/login');
     }
 };
 

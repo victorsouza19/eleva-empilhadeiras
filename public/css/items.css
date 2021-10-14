@@ -152,5 +152,60 @@ td:last-child {
 
 }
 
+.resolution-button{
+    display: none;
+}
+
+
+@media screen and (max-width: 960px){
+    table {
+        border-collapse: separate;
+        border-spacing: 0 0.1rem; 
+        width: 100%;     
+    }
+
+    table td{
+        font-size: 1.1rem;
+        padding: 0.3rem;
+        border: 1px solid white;
+    }
+
+    .button-options{
+        width: 2rem;
+        height: 2rem;
+
+    }
+}
+
+@media screen and (max-width: 732px){
+    table {
+        border-collapse: separate;
+        border-spacing: 0 0.1rem; 
+        width: 100%;     
+    }
+
+    table td{
+        font-size: 1.1rem;
+        padding: 0.3rem;
+        border: 1px solid white;
+    }
+
+    .button-options{
+        width: 2rem;
+        height: 2rem;
+
+    }
+}
+
+@media screen and (max-width: 570px){
+    table{
+        display: none;
+    }
+    .resolution-button{
+        display: block;
+    }
+
+}
+  
 
 

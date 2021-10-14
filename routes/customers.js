@@ -32,28 +32,21 @@ const router = express.Router();
   
   });
 
-  router.get('/', authController.isLoggedIn, customersController.customers,(req, res) => {
-    if(req.user) {
-        res.render('customers/customers');
-    } else {
-        res.redirect('/login');
-    };
-    
-  });
+  router.get('/', authController.isLoggedIn, customersController.customers);
 
 
 // CRUD routes || Rotas para CRUD
   router.post('/new', customersController.new );
 
-  router.get('/edit/:id', customersController.edit );
+  router.get('/edit/:id', authController.isLoggedIn, customersController.edit );
 
   router.post('/update', customersController.put );
 
-  router.get('/delete/:id', customersController.delete );
+  router.get('/delete/:id', authController.isLoggedIn, customersController.delete );
 
 
 // Verify routes || Rotas de verificação
-  router.post('/verify', customersController.verify );
+  router.post('/verify', authController.isLoggedIn, customersController.verify );
 
 
 module.exports = router;

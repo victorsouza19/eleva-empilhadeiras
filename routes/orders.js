@@ -23,15 +23,6 @@ const router = express.Router();
     
     });
 
-  router.get('/edit', authController.isLoggedIn, (req, res) => {
-  if(req.user) {
-      res.render('orders/edit');
-  } else {
-      res.redirect('/login');
-  };
-  
-  });
-
   router.get('/customRegister', authController.isLoggedIn, (req, res) => {
   if(req.user) {
       res.render('orders/customRegister');
@@ -53,17 +44,17 @@ const router = express.Router();
 
 
 // order interactions
-router.get('/', ordersController.orders );
+router.get('/', authController.isLoggedIn, ordersController.orders );
 
-router.get('/edit/:id', ordersController.edit );
+router.get('/edit/:id', authController.isLoggedIn, ordersController.edit );
 
-router.get('/delete/:id', ordersController.delete );
+router.get('/delete/:id', authController.isLoggedIn, authController.isLoggedIn, ordersController.delete );
 
-router.post('/delete/all', ordersController.deleteAll );
+router.post('/delete/all', ordersController.deleteAll ); //
 
-router.get('/deleteEquipment/:equipId&:orderId', ordersController.deleteEquipment );
+router.get('/deleteEquipment/:equipId&:orderId', authController.isLoggedIn, ordersController.deleteEquipment );
 
-router.get('/delete/verify/:id', ordersController.deleteVerify );
+router.get('/delete/verify/:id', authController.isLoggedIn, ordersController.deleteVerify );
 
 
 // form manipulations

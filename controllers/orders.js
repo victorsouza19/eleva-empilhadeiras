@@ -5,30 +5,37 @@ const { json } = require('express');
 
 // Order Interactions || interações com as ordens de serviço pela rota "/orders"
   exports.orders = async (req,res) => {
+    if(req.user) {
         try {
 
-        db.query('SELECT o.id, c.name, c.identify, o.responsible, o.status, o.type FROM orders AS o INNER JOIN customers as c ON c.id = o.customer_id ORDER BY o.initial_date DESC;', async (error, rows) => {
-            if(error){
-                console.log(error)
-
-            } else if(rows.length > 0) {
-                return res.render('orders/orders', {
-                    items: rows 
-                });
-
-
-            } else {
-                return res.render('orders/orders');
-            }
-        });
-
-
-        } catch (error) {
-            console.log(error);
-        }
-  };
+            db.query('SELECT o.id, c.name, c.identify, o.responsible, o.status, o.type FROM orders AS o INNER JOIN customers as c ON c.id = o.customer_id ORDER BY o.initial_date DESC;', async (error, rows) => {
+                if(error){
+                    console.log(error)
     
+                } else if(rows.length > 0) {
+                    return res.render('orders/orders', {
+                        items: rows 
+                    });
+    
+    
+                } else {
+                    return res.render('orders/orders');
+                }
+            });
+    
+    
+            } catch (error) {
+                console.log(error);
+            }
+
+    } else {
+        res.redirect('/login');
+    };
+    
+  };
+
   exports.edit = async (req,res) => {
+    if(req.user) {
         try {
             console.log(req.params.id);
             order_id = req.params.id
@@ -114,9 +121,14 @@ const { json } = require('express');
         } catch (error) {
             console.log(error);
         }
-  };
+        
+    } else {
+        res.redirect('/login');
+    };
+};
 
   exports.deleteVerify = async (req,res) => {
+    if(req.user) {
         try {
             console.log(req.params.id);
             order_id = req.params.id
@@ -202,9 +214,14 @@ const { json } = require('express');
         } catch (error) {
             console.log(error);
         }
+        
+    } else {
+        res.redirect('/login');
+    };
   };
 
   exports.delete = async (req,res) => {
+    if(req.user) {
         try {
             console.log(req.params.id);
             id = req.params.id;
@@ -247,6 +264,10 @@ const { json } = require('express');
         } catch (error) {
             console.log(error);
         }
+        
+    } else {
+        res.redirect('/login');
+    };     
   };
 
   exports.deleteAll = async (req, res) => {
@@ -328,43 +349,48 @@ const { json } = require('express');
   };
 
   exports.deleteEquipment = async (req, res) => {
-    try {
-      console.log(req.params);
-      order_id = req.params.orderId;
-      equipment_id = req.params.equipId;
-  
-      db.query('DELETE FROM orders_equipments WHERE order_id = ? AND equipment_id = ?', [order_id, equipment_id], async (error, results) => {
-        if (error) {
-          console.error(error);
-          res.status(404)
-          return res.render('successMessage', {
-            errormessage: 'Falha ao apagar equipamento'
-          })
-  
-        } else if (results) {
-          console.log(results);
-          db.query('SELECT o.id, c.name, c.identify, o.responsible, o.status, o.type FROM orders AS o INNER JOIN customers as c ON c.id = o.customer_id ORDER BY o.initial_date DESC;', async (error, rows) => {
-            if (error) {
-              console.log(error)
-  
-            } else if (rows.length > 0) {
-              return res.render('orders/orders', {
-                items: rows,
-                successmessage: "Equipamento desvinculado!"
-              });
-  
-  
-            } else {
-              return res.render('orders/orders', {
-                emptymessage: "Nenhuma ordem de serviço encontrada!"
-              })
-            }
-          });
-        }
-      });
-    } catch (error) {
-      console.log(error);
-    }
+    if(req.user) {
+        try {
+            console.log(req.params);
+            order_id = req.params.orderId;
+            equipment_id = req.params.equipId;
+        
+            db.query('DELETE FROM orders_equipments WHERE order_id = ? AND equipment_id = ?', [order_id, equipment_id], async (error, results) => {
+              if (error) {
+                console.error(error);
+                res.status(404)
+                return res.render('successMessage', {
+                  errormessage: 'Falha ao apagar equipamento'
+                })
+        
+              } else if (results) {
+                console.log(results);
+                db.query('SELECT o.id, c.name, c.identify, o.responsible, o.status, o.type FROM orders AS o INNER JOIN customers as c ON c.id = o.customer_id ORDER BY o.initial_date DESC;', async (error, rows) => {
+                  if (error) {
+                    console.log(error)
+        
+                  } else if (rows.length > 0) {
+                    return res.render('orders/orders', {
+                      items: rows,
+                      successmessage: "Equipamento desvinculado!"
+                    });
+        
+        
+                  } else {
+                    return res.render('orders/orders', {
+                      emptymessage: "Nenhuma ordem de serviço encontrada!"
+                    })
+                  }
+                });
+              }
+            });
+          } catch (error) {
+            console.log(error);
+          }
+        
+    } else {
+        res.redirect('/login');
+    };
   };
 
 
