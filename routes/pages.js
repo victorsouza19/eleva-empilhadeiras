@@ -30,17 +30,18 @@ router.get('/success', authController.isLoggedIn, (req, res) => {
     
 });
 
-router.get('/graphs', authController.isLoggedIn, (req, res) => {
+router.get('/reports', authController.isLoggedIn, (req, res) => {
     if(req.user) {
-        res.render('graphs');
+        res.render('reports');
     } else {
         res.redirect('/login');
     };
-    
 });
 
 router.get('/login', (req, res) => {
     res.render('login');
 });
+
+
 
 module.exports = router;
