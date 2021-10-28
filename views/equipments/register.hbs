@@ -63,11 +63,6 @@
             <input type="number" id="price" name="price" step="0.01" required />
           </div>
 
-          <div class="input-block">
-            <label for="description">Descrição<span>Máximo de 200 caracteres</span></label>
-            <textarea maxlength="200" id="description" name="description"></textarea>
-          </div>
-
           {{#if alertmessage}}
             <h4 class="alert-message">{{alertmessage}}</h4>
           {{else if successmessage}}

@@ -89,81 +89,6 @@
           </div>
         </fieldset>
         <fieldset>
-          <legend>Dados (OS)</legend>
-
-          <div class="input-block">
-            <label for="responsible">Responsável</label>
-            <input id="responsible" name="responsible" value="{{customer.responsible}}" required />
-          </div>
-
-        <div class="input-block">
-          <label for="os_type">Tipo de atendimento</label>
-          <input type="hidden" id="os_type" name="os_type" {{#if customer.os_type}}value="{{customer.os_type}}"{{else}}value="Requisição"{{/if}} required />
-
-          <div class="button-select ostype-select">
-             {{#if orderType}}
-              <button data-status="Requisição" onclick="toggleSelectOsType(event)" type="button" >
-                Requisição
-              </button>
-              <button data-status="Incidente" onclick="toggleSelectOsType(event)" type="button" class="active">
-                Incidente
-              </button>
-            {{else}}
-              <button data-status="Requisição" onclick="toggleSelectOsType(event)" type="button" class="active">
-                Requisição
-              </button>
-              <button data-status="Incidente" onclick="toggleSelectOsType(event)" type="button">
-                Incidente
-              </button>
-            {{/if}}
-          </div>
-
-          <div class="input-block">
-            <label for="description">Descrição<span>Máximo de 300 caracteres</span></label>
-            <textarea maxlength="300" id="description" name="description" required>{{customer.description}}</textarea>
-          </div>
-
-          <div class="input-block">
-            <label for="status">Status</label>
-            <input type="hidden" id="status" name="status" {{#if customer.status}}value="{{customer.status}}"{{else}}value="Aberto"{{/if}} required />
-
-           <div class="button-select-status">
-              {{#if progress}}
-                <button data-value="Aberto" onclick="toggleSelectStatus(event)" type="button">
-                  Aberto
-                </button>
-                <button data-value="Em andamento" onclick="toggleSelectStatus(event)" type="button" class="active">
-                  Em Andamento
-                </button>
-                <button data-value="Fechado" onclick="toggleSelectStatus(event)" type="button">
-                  Fechado
-                </button>
-              {{else if closed}}
-                <button data-value="Aberto" onclick="toggleSelectStatus(event)" type="button">
-                  Aberto
-                </button>
-                <button data-value="Em andamento" onclick="toggleSelectStatus(event)" type="button">
-                  Em Andamento
-                </button>
-                <button data-value="Fechado" onclick="toggleSelectStatus(event)" type="button" class="active">
-                  Fechado
-                </button>
-              {{else}}
-                <button data-value="Aberto" onclick="toggleSelectStatus(event)" type="button" class="active">
-                    Aberto
-                  </button>
-                  <button data-value="Em andamento" onclick="toggleSelectStatus(event)" type="button">
-                    Em Andamento
-                  </button>
-                  <button data-value="Fechado" onclick="toggleSelectStatus(event)" type="button">
-                    Fechado
-                  </button>
-              {{/if}}
-
-            </div>
-          </div>
-        </fieldset>
-        <fieldset>
           <legend>Equipamento</legend>
           <div class="input-block">
               <label for="equipment_situation">Situação</label>
@@ -296,11 +221,6 @@
                 <label for="price">Preço<SPAN>(R$)</SPAN> </label>
                 <input type="number" id="price" name="price" step="0.01" value="{{customer.price}}" required />
               </div>
-
-              <div class="input-block">
-                <label for="equipment_description">Descrição<span>Máximo de 200 caracteres</span></label>
-                <textarea maxlength="200" id="equipment_description" name="equipment_description">{{customer.equipment_description}}</textarea>
-              </div>
           </div> 
           <div class="input-block" id="oldEquipment" style="display: none;">
               {{#if emptymessage}}
@@ -331,9 +251,83 @@
           </div>
 
           {{/if}}
-          
-          <button type="submit" class="primary-button">Criar</button>
         </fieldset> 
+        <fieldset>
+          <legend>Dados (OS)</legend>
+
+          <div class="input-block">
+            <label for="responsible">Responsável</label>
+            <input id="responsible" name="responsible" value="{{customer.responsible}}" required />
+          </div>
+
+        <div class="input-block">
+          <label for="os_type">Tipo de atendimento</label>
+          <input type="hidden" id="os_type" name="os_type" {{#if customer.os_type}}value="{{customer.os_type}}"{{else}}value="Requisição"{{/if}} required />
+
+          <div class="button-select ostype-select">
+             {{#if orderType}}
+              <button data-status="Requisição" onclick="toggleSelectOsType(event)" type="button" >
+                Requisição
+              </button>
+              <button data-status="Incidente" onclick="toggleSelectOsType(event)" type="button" class="active">
+                Incidente
+              </button>
+            {{else}}
+              <button data-status="Requisição" onclick="toggleSelectOsType(event)" type="button" class="active">
+                Requisição
+              </button>
+              <button data-status="Incidente" onclick="toggleSelectOsType(event)" type="button">
+                Incidente
+              </button>
+            {{/if}}
+          </div>
+
+          <div class="input-block">
+            <label for="description">Descrição<span>Máximo de 300 caracteres</span></label>
+            <textarea maxlength="300" id="description" name="description" required>{{customer.description}}</textarea>
+          </div>
+
+          <div class="input-block">
+            <label for="status">Status</label>
+            <input type="hidden" id="status" name="status" {{#if customer.status}}value="{{customer.status}}"{{else}}value="Aberto"{{/if}} required />
+
+           <div class="button-select-status">
+              {{#if progress}}
+                <button data-value="Aberto" onclick="toggleSelectStatus(event)" type="button">
+                  Aberto
+                </button>
+                <button data-value="Em andamento" onclick="toggleSelectStatus(event)" type="button" class="active">
+                  Em Andamento
+                </button>
+                <button data-value="Fechado" onclick="toggleSelectStatus(event)" type="button">
+                  Fechado
+                </button>
+              {{else if closed}}
+                <button data-value="Aberto" onclick="toggleSelectStatus(event)" type="button">
+                  Aberto
+                </button>
+                <button data-value="Em andamento" onclick="toggleSelectStatus(event)" type="button">
+                  Em Andamento
+                </button>
+                <button data-value="Fechado" onclick="toggleSelectStatus(event)" type="button" class="active">
+                  Fechado
+                </button>
+              {{else}}
+                <button data-value="Aberto" onclick="toggleSelectStatus(event)" type="button" class="active">
+                    Aberto
+                  </button>
+                  <button data-value="Em andamento" onclick="toggleSelectStatus(event)" type="button">
+                    Em Andamento
+                  </button>
+                  <button data-value="Fechado" onclick="toggleSelectStatus(event)" type="button">
+                    Fechado
+                  </button>
+              {{/if}}
+
+            </div>
+          </div>
+        </fieldset>
+        <button type="submit" class="primary-button">Criar</button>
       </form>
     </main>
   </div>

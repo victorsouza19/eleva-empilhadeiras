@@ -7,6 +7,10 @@ main {
   flex: 1;
 }
 
+.logoBar,
+.logoBarWrapper{
+  display: none !important;
+}
 
 
 
