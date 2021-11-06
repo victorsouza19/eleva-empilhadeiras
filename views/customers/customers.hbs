@@ -72,13 +72,15 @@
                   <td>{{telephone}}</td>
                   <td>{{cep}}</td>
                   <td class="button-options"><a href="/customers/edit/{{id}}"><button class="edit-button" type="submit"><i class="fas fa-edit"></button></a></td>
-                  <td class="button-options"><a href="/customers/delete/{{id}}"><button class="delete-button" type="submit"><i class="fas fa-trash"></i></button></a></td>
+                  <td class="button-options"><a href="/customers/delete/{{id}}" onclick="customerCheck({{id}})"><button class="delete-button" type="submit"><i class="fas fa-trash"></i></button></a></td>
               </tr>
               {{/each}}
             </tbody>
           </table>
   
   <script src="/scripts/animations.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="/scripts/submit.js"></script>
 </body>
 
 </html>

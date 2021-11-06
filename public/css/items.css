@@ -167,7 +167,7 @@ td:last-child {
     table td{
         font-size: 1.1rem;
         padding: 0.3rem;
-        border: 1px solid white;
+
     }
 
     .button-options{
@@ -180,14 +180,13 @@ td:last-child {
 @media screen and (max-width: 732px){
     table {
         border-collapse: separate;
-        border-spacing: 0 0.1rem; 
+
         width: 100%;     
     }
 
     table td{
         font-size: 1.1rem;
         padding: 0.3rem;
-        border: 1px solid white;
     }
 
     .button-options{

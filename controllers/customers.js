@@ -1,5 +1,6 @@
 const db = require('../app');
 const { equipments } = require('./equipments');
+const { orders } = require('./orders');
 
 
 // view functions || Função para listar os clientes
@@ -175,66 +176,143 @@ const { equipments } = require('./equipments');
         }
 	};
 
-	exports.delete = async (req, res) => {
+	exports.delete = (req, res) => {
         if(req.user){
             try {
                 console.log(req.params);
-                customer_id = req.params.id
-        
-                db.query('SELECT * FROM customers WHERE id = ?', [customer_id], (error, results) => {
-                    if (error) {
+                customer_id = req.params.id;
+
+                db.query('SELECT id FROM orders WHERE orders.customer_id = ?', [customer_id], (error, results) => {
+                    
+                    if(error){
                         console.log(error);
-                        return res.status(500).render('successMessage', {
-                            errormessage: 'Ocorreu um erro interno!'
-                        });
-                    }
-                    else if (results.length > 0) {
-                        let address_id = results[0].adress_id;
+                    } else if (results.length > 0){
+                        let orders_arr = [];
+												let ordersId = orders_arr;
+                                
+                        for(let pos= 0; pos < results.length; pos++){
+                            let id = results[pos].id;
+                            orders_arr.push(id);
+                        }
                         
-                        db.query('DELETE FROM customers WHERE id = ?', [customer_id], async (error, result) => {
+                        console.log(orders_arr);
+
+                        db.query('DELETE FROM orders_equipments WHERE orders_equipments.order_id IN (?)', [orders_arr], (error, results) => {
+                            if (error){
+                                console.log(error);
+                            }else if(results){
+                                db.query('DELETE FROM orders WHERE orders.id IN (?)', [ordersId], (error, results) => {
+                                    if (error){
+                                        console.log(error);
+                                    } else if(results){
+
+                                        db.query('SELECT * FROM customers WHERE id = ?', [customer_id], (error, results) => {
+                                            if (error) {
+                                                console.log(error);
+                                                return res.status(500).render('successMessage', {
+                                                    errormessage: 'Ocorreu um erro interno!'
+                                                });
+                                            }
+                                            else if (results.length > 0) {
+                                                let address_id = results[0].adress_id;
+                                                
+                                                db.query('DELETE FROM customers WHERE id = ?', [customer_id], async (error, result) => {
+                                                    if (error) {
+                                                        console.log(error);
+                                                        return res.status(500).render('successMessage', {
+                                                            errormessage: 'Erro ao apagar cliente!'
+                                                        });
+                                                    } else if (result) {
+                                                        db.query('DELETE FROM addresses WHERE id = ?', [address_id], async (error, result) => {
+                                                            if (error) {
+                                                                console.log(error);
+                                                                return res.status(500).render('successMessage', {
+                                                                    errormessage: 'Erro ao apagar endereço!'
+                                                                });
+                                                            }
+                                                            else if (result) {
+                                                                db.query('SELECT c.id, c.name, c.identify, c.telephone, a.cep FROM customers as c INNER JOIN addresses as a ON c.adress_id = a.id ORDER BY c.id DESC;', async (error, rows) => {
+                                                                    if (error) {
+                                                                        console.log(error)
+                                
+                                                                    } else if (rows.length > 0) {
+                                                                        return res.render('customers/customers', {
+                                                                            items: await rows,
+                                                                            successmessage: "Cliente apagado!"
+                                                                        });
+                                
+                                
+                                                                    } else {
+                                                                        return res.render('customers/customers', {
+                                                                            alertmessage: "Nenhum cliente cadastrado"
+                                                                        })
+                                                                    }
+                                                                });
+                                
+                                                            }
+                                                        });
+                                                    }
+                                                });
+                                            }
+                                        });
+                                    }
+                                });
+                            }
+                        });
+                    } else {
+                        db.query('SELECT * FROM customers WHERE id = ?', [customer_id], (error, results) => {
                             if (error) {
                                 console.log(error);
                                 return res.status(500).render('successMessage', {
-                                    errormessage: 'Erro ao apagar cliente!'
+                                    errormessage: 'Ocorreu um erro interno!'
                                 });
                             }
-        
-                            else if (result) {
-                                console.log(result);
-                                db.query('DELETE FROM addresses WHERE id = ?', [address_id], async (error, result) => {
+                            else if (results.length > 0) {
+                                let address_id = results[0].adress_id;
+                                
+                                db.query('DELETE FROM customers WHERE id = ?', [customer_id], async (error, result) => {
                                     if (error) {
                                         console.log(error);
                                         return res.status(500).render('successMessage', {
-                                            errormessage: 'Erro ao apagar endereço!'
+                                            errormessage: 'Erro ao apagar cliente!'
                                         });
                                     }
+                
                                     else if (result) {
-                                        db.query('SELECT c.id, c.name, c.identify, c.telephone, a.cep FROM customers as c INNER JOIN addresses as a ON c.adress_id = a.id ORDER BY c.id DESC;', async (error, rows) => {
+                                        db.query('DELETE FROM addresses WHERE id = ?', [address_id], async (error, result) => {
                                             if (error) {
-                                                console.log(error)
-        
-                                            } else if (rows.length > 0) {
-                                                console.log(rows);
-                                                return res.render('customers/customers', {
-                                                    items: await rows,
-                                                    successmessage: "Cliente apagado!"
+                                                console.log(error);
+                                                return res.status(500).render('successMessage', {
+                                                    errormessage: 'Erro ao apagar endereço!'
                                                 });
-        
-        
-                                            } else {
-                                                return res.render('customers/customers', {
-                                                    alertmessage: "Nenhum cliente cadastrado"
-                                                })
+                                            }
+                                            else if (result) {
+                                                db.query('SELECT c.id, c.name, c.identify, c.telephone, a.cep FROM customers as c INNER JOIN addresses as a ON c.adress_id = a.id ORDER BY c.id DESC;', async (error, rows) => {
+                                                    if (error) {
+                                                        console.log(error)
+                
+                                                    } else if (rows.length > 0) {
+                                                        return res.render('customers/customers', {
+                                                            items: await rows,
+                                                            successmessage: "Cliente apagado!"
+                                                        });
+                
+                
+                                                    } else {
+                                                        return res.render('customers/customers', {
+                                                            alertmessage: "Nenhum cliente cadastrado"
+                                                        })
+                                                    }
+                                                });
+                
                                             }
                                         });
-        
                                     }
                                 });
                             }
                         });
                     }
                 });
-        
             } catch (error) {
                 console.log(error);
             }
