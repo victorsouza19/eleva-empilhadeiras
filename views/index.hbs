@@ -1,26 +1,30 @@
 <!DOCTYPE html>
 <html lang="pt-br">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-     <title>Home | ElevaEmpilhadeiras</title>
-     <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
+    <title>Home | ElevaEmpilhadeiras</title>
+    <link rel="shortcut icon" href="/images/favicon.ico" type="image/x-icon">
 
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,400;1,600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200;0,300;0,400;0,600;0,700;0,800;0,900;1,400;1,600&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="/css/home.css">
     <link rel="stylesheet" href="/css/animations.css" />
     <link rel="stylesheet" href="/css/graphs.css" />
 
     <script src="https://kit.fontawesome.com/a1c18692b7.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
     <div class="container">
-        <div class= "animate-down top-content">
-            <nav class= "top-nav">
+        <div class="animate-down top-content">
+            <nav class="top-nav">
                 <div class="left-content">
                     <img src="/images/logo-eleva.png" alt="logo-eleva">
                     <span>| Since 2007</span>
@@ -36,75 +40,57 @@
                     <h2>Ordens de Serviço</h2>
                 </div>
                 <div class="graph-container">
-                    {{#if order}}
-                        {{#each order}}
-                            <div class="card">
-                                <div class="box">
-                                    <div class="percent">
-                                        <svg>
-                                            <circle cx="70" cy="70" r="70"></circle>
-                                            <circle cx="70" cy="70" r="70"></circle>
-                                        </svg>
-                                        <div class="number">
-                                            <h2>{{contagem}}</h2>
-                                        </div>
-                                    </div>
-                                    <h2 class="cardtext">{{status}}</h2>
+                    <div class="card">
+                        <div class="box">
+                            <div class="percent">
+                                <svg>
+                                    <circle cx="70" cy="70" r="70"></circle>
+                                    <circle cx="70" cy="70" r="70"></circle>
+                                </svg>
+                                <div class="number">
+                                    <h2>{{open}}</h2>
                                 </div>
                             </div>
-                        {{/each}}
-                    {{else}}
-                        <div class="card">
-                            <div class="box">
-                                <div class="percent">
-                                    <svg>
-                                        <circle cx="70" cy="70" r="70"></circle>
-                                        <circle cx="70" cy="70" r="70"></circle>
-                                    </svg>
-                                    <div class="number">
-                                        <h2>0</h2>
-                                    </div>
-                                </div>
-                                <h2 class="cardtext">Em aberto</h2>
-                            </div>
+                            <h2 class="cardtext">Em aberto</h2>
                         </div>
+                    </div>
 
-                        <div class="card">
-                            <div class="box">
-                                <div class="percent">
-                                    <svg>
-                                        <circle cx="70" cy="70" r="70"></circle>
-                                        <circle cx="70" cy="70" r="70"></circle>
-                                    </svg>
-                                    <div class="number">
-                                        <h2>0</h2>
-                                    </div>
+                    <div class="card">
+                        <div class="box">
+                            <div class="percent">
+                                <svg>
+                                    <circle cx="70" cy="70" r="70"></circle>
+                                    <circle cx="70" cy="70" r="70"></circle>
+                                </svg>
+                                <div class="number">
+                                    <h2>{{progress}}</h2>
                                 </div>
-                                <h2 class="cardtext">Em andamento</h2>
                             </div>
+                            <h2 class="cardtext">Em andamento</h2>
                         </div>
+                    </div>
 
-                        <div class="card">
-                            <div class="box">
-                                <div class="percent">
-                                    <svg>
-                                        <circle cx="70" cy="70" r="70"></circle>
-                                        <circle cx="70" cy="70" r="70"></circle>
-                                    </svg>
-                                    <div class="number">
-                                        <h2>0</h2>
-                                    </div>
+                    <div class="card">
+                        <div class="box">
+                            <div class="percent">
+                                <svg>
+                                    <circle cx="70" cy="70" r="70"></circle>
+                                    <circle cx="70" cy="70" r="70"></circle>
+                                </svg>
+                                <div class="number">
+                                    <h2>{{closed}}</h2>
                                 </div>
-                                <h2 class="cardtext">Fechado</h2>
                             </div>
+                            <h2 class="cardtext">Fechado</h2>
                         </div>
-                        {{/if}}
-                </div>   
+                    </div>
+                </div>
                 <div class="options">
                     <div class="os-container">
                         <div class="buttons-container">
-                            <a href="/customerVerify"><button><i class="fas fa-file-import"></i><span>Criar</span></button></a>
-                            <a href="/view/viewOrders"><button><i class="fas fa-edit"></i><span>Editar</span></button></a>
+                            <a href="customers/verify"><button><i
+                                        class="fas fa-file-import"></i><span>Criar</span></button></a>
+                            <a href="/orders"><button><i class="fas fa-edit"></i><span>Editar</span></button></a>
                         </div>
                     </div>
                     <hr>
@@ -112,29 +98,33 @@
                         <div class="options-container">
                             <h4>Equipamentos</h4>
                             <div class="buttons-container">
-                                <a href="/equipmentRegister"><button><i class="fas fa-tools"></i><span>Criar</span></button></a>
-                                <a href="#"><button><i class="fas fa-edit"></i><span>Editar</span></button></a>
+                                <a href="equipments/register"><button><i
+                                            class="fas fa-tools"></i><span>Criar</span></button></a>
+                                <a href="/equipments"><button><i
+                                            class="fas fa-edit"></i><span>Editar</span></button></a>
                             </div>
-                        </div>      
+                        </div>
                         <div class="options-container">
                             <h4>Cliente</h4>
                             <div class="buttons-container">
-                                <a href="/customerRegister"><button><i class="fas fa-user-plus"></i><span> Criar</span></button></a>
-                                <a href="#"><button><i class="fas fa-edit"></i><span>Editar</span></button></a>
+                                <a href="/customers/register"><button><i class="fas fa-user-plus"></i><span>
+                                            Criar</span></button></a>
+                                <a href="/customers"><button><i class="fas fa-edit"></i><span>Editar</span></button></a>
                             </div>
-                        </div> 
+                        </div>
                         <div class="options-container">
                             <h4>Funcionário</h4>
-                                <div class="buttons-container">
-                                <a href="/userRegister"><button><i class="fas fa-user-plus"></i><span>Criar</span></button></a>
-                                <a href="#"><button><i class="fas fa-edit"></i><span>Editar</span></button></a>
+                            <div class="buttons-container">
+                                <a href="/users/register"><button><i
+                                            class="fas fa-user-plus"></i><span>Criar</span></button></a>
+                                <a href="/users"><button><i class="fas fa-edit"></i><span>Editar</span></button></a>
                             </div>
-                        </div> 
+                        </div>
                         <div class="options-container">
                             <h4>Relatórios</h4>
-                            <a href="#"><button><i class="fas fa-list-alt"></i><span>Relatórios</span></button></a>
-                        </div>  
-                    </div>         
+                            <a href="/reports"><button><i class="fas fa-list-alt"></i><span>Relatórios</span></button></a>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="second-column">
@@ -143,21 +133,36 @@
                         <img class="profile-background" src="/images/avatar.svg" alt="user-background">
                         <img class="profile-avatar" src="/images/workers.svg" alt="user">
                     </div>
-
-                    <p>Olá, <b>{{user.name}}!</b></p>
-                    <span>{{user.role}}</span>
+                    <div class="usr-info">
+                        <p>Olá, <b>{{user.name}}!</b></p>
+                        <span>{{user.role}}</span>
+                    </div>
+                    
                 </div>
                 <div class="usr-buttons">
-                    <div class= "edit">
-                            <a href="#"><button><i class="fas fa-user-edit"></i>Editar</button></a>
+                    <div class="edit">
+                        <a href="/users/edit/{{user.id}}"><button><i class="fas fa-user-edit"></i>Editar</button></a>
                     </div>
-                    <div class= "exit">
-                            <a href="/auth/logout"><button><i class="fas fa-sign-out-alt"></i>Sair</button></a>
+                    <div class="exit">
+                        <a href="/auth/logout"><button><i class="fas fa-sign-out-alt"></i>Sair</button></a>
 
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</body>  
+</body>
+<script>
+  window.watsonAssistantChatOptions = {
+      integrationID: "e710ff5e-7f34-4236-ac22-64e8347c8ad6", // The ID of this integration.
+      region: "au-syd", // The region your integration is hosted in.
+      serviceInstanceID: "92085e57-7032-4fd2-83a0-11b8600d8d1a", // The ID of your service instance.
+      onLoad: function(instance) { instance.render(); }
+    };
+  setTimeout(function(){
+    const t=document.createElement('script');
+    t.src="https://web-chat.global.assistant.watson.appdomain.cloud/versions/" + (window.watsonAssistantChatOptions.clientVersion || 'latest') + "/WatsonAssistantChatEntry.js"
+    document.head.appendChild(t);
+  });
+</script>
 </html>

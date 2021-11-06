@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+
+<html lang="pt_BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Equipments | ElevaEmpilhadeiras</title>
+
+
+  <link rel="icon" href="/images/logo-eleva.png" />
+
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="/css/animations.css" />
+  <link rel="stylesheet" href="/css/sidebar.css" />
+  <link rel="stylesheet" href="/css/views.css" />
+  <link rel="stylesheet" href="/css/primary-button.css" />
+  <link rel="stylesheet" href="/css/page-forms.css" />
+  <link rel="stylesheet" href="/css/items.css" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/home.css">
+    <script src="https://kit.fontawesome.com/a1c18692b7.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+  <div id="page-creates">
+    <aside class="animate-down sidebar">
+      <img class="image-aside" src="/images/logo-eleva.png" alt="logo eleva" />
+
+      <footer>
+          <a href="/"><button><img src="/images/arrow-back.svg" alt="Voltar" /></button></a>
+      </footer>
+    </aside>
+
+    <main class="animate-appear with-sidebar">
+      <div class="container">
+        <fieldset>
+          <legend>Equipamentos</legend>
+          {{#if successmessage}}
+              <h4 class="success-message-top">{{successmessage}}</h4>
+          {{/if}}
+
+          {{#if alertmessage}}
+            <h4 class="alert-message-top">{{alertmessage}}</h4>
+            <a href="/customerVerify" class="primary-button"><span>Cadastrar</span></a>
+
+
+          {{else}}
+          <h4 class="alert-message-top resolution-button"> Resolução de tela não suportada!</h4>
+          <table>
+            <thead>
+              <tr>
+                <div class="menu-items">
+                  <th>Marca</th>
+                  <th>Modelo</th>
+                  <th>Fornecedor</th>
+                  <th>Preço</th>
+                  <th>Editar</th>
+                  <th>Apagar</th>
+                </div>
+              </tr>
+            </thead>
+          {{/if}}
+            <tbody>
+              {{#each items}}
+              <tr class="item">
+                  <td>{{manufacturer}}</td>
+                  <td>{{model}}</td>
+                  <td>{{provider}}</td>
+                  <td>R$ {{price}}</td>
+                  <td class="button-options"><a href="/equipments/edit/{{id}}"><button class="edit-button" type="submit"><i class="fas fa-edit"></button></a></td>
+                  <td class="button-options"><a href="/equipments/delete/{{id}}"><button class="delete-button" type="submit"><i class="fas fa-trash"></i></button></a></td>
+              </tr>
+              {{/each}}
+            </tbody>
+          </table>
+  
+  <script src="/scripts/animations.js"></script>
+</body>
+
+</html>

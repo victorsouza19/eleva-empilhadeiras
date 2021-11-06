@@ -92,3 +92,13 @@
 .button-select-status button:last-child {
     border-radius: 0 1rem 1rem 0;
 }
+
+@media screen and (max-width: 350px){
+
+    .button-select button,
+    .button-select-status button{
+        font-size: 1.7rem;
+        padding: 0.3rem;
+    }
+    
+  }

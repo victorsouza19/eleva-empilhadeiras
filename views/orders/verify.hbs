@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+
+<html lang="pt_BR">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  {{!-- Favicon Bar --}}
+  <title>Ordem de Serviço | ElevaEmpilhadeiras</title>
+  <link rel="icon" href="/images/logo-eleva.png" />
+
+  {{!-- Css --}}
+  <link rel="stylesheet" href="/css/main.css" />
+  <link rel="stylesheet" href="/css/animations.css" />
+  <link rel="stylesheet" href="/css/sidebar.css" />
+  <link rel="stylesheet" href="/css/views.css" />
+  <link rel="stylesheet" href="/css/primary-button.css" />
+  <link rel="stylesheet" href="/css/page-forms.css" />
+  <link rel="stylesheet" href="/css/items.css" />
+  <link rel="stylesheet" href="/css/secondary-button.css" />
+  <link rel="stylesheet" href="/css/home.css">
+
+  {{!-- Fonts --}}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <div id="page-creates">
+    <aside class="animate-down sidebar">
+      <img class="image-aside" src="/images/logo-eleva.png" alt="logo eleva" />
+
+      <footer>
+          <a href="/"><button><img src="/images/arrow-back.svg" alt="Voltar" /></button></a>
+      </footer>
+    </aside>
+
+    <main class="animate-appear with-sidebar">
+      <div class="container">
+        <fieldset>
+          {{#if verifymessage}}
+          <legend>Verificação | Ordem de Serviço</legend>
+          <div class="alert-message-top">
+            <h4>{{verifymessage}}</h4>
+            <br>
+            <p>Abaixo você tem a lista de equipamentos que possuem o vínculo mencionado.</p>
+            <p>Você pode apagar somente a ordem de serviço, ou apagar os equipamentos que estão vinculados também.</p>
+            <br>
+            <p style="color: black">O que você deseja apagar?</p>
+          </div>
+
+
+          <table>
+            <thead>
+              <tr>
+                <div class="menu-items">
+                  <th>Marca</th>
+                  <th>Modelo</th>
+                  <th>Fornecedor</th>
+                  <th>Preço</th>
+                  <th>Selecionar</th>
+                </div>
+              </tr>
+            </thead>
+            {{/if}}
+            <form action="/orders/delete/all" method="POST">
+              <tbody>
+                {{#each items}}
+                <tr class="item">
+                  <td>{{manufacturer}}</td>
+                  <td>{{model}}</td>
+                  <td>{{provider}}</td>
+                  <td>R$ {{price}}</td>
+                  <td class="equip-checkbox"><input type="checkbox" name="equipment_id" value="{{id}}"></td>
+                </tr>
+                {{/each}}
+              </tbody>
+          </table>
+
+          <!--<a href="/" class="primary-button">Apagar todos</a>-->
+          <a href="/orders/delete/{{order_id}}" class="choose-button">Somente OS</a>
+
+
+          <input type="hidden" name="order_id" value="{{order_id}}">
+          <button type="submit" class="choose-button-overlay">OS e selecionados</button>
+          </form>
+        </fieldset>
+      </div>
+    </main>
+  </div>
+
+
+  <script src="/scripts/animations.js"></script>
+  <script src="/scripts/checkbox.js"></script>
+</body>
+
+</html>

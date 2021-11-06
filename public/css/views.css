@@ -205,4 +205,14 @@ fieldset legend {
   color: #4e4e4e;
 }
 
+@media screen and (max-width: 960px){
+  .container {
+    width: 98%;
+    height: auto;
 
+    margin: 6.4rem auto;
+    padding: 4rem 1rem;
+  }
+
+
+}
