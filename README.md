@@ -14,7 +14,7 @@
 
 ## Melhorias 🚧
 
-Projeto em finalização, as próximas atualizações serão:
+Projeto finalizado, últimas atualizações:
 
 - [x] Criação do arquivo SQL com as tabelas do banco de dados para importação.
 
