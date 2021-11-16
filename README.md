@@ -12,7 +12,7 @@
 
 > Trabalho acadêmico desenvolvido para o Projeto Interdisciplinar VI e Projetos de Tecnologia da Informação II
 
-## Sobre o projeto
+## 📢 Sobre o projeto
 
 Este projeto foi feito por um grupo de integrantes da Fatec Campinas, através de uma consultoria, onde foi desenvolvido um software para controle de ordens de serviço, onde os usuários podem cadastrar as ordens, alterar dados, cadastrar clientes e equipamentos, ver status, visualizar relatórios e mais algumas funcionalidades. Os usuários contam também com um chatbot que pode auxilia-los na utilização do sistema.
 <br>
