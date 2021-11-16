@@ -65,14 +65,26 @@ Como alternativa, consulte a documentação do GitHub em [como criar uma solicit
 
 ## 🤝 Colaboradores
 
-<div align="center" >
-  <a href="#">
-    <img src="https://github.com/victorsouza19.png" width="100px;" alt="Foto do Victor Souza"/><br>
-    <sub>
-      <b>Victor Souza</b>
-    </sub>
-  </a>
-</div>
+<table>
+  <tr>
+    <td align="center">
+      <a href="#" align="left">
+          <img src="https://github.com/victorsouza19.png" width="100px;" alt="Foto do Victor Souza"/><br>
+        <sub>
+          <b>Victor Souza</b>
+        </sub>
+      </a>
+    </td>
+    <td align="center">
+     <a href="#" align="center">
+        <img src="https://github.com/vaoagost.png" width="100px;" alt="Foto do Vinicius Agostini"/><br>
+        <sub>
+          <b>Vinicius Agostini</b>
+        </sub>
+      </a>
+    </td>
+  </tr>
+</table>
 
 ## 📝 Licença
 
