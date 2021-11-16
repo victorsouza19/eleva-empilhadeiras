@@ -8,7 +8,7 @@
 ![Followers](https://img.shields.io/github/followers/victorsouza19?style=for-the-badge)
 </div>
 
-<img src="https://user-images.githubusercontent.com/71740612/142080425-a04b0e58-7128-4c24-892d-16442314f65c.jpg" alt="Eleva-empilhadeiras">
+<img src="https://user-images.githubusercontent.com/71740612/142083876-454c93ff-9208-4879-969c-81c669da73c3.jpg" alt="Eleva-empilhadeiras">
 
 > Trabalho acadêmico desenvolvido para o Projeto Interdisciplinar VI e Projetos de Tecnologia da Informação II
 
