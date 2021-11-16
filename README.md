@@ -1,21 +1,22 @@
 # Eleva Empilhadeiras
 <br>
 <div align="center">
-<img style="background: #fff" src="https://" alt="Eleva-empilhadeiras">
-  
+<img style="background: #fff" width="400" src="https://user-images.githubusercontent.com/71740612/142078549-308d081e-8b0e-4b47-a897-81914adc0ef6.png" alt="Eleva-empilhadeiras">
+
 ![GitHub language count](https://img.shields.io/github/languages/count/victorsouza19/eleva-empilhadeiras?style=for-the-badge)
 ![Bitbucket open issues](https://img.shields.io/bitbucket/issues/victorsouza19/eleva-empilhadeiras?style=for-the-badge)
 ![Followers](https://img.shields.io/github/followers/victorsouza19?style=for-the-badge)
 </div>
 
-![image](https://.png)
-> Projeto acadêmico desenvolvido para o Projeto Interdisciplinar VI e Projetos de Tecnologia da Informação II
+<img src="https://user-images.githubusercontent.com/71740612/142080425-a04b0e58-7128-4c24-892d-16442314f65c.jpg" alt="Eleva-empilhadeiras">
+
+> Trabalho acadêmico desenvolvido para o Projeto Interdisciplinar VI e Projetos de Tecnologia da Informação II
 
 ## Melhorias 🚧
 
 Projeto em finalização, as próximas atualizações serão:
 
-- [ ] Criação do arquivo SQL com as tabelas do banco de dados para importação.
+- [x] Criação do arquivo SQL com as tabelas do banco de dados para importação.
 
 
 ## 💻 Pré-requisitos
@@ -33,6 +34,10 @@ Fazer o clone do projeto e rodar o comando na pasta raiz:
 ```
 npm install
 ```
+<br>
+
+Acessar o seu banco de dados e fazer a importação com o arquivo <code>elevadatabase.sql</code>:
+
 <br>
 
 Alterar o arquivo <code>.envexample</code> com os dados do seu banco :
