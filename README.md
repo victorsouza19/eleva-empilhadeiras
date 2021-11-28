@@ -3,9 +3,14 @@
 <div align="center">
 <img style="background: #fff" width="400" src="https://user-images.githubusercontent.com/71740612/142078549-308d081e-8b0e-4b47-a897-81914adc0ef6.png" alt="Eleva-empilhadeiras">
 
-![GitHub language count](https://img.shields.io/github/languages/count/victorsouza19/eleva-empilhadeiras?style=for-the-badge)
-![Bitbucket open issues](https://img.shields.io/bitbucket/issues/victorsouza19/eleva-empilhadeiras?style=for-the-badge)
-![Followers](https://img.shields.io/github/followers/victorsouza19?style=for-the-badge)
+![Badge](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
+![Badge](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
+![Badge](https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E)
+![Badge](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
+![Badge](https://img.shields.io/badge/MySQL-00000F?style=for-the-badge&logo=mysql&logoColor=white)
+![Badge](https://img.shields.io/badge/PowerBI-F2C811?style=for-the-badge&logo=Power%20BI&logoColor=white)
+![Badge](https://img.shields.io/badge/Font_Awesome-339AF0?style=for-the-badge&logo=fontawesome&logoColor=white)
+  
 </div>
 
 <div align="center">
